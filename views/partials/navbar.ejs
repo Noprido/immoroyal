@@ -1,0 +1,25 @@
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    <span>IMMO<span style="color:#fff">ROYAL</span></span>
+  </a>
+
+  <button class="navbar-burger" id="burgerBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="navbar-links" id="navbarLinks">
+    <a href="/annonces" class="nav-link">Annonces</a>
+    <% if (user) { %>
+      <a href="/annonces/creer" class="nav-link">Publier</a>
+      <a href="/messages" class="nav-link">Messages</a>
+      <a href="/profile/dashboard" class="nav-link">Mon compte</a>
+      <% if (user.role === 'admin') { %>
+        <a href="/admin/dashboard" class="nav-link" style="color: #D4AF37;">Admin</a>
+      <% } %>
+      <a href="/logout" class="btn btn-outline btn-sm">Déconnexion</a>
+    <% } else { %>
+      <a href="/login" class="nav-link">Connexion</a>
+      <a href="/register" class="btn btn-nav-primary">S'inscrire</a>
+    <% } %>
+  </div>
+</nav>

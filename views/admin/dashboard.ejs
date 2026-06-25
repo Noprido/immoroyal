@@ -1,0 +1,25 @@
+<%- include('../partials/header', { title: 'Admin' }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section">
+  <div class="container">
+    <h1 style="font-size:1.8rem; font-weight:800; margin-bottom:0.5rem;">Panel <span style="color:#D4AF37;">Administrateur</span></h1>
+    <p style="color:#6B6B6B; margin-bottom:2rem;">Vue d'ensemble de la plateforme</p>
+
+    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
+
+    <div class="stat-cards" style="margin-bottom:2.5rem;">
+      <div class="stat-card"><div class="number"><%= stats.totalUsers %></div><div class="label">Utilisateurs</div></div>
+      <div class="stat-card"><div class="number"><%= stats.totalAnnonces %></div><div class="label">Annonces totales</div></div>
+      <div class="stat-card"><div class="number"><%= stats.annoncesActives %></div><div class="label">Annonces actives</div></div>
+      <div class="stat-card"><div class="number"><%= stats.usersBannis %></div><div class="label">Comptes bannis</div></div>
+    </div>
+
+    <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+      <a href="/admin/users" class="btn btn-gold btn-lg">👥 Gérer les utilisateurs</a>
+      <a href="/admin/annonces" class="btn btn-dark btn-lg">📋 Gérer les annonces</a>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

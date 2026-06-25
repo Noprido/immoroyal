@@ -1,0 +1,48 @@
+<%- include('../partials/header', { title: 'Annonces — Admin' }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+      <h1 style="font-size:1.8rem; font-weight:800;">📋 <span style="color:#D4AF37;">Toutes les annonces</span></h1>
+      <a href="/admin/dashboard" class="btn btn-outline btn-sm">← Retour</a>
+    </div>
+    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Titre</th><th>Auteur</th><th>Ville</th><th>Loyer</th><th>Date</th><th>En avant</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <% annonces.forEach(a => { %>
+            <tr>
+              <td>
+                <a href="/annonces/<%= a.id %>" style="font-weight:600; color:#D4AF37; font-size:0.9rem;"><%= a.titre %></a>
+                <div style="font-size:0.78rem; color:#6B6B6B;"><%= a.typeBien %></div>
+              </td>
+              <td style="font-size:0.85rem;"><%= a.auteurNom %></td>
+              <td style="font-size:0.85rem;"><%= a.ville %></td>
+              <td style="font-weight:700; color:#B8960C; font-size:0.9rem;"><%= a.loyer.toLocaleString('fr-FR') %></td>
+              <td style="font-size:0.82rem; color:#6B6B6B;"><%= new Date(a.datePublication).toLocaleDateString('fr-FR') %></td>
+              <td>
+                <form action="/admin/annonces/<%= a.id %>/avant" method="POST">
+                  <button class="btn <%= a.enAvant ? 'btn-gold' : 'btn-outline' %> btn-sm">
+                    <%= a.enAvant ? '⭐ Oui' : 'Non' %>
+                  </button>
+                </form>
+              </td>
+              <td>
+                <form action="/admin/annonces/<%= a.id %>/supprimer" method="POST" onsubmit="return confirm('Supprimer cette annonce ?')">
+                  <button class="btn btn-danger btn-sm">🗑 Supprimer</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,46 @@
+<%- include('../partials/header', { title: 'Messages' }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section">
+  <div class="container" style="max-width:800px;">
+    <h1 style="font-size:1.8rem; font-weight:800; margin-bottom:2rem;">💬 Mes <span style="color:#D4AF37;">messages</span></h1>
+
+    <% if (conversations.length === 0) { %>
+      <div class="empty-state">
+        <div class="icon">💬</div>
+        <h3>Aucune conversation</h3>
+        <p>Vos échanges avec les propriétaires apparaîtront ici.</p>
+        <a href="/annonces" class="btn btn-gold" style="margin-top:1rem;">Parcourir les annonces</a>
+      </div>
+    <% } else { %>
+      <div class="conversations-list">
+        <% conversations.forEach(conv => { %>
+          <a href="/messages/<%= conv.id %>" class="conv-item" style="text-decoration:none; color:inherit;">
+            <div class="conv-avatar">
+              <%= conv.autreUser ? conv.autreUser.nom.charAt(0).toUpperCase() : '?' %>
+            </div>
+            <div style="flex:1; min-width:0;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong style="font-size:0.95rem;"><%= conv.autreUser ? conv.autreUser.nom : 'Utilisateur' %></strong>
+                <% if (conv.nonLus > 0) { %><span class="badge badge-gold"><%= conv.nonLus %></span><% } %>
+              </div>
+              <p style="font-size:0.8rem; color:#6B6B6B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                🏠 <%= conv.annonce ? conv.annonce.titre : 'Annonce supprimée' %>
+              </p>
+              <% if (conv.dernierMessage) { %>
+                <p style="font-size:0.82rem; color:#2C2C2E; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                  <%= conv.dernierMessage.texte %>
+                </p>
+              <% } %>
+            </div>
+            <span style="font-size:0.75rem; color:#6B6B6B; flex-shrink:0;">
+              <%= conv.dernierMessage ? new Date(conv.dernierMessage.date).toLocaleDateString('fr-FR') : '' %>
+            </span>
+          </a>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

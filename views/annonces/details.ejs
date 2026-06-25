@@ -1,0 +1,194 @@
+<%- include('../partials/header', { title: annonce.titre }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section" style="padding-top:2rem;">
+  <div class="container">
+    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
+    <% if (error) { %><div class="alert alert-error">⚠️ <%= error %></div><% } %>
+
+    <!-- Fil d'Ariane -->
+    <p style="font-size:0.85rem; color:#6B6B6B; margin-bottom:1.5rem;">
+      <a href="/" style="color:#D4AF37;">Accueil</a> ›
+      <a href="/annonces" style="color:#D4AF37;">Annonces</a> ›
+      <%= annonce.titre %>
+    </p>
+
+    <!-- Galerie photos en grille -->
+    <% if (annonce.photos && annonce.photos.length > 0) { %>
+      <div class="photo-grid photo-grid-<%= Math.min(annonce.photos.length, 5) %>" id="photoGrid">
+        <% annonce.photos.slice(0, 5).forEach((p, i) => { %>
+          <div class="photo-grid-item" data-index="<%= i %>" onclick="openLightbox(<%= i %>)">
+            <img src="<%= p %>" alt="<%= annonce.titre %> - photo <%= i + 1 %>" loading="lazy">
+            <% if (i === 4 && annonce.photos.length > 5) { %>
+              <div class="photo-grid-more">+<%= annonce.photos.length - 5 %></div>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+      <% if (annonce.photos.length > 1) { %>
+        <button class="btn btn-outline btn-sm" style="margin-top:0.75rem;" onclick="openLightbox(0)">
+          📷 Voir les <%= annonce.photos.length %> photos
+        </button>
+      <% } %>
+    <% } else { %>
+      <div style="background:#F5F5F5; border-radius:12px; height:280px; display:flex; align-items:center; justify-content:center; font-size:4rem; margin-bottom:1rem;">🏠</div>
+    <% } %>
+
+    <div class="detail-grid">
+      <!-- Colonne gauche : infos -->
+      <div>
+        <!-- En-tête -->
+        <div style="margin-bottom:1.5rem;">
+          <span class="badge badge-gold" style="margin-bottom:0.75rem;"><%= annonce.typeBien %></span>
+          <% if (annonce.enAvant) { %><span class="badge badge-gold" style="margin-left:0.5rem;">⭐ En avant</span><% } %>
+          <h1 style="font-size:1.7rem; font-weight:800; margin-bottom:0.5rem;"><%= annonce.titre %></h1>
+          <p style="color:#6B6B6B; font-size:1rem;">📍 <%= annonce.ville %><% if (annonce.quartier) { %>, <%= annonce.quartier %><% } %></p>
+          <div style="font-size:2rem; font-weight:800; color:#B8960C; margin-top:0.75rem;">
+            <%= annonce.loyer.toLocaleString('fr-FR') %> FCFA <span style="font-size:1rem; font-weight:400; color:#6B6B6B;">/ mois</span>
+          </div>
+        </div>
+
+        <!-- Infos financières -->
+        <div class="info-block">
+          <h3>💰 Informations financières</h3>
+          <div class="info-row"><span class="label">Loyer mensuel</span><span class="value"><%= annonce.loyer.toLocaleString('fr-FR') %> FCFA</span></div>
+          <% if (annonce.moisAvance !== undefined && annonce.moisAvance !== null) { %><div class="info-row"><span class="label">Mois d'avance</span><span class="value"><%= annonce.moisAvance %> mois</span></div><% } %>
+          <% if (annonce.cautionEau !== undefined && annonce.cautionEau !== null) { %><div class="info-row"><span class="label">Caution eau</span><span class="value"><%= annonce.cautionEau.toLocaleString('fr-FR') %> FCFA</span></div><% } %>
+          <% if (annonce.cautionElec !== undefined && annonce.cautionElec !== null) { %><div class="info-row"><span class="label">Caution électricité</span><span class="value"><%= annonce.cautionElec.toLocaleString('fr-FR') %> FCFA</span></div><% } %>
+          <% if (annonce.commissionDemarcheur !== undefined && annonce.commissionDemarcheur !== null) { %><div class="info-row"><span class="label">Commission démarcheur</span><span class="value"><%= annonce.commissionDemarcheur.toLocaleString('fr-FR') %> FCFA</span></div><% } %>
+          <%
+            const totalInitial = (annonce.loyer || 0) * ((annonce.moisAvance || 0))
+              + (annonce.cautionEau || 0)
+              + (annonce.cautionElec || 0)
+              + (annonce.commissionDemarcheur || 0);
+          %>
+          <div class="info-row info-row-total">
+            <span class="label">Total à prévoir à l'entrée</span>
+            <span class="value"><%= totalInitial.toLocaleString('fr-FR') %> FCFA</span>
+          </div>
+        </div>
+
+        <!-- Caractéristiques -->
+        <div class="info-block">
+          <h3>🏠 Caractéristiques du logement</h3>
+          <% if (annonce.nbPieces !== undefined && annonce.nbPieces !== null) { %><div class="info-row"><span class="label">Nombre de pièces</span><span class="value"><%= annonce.nbPieces %></span></div><% } %>
+          <% if (annonce.nbChambres !== undefined && annonce.nbChambres !== null) { %><div class="info-row"><span class="label">Chambres</span><span class="value"><%= annonce.nbChambres %></span></div><% } %>
+          <% if (annonce.nbSalons !== undefined && annonce.nbSalons !== null) { %><div class="info-row"><span class="label">Salons</span><span class="value"><%= annonce.nbSalons %></span></div><% } %>
+          <% if (annonce.nbDouches !== undefined && annonce.nbDouches !== null) { %><div class="info-row"><span class="label">Douches</span><span class="value"><%= annonce.nbDouches %></span></div><% } %>
+          <% if (annonce.nbCuisines !== undefined && annonce.nbCuisines !== null) { %><div class="info-row"><span class="label">Cuisines</span><span class="value"><%= annonce.nbCuisines %></span></div><% } %>
+          <% if (annonce.electriciteType) { %>
+            <div class="info-row"><span class="label">Électricité</span><span class="value"><%= annonce.electriciteType === 'personnel' ? 'Compteur personnel' : 'Compteur commun' %><% if (annonce.electriciteCompteur) { %> (<%= annonce.electriciteCompteur === 'carte' ? 'à carte' : 'standard' %>)<% } %></span></div>
+          <% } %>
+          <% if (annonce.eauType) { %>
+            <div class="info-row"><span class="label">Eau</span><span class="value"><%= annonce.eauType === 'personnel' ? 'Personnelle' : 'Commune' %></span></div>
+          <% } %>
+        </div>
+
+        <!-- Description avec "voir plus" -->
+        <% if (annonce.description) { %>
+          <div class="info-block">
+            <h3>📝 Description</h3>
+            <% const descCourte = annonce.description.length > 280; %>
+            <p class="description-text <%= descCourte ? 'collapsed' : '' %>" id="descText" style="line-height:1.8; color:#2C2C2E; white-space:pre-line;"><%= annonce.description %></p>
+            <% if (descCourte) { %>
+              <button class="btn-voir-plus" id="btnVoirPlus" onclick="toggleDescription()">Voir plus ▾</button>
+            <% } %>
+          </div>
+        <% } %>
+
+        <!-- Actions propriétaire -->
+        <% if (user && user.id === annonce.auteurId) { %>
+          <div class="owner-actions">
+            <a href="/annonces/<%= annonce.id %>/edit" class="btn btn-outline">✏️ Modifier</a>
+            <form action="/annonces/<%= annonce.id %>/delete" method="POST" onsubmit="return confirm('Supprimer cette annonce ?')">
+              <button type="submit" class="btn btn-danger">🗑 Supprimer</button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+
+      <!-- Colonne droite : contact -->
+      <div>
+        <div class="contact-card">
+          <h3>📞 Contacter le propriétaire</h3>
+          <p style="color:rgba(255,255,255,0.7); font-size:0.9rem; margin-bottom:1.2rem;">Publié par <strong style="color:#fff;"><%= annonce.auteurNom %></strong></p>
+          <p style="color:rgba(255,255,255,0.7); font-size:0.85rem; margin-bottom:1.5rem;">
+            Le <%= new Date(annonce.createdAt).toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' }) %>
+          </p>
+
+          <a href="tel:<%= annonce.auteurTelephone %>" class="btn btn-gold btn-full" style="margin-bottom:0.75rem;">
+            📱 <%= annonce.auteurTelephone %>
+          </a>
+
+          <% if (!user) { %>
+            <a href="/login" class="btn btn-outline btn-full">💬 Envoyer un message</a>
+            <p style="text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.5); margin-top:0.75rem;">Connectez-vous pour envoyer un message</p>
+          <% } else if (user.id !== annonce.auteurId) { %>
+            <a href="/messages/annonce/<%= annonce.id %>" class="btn btn-outline btn-full">💬 Envoyer un message</a>
+          <% } else { %>
+            <p style="text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.5); margin-top:0.75rem;">C'est votre annonce</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<% if (annonce.photos && annonce.photos.length > 0) { %>
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-arrow lightbox-prev" onclick="changeSlide(-1)">‹</button>
+  <div class="lightbox-content">
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-counter"><span id="lightboxCounter"></span></div>
+  </div>
+  <button class="lightbox-arrow lightbox-next" onclick="changeSlide(1)">›</button>
+</div>
+
+<script>
+  const photos = <%- JSON.stringify(annonce.photos) %>;
+  let currentSlide = 0;
+
+  function openLightbox(index) {
+    currentSlide = index;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function changeSlide(dir) {
+    currentSlide = (currentSlide + dir + photos.length) % photos.length;
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    document.getElementById('lightboxImg').src = photos[currentSlide];
+    document.getElementById('lightboxCounter').textContent = (currentSlide + 1) + ' / ' + photos.length;
+  }
+
+  document.addEventListener('keydown', (e) => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changeSlide(-1);
+    if (e.key === 'ArrowRight') changeSlide(1);
+  });
+</script>
+<% } %>
+
+<script>
+  function toggleDescription() {
+    const desc = document.getElementById('descText');
+    const btn = document.getElementById('btnVoirPlus');
+    const isCollapsed = desc.classList.toggle('collapsed');
+    btn.textContent = desc.classList.contains('collapsed') ? 'Voir plus ▾' : 'Voir moins ▴';
+  }
+</script>
+
+<%- include('../partials/footer') %>

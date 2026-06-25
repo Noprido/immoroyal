@@ -1,0 +1,58 @@
+<%- include('../partials/header', { title: 'Mes annonces' }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section">
+  <div class="container">
+    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+      <div>
+        <h1 style="font-size:1.8rem; font-weight:800;">Mes <span style="color:#D4AF37;">annonces</span></h1>
+        <p style="color:#6B6B6B;"><%= annonces.length %> annonce<%= annonces.length !== 1 ? 's' : '' %></p>
+      </div>
+      <a href="/annonces/creer" class="btn btn-gold">+ Publier</a>
+    </div>
+
+    <% if (annonces.length === 0) { %>
+      <div class="empty-state">
+        <div class="icon">📋</div>
+        <h3>Aucune annonce</h3>
+        <p>Vous n'avez pas encore publié d'annonce.</p>
+        <a href="/annonces/creer" class="btn btn-gold" style="margin-top:1rem;">Publier ma première annonce</a>
+      </div>
+    <% } else { %>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Annonce</th><th>Ville</th><th>Loyer</th><th>Date</th><th>Statut</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <% annonces.forEach(a => { %>
+              <tr>
+                <td>
+                  <div style="font-weight:600; font-size:0.9rem;"><%= a.titre %></div>
+                  <div style="font-size:0.8rem; color:#6B6B6B;"><%= a.typeBien %></div>
+                </td>
+                <td><%= a.ville %></td>
+                <td style="font-weight:700; color:#B8960C;"><%= a.loyer.toLocaleString('fr-FR') %> FCFA</td>
+                <td style="font-size:0.85rem; color:#6B6B6B;"><%= new Date(a.datePublication).toLocaleDateString('fr-FR') %></td>
+                <td><span class="badge <%= a.statut === 'actif' ? 'badge-green' : 'badge-grey' %>"><%= a.statut %></span></td>
+                <td>
+                  <div style="display:flex; gap:0.5rem;">
+                    <a href="/annonces/<%= a.id %>" class="btn btn-outline btn-sm">Voir</a>
+                    <a href="/annonces/<%= a.id %>/modifier" class="btn btn-dark btn-sm">Modifier</a>
+                    <form action="/annonces/<%= a.id %>/supprimer" method="POST" onsubmit="return confirm('Supprimer ?')">
+                      <button type="submit" class="btn btn-danger btn-sm">🗑</button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,52 @@
+<%- include('../partials/header', { title: 'Utilisateurs — Admin' }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+      <h1 style="font-size:1.8rem; font-weight:800;">👥 <span style="color:#D4AF37;">Utilisateurs</span></h1>
+      <a href="/admin/dashboard" class="btn btn-outline btn-sm">← Retour</a>
+    </div>
+    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Nom</th><th>Email</th><th>Téléphone</th><th>Rôle</th><th>Inscrit le</th><th>Statut</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <% users.forEach(u => { %>
+            <tr>
+              <td><strong><%= u.nom %></strong></td>
+              <td style="font-size:0.85rem;"><%= u.email %></td>
+              <td style="font-size:0.85rem;"><%= u.telephone %></td>
+              <td><span class="badge <%= u.role === 'admin' ? 'badge-gold' : 'badge-grey' %>"><%= u.role %></span></td>
+              <td style="font-size:0.82rem; color:#6B6B6B;"><%= new Date(u.dateInscription).toLocaleDateString('fr-FR') %></td>
+              <td><span class="badge <%= u.banni ? 'badge-red' : 'badge-green' %>"><%= u.banni ? 'Banni' : 'Actif' %></span></td>
+              <td>
+                <div style="display:flex; gap:0.4rem;">
+                  <% if (u.role !== 'admin') { %>
+                    <% if (!u.banni) { %>
+                      <form action="/admin/users/<%= u.id %>/bannir" method="POST">
+                        <button class="btn btn-danger btn-sm">Bannir</button>
+                      </form>
+                    <% } else { %>
+                      <form action="/admin/users/<%= u.id %>/debannir" method="POST">
+                        <button class="btn btn-outline btn-sm">Débannir</button>
+                      </form>
+                    <% } %>
+                    <form action="/admin/users/<%= u.id %>/supprimer" method="POST" onsubmit="return confirm('Supprimer ce compte ?')">
+                      <button class="btn btn-danger btn-sm">🗑</button>
+                    </form>
+                  <% } %>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

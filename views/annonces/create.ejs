@@ -1,0 +1,160 @@
+<%- include('../partials/header', { title: 'Publier une annonce' }) %>
+<%- include('../partials/navbar') %>
+
+<div class="page-form">
+  <h1 style="font-size:1.8rem; font-weight:800; margin-bottom:0.5rem;">Publier une <span style="color:#D4AF37;">annonce</span></h1>
+  <p style="color:#6B6B6B; margin-bottom:1.5rem;">Remplissez les informations de votre bien</p>
+
+  <% if (error) { %><div class="alert alert-error">⚠️ <%= error %></div><% } %>
+
+  <!-- Stepper -->
+  <div class="stepper">
+    <div class="stepper-item active" data-step="1">
+      <span class="stepper-circle">1</span><span class="stepper-label">Général</span>
+    </div>
+    <div class="stepper-line"></div>
+    <div class="stepper-item" data-step="2">
+      <span class="stepper-circle">2</span><span class="stepper-label">Finances</span>
+    </div>
+    <div class="stepper-line"></div>
+    <div class="stepper-item" data-step="3">
+      <span class="stepper-circle">3</span><span class="stepper-label">Détails</span>
+    </div>
+    <div class="stepper-line"></div>
+    <div class="stepper-item" data-step="4">
+      <span class="stepper-circle">4</span><span class="stepper-label">Photos</span>
+    </div>
+  </div>
+
+  <form action="/annonces/creer" method="POST" enctype="multipart/form-data" id="annonceForm">
+
+    <!-- ÉTAPE 1 : Infos générales -->
+    <div class="form-step active" data-step="1">
+      <div class="form-card">
+        <h3>📋 Informations générales</h3>
+        <div class="form-grid-2">
+          <div class="form-group" style="grid-column:1/-1;">
+            <label class="form-label">Titre de l'annonce *</label>
+            <input type="text" name="titre" class="form-control" placeholder="Ex: Beau studio meublé à Fidjrossè" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Type de bien *</label>
+            <select name="typeBien" class="form-control" required>
+              <option value="">Choisir...</option>
+              <% typesBien.forEach(t => { %><option value="<%= t %>"><%= t %></option><% }) %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ville / Commune *</label>
+            <input type="text" name="ville" class="form-control" data-autocomplete="ville"
+                  placeholder="Cotonou, Abomey-Calavi..." autocomplete="off" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Quartier / Village *</label>
+            <input type="text" name="quartier" class="form-control" data-autocomplete="quartier"
+                  placeholder="Fidjrossè, Akpakpa..." autocomplete="off" required>
+          </div>
+          <div class="form-group" style="grid-column:1/-1;">
+            <label class="form-label">Description *</label>
+            <textarea name="description" class="form-control" placeholder="Décrivez votre bien (emplacement, état, commodités...)" required></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 2 : Finances -->
+    <div class="form-step" data-step="2">
+      <div class="form-card">
+        <h3>💰 Informations financières</h3>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Loyer mensuel (FCFA) *</label>
+            <input type="number" name="loyer" class="form-control" placeholder="50 000" min="0" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mois d'avance *</label>
+            <input type="number" name="moisAvance" class="form-control" placeholder="3" min="0" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Caution eau (FCFA) *</label>
+            <input type="number" name="cautionEau" class="form-control" placeholder="20 000" min="0" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Caution électricité (FCFA) *</label>
+            <input type="number" name="cautionElec" class="form-control" placeholder="0" min="0" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Commission démarcheur (FCFA) *</label>
+            <input type="number" name="commissionDemarcheur" class="form-control" placeholder="0" min="0" required>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 3 : Caractéristiques -->
+    <div class="form-step" data-step="3">
+      <div class="form-card">
+        <h3>🏠 Caractéristiques du logement</h3>
+        <div class="form-grid-3" style="margin-bottom:1.5rem;">
+          <div class="form-group"><label class="form-label">Nb. pièces *</label><input type="number" name="nbPieces" class="form-control" min="0" placeholder="3" required></div>
+          <div class="form-group"><label class="form-label">Chambres *</label><input type="number" name="nbChambres" class="form-control" min="0" placeholder="2" required></div>
+          <div class="form-group"><label class="form-label">Salons *</label><input type="number" name="nbSalons" class="form-control" min="0" placeholder="1" required></div>
+          <div class="form-group"><label class="form-label">Douches *</label><input type="number" name="nbDouches" class="form-control" min="0" placeholder="1" required></div>
+          <div class="form-group"><label class="form-label">Cuisines *</label><input type="number" name="nbCuisines" class="form-control" min="0" placeholder="1" required></div>
+        </div>
+        <div class="form-grid-3">
+          <div class="form-group">
+            <label class="form-label">Électricité *</label>
+            <select name="electriciteType" class="form-control" required>
+              <option value="">Choisir...</option>
+              <option value="personnel">Compteur personnel</option>
+              <option value="commun">Compteur commun</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Type de compteur *</label>
+            <select name="electriciteCompteur" class="form-control" required>
+              <option value="">Choisir...</option>
+              <option value="standard">Standard</option>
+              <option value="carte">À carte</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Eau *</label>
+            <select name="eauType" class="form-control" required>
+              <option value="">Choisir...</option>
+              <option value="personnel">Personnelle</option>
+              <option value="commun">Commune</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 4 : Photos -->
+    <div class="form-step" data-step="4">
+      <div class="form-card">
+        <h3>📸 Photos (max 10) *</h3>
+        <div class="upload-zone" onclick="document.getElementById('photoInput').click()">
+          <input type="file" id="photoInput" name="photos" multiple accept="image/*" onchange="previewPhotos(this)" required>
+          <div style="font-size:2.5rem; margin-bottom:0.75rem;">📷</div>
+          <p style="font-weight:600; color:#2C2C2E;">Cliquez pour ajouter des photos</p>
+          <p style="font-size:0.85rem; color:#6B6B6B; margin-top:0.3rem;">JPEG, PNG, WebP — Max 5 Mo par photo — Au moins 1 photo requise</p>
+        </div>
+        <div class="photos-preview" id="photosPreview"></div>
+      </div>
+    </div>
+
+    <!-- Navigation wizard -->
+    <div class="wizard-nav">
+      <a href="/annonces" class="btn btn-outline" id="btnCancel">Annuler</a>
+      <div class="wizard-nav-right">
+        <button type="button" class="btn btn-outline" id="btnPrev" style="display:none;">← Précédent</button>
+        <button type="button" class="btn btn-gold" id="btnNext">Suivant →</button>
+        <button type="submit" class="btn btn-gold" id="btnSubmit" style="display:none;">✓ Publier l'annonce</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,54 @@
+<%- include('../partials/header', { title: 'Conversation' }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section">
+  <div class="container" style="max-width:800px;">
+
+    <!-- En-tête conversation -->
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+      <a href="/messages" style="color:#D4AF37; font-size:1.2rem;">←</a>
+      <div class="conv-avatar" style="width:48px; height:48px; border-radius:50%; background:#D4AF37; display:flex; align-items:center; justify-content:center; font-weight:700; color:#1C1C1E;">
+        <%= autreUser ? autreUser.nom.charAt(0).toUpperCase() : '?' %>
+      </div>
+      <div>
+        <h2 style="font-size:1.1rem; font-weight:700;"><%= autreUser ? autreUser.nom : 'Utilisateur' %></h2>
+        <% if (annonce) { %>
+          <a href="/annonces/<%= annonce.id %>" style="font-size:0.82rem; color:#D4AF37;">🏠 <%= annonce.titre %></a>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Bulles de messages -->
+    <div class="chat-box" id="chatBox">
+      <% if (messages.length === 0) { %>
+        <div style="text-align:center; color:#6B6B6B; margin:auto;">Démarrez la conversation !</div>
+      <% } else { %>
+        <% messages.forEach(msg => { %>
+          <div style="display:flex; flex-direction:column; align-items:<%= msg.senderId === user.id ? 'flex-end' : 'flex-start' %>;">
+            <div class="message-bubble <%= msg.senderId === user.id ? 'sent' : 'received' %>">
+              <%= msg.texte %>
+            </div>
+            <span class="message-time">
+              <%= new Date(msg.date).toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' }) %>
+              · <%= new Date(msg.date).toLocaleDateString('fr-FR') %>
+            </span>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+
+    <!-- Zone de saisie -->
+    <form action="/messages/<%= conv.id %>/envoyer" method="POST" class="chat-input">
+      <input type="text" name="texte" class="form-control" placeholder="Écrire un message..." autocomplete="off" style="flex:1;" required>
+      <button type="submit" class="btn btn-gold">Envoyer</button>
+    </form>
+  </div>
+</section>
+
+<script>
+  // Scroll auto vers le bas
+  const chatBox = document.getElementById('chatBox');
+  if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+</script>
+
+<%- include('../partials/footer') %>

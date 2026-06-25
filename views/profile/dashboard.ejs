@@ -1,0 +1,94 @@
+<%- include('../partials/header', { title: 'Mon compte' }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section">
+  <div class="container">
+    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
+    <% if (error) { %><div class="alert alert-error">⚠️ <%= error %></div><% } %>
+
+    <div class="dashboard-grid">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-user">
+          <div class="avatar"><%= user.nom.charAt(0).toUpperCase() %></div>
+          <h3><%= user.nom %></h3>
+          <p><%= user.email %></p>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="/profile/dashboard" class="active">🏠 Tableau de bord</a>
+          <a href="/profile/annonces">📋 Mes annonces</a>
+          <a href="/messages">💬 Messages <% if (unread > 0) { %><span class="badge badge-gold" style="margin-left:auto;"><%= unread %></span><% } %></a>
+          <a href="/annonces/creer">➕ Publier</a>
+          <a href="/logout" style="color:#dc3545;">🚪 Déconnexion</a>
+        </nav>
+      </div>
+
+      <!-- Contenu -->
+      <div>
+        <!-- Stats -->
+        <div class="stat-cards">
+          <div class="stat-card"><div class="number"><%= annonces.length %></div><div class="label">Annonces publiées</div></div>
+          <div class="stat-card"><div class="number"><%= annonces.filter(a => a.statut === 'actif').length %></div><div class="label">Annonces actives</div></div>
+          <div class="stat-card"><div class="number"><%= unread %></div><div class="label">Messages non lus</div></div>
+        </div>
+
+        <!-- Modifier profil -->
+        <div class="info-block">
+          <h3>👤 Modifier mon profil</h3>
+          <form action="/profile/modifier" method="POST" style="display:flex; flex-direction:column; gap:1rem;">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Nom complet</label>
+                <input type="text" name="nom" class="form-control" value="<%= user.nom %>">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Téléphone</label>
+                <input type="tel" name="telephone" class="form-control" value="<%= user.telephone %>">
+              </div>
+            </div>
+            <div class="gold-line"></div>
+            <p style="font-size:0.85rem; color:#6B6B6B; font-weight:600;">Changer de mot de passe (optionnel)</p>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label class="form-label">Mot de passe actuel</label>
+                <input type="password" name="ancienPassword" class="form-control" placeholder="••••••••">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nouveau mot de passe</label>
+                <input type="password" name="newPassword" class="form-control" placeholder="••••••••">
+              </div>
+            </div>
+            <div><button type="submit" class="btn btn-gold">Enregistrer</button></div>
+          </form>
+        </div>
+
+        <!-- Dernières annonces -->
+        <div class="info-block">
+          <h3>📋 Mes dernières annonces</h3>
+          <% if (annonces.length === 0) { %>
+            <div class="empty-state" style="padding:2rem;">
+              <div class="icon">🏠</div>
+              <p>Vous n'avez pas encore publié d'annonce.</p>
+              <a href="/annonces/creer" class="btn btn-gold" style="margin-top:1rem;">Publier une annonce</a>
+            </div>
+          <% } else { %>
+            <% annonces.slice(0, 3).forEach(a => { %>
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem 0; border-bottom:1px solid #F5F5F5;">
+                <div>
+                  <p style="font-weight:600; font-size:0.9rem;"><%= a.titre %></p>
+                  <p style="font-size:0.8rem; color:#6B6B6B;"><%= a.loyer.toLocaleString('fr-FR') %> FCFA · <%= a.ville %></p>
+                </div>
+                <a href="/annonces/<%= a.id %>" class="btn btn-outline btn-sm">Voir</a>
+              </div>
+            <% }) %>
+            <% if (annonces.length > 3) { %>
+              <a href="/profile/annonces" style="font-size:0.85rem; color:#D4AF37; display:block; margin-top:1rem;">Voir toutes mes annonces →</a>
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

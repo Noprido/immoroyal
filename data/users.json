@@ -1,0 +1,12 @@
+[
+  {
+    "id": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "nom": "Prince Steed Noumon Dossou",
+    "email": "steednoumon@gmail.com",
+    "telephone": "+22952398046",
+    "password": "$2b$10$u9yPF9/wJ4hWILaLDrphCOR88Vm86jZnMNeUimFL57GnTWrtANtP.",
+    "role": "user",
+    "banni": false,
+    "createdAt": "2026-06-22T03:18:13.386Z"
+  }
+]

@@ -1,0 +1,114 @@
+<%- include('partials/header', { title: 'Accueil' }) %>
+<%- include('partials/navbar') %>
+
+<!-- HERO -->
+<section class="hero" style="background-image: url('/images/hero-bg.jpg');">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Trouvez votre futur logement <span>au Bénin</span></h1>
+    <p>Des centaines d'annonces de location vérifiées, publiées par des particuliers et des démarcheurs locaux.</p>
+    <div class="hero-actions">
+      <a href="/annonces" class="btn btn-gold btn-lg">🔍 Rechercher</a>
+      <a href="/annonces/creer" class="btn btn-outline btn-lg">+ Publier une annonce</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH BAR -->
+<div class="container">
+  <div class="search-bar">
+    <h3>Recherche rapide</h3>
+    <form action="/annonces" method="GET" class="search-grid">
+        <div class="form-group">
+          <label class="form-label">Ville / Commune *</label>
+          <input type="text" name="ville" class="form-control" data-autocomplete="ville"
+                placeholder="Cotonou, Abomey-Calavi..." autocomplete="off" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Quartier / Village *</label>
+          <input type="text" name="quartier" class="form-control" data-autocomplete="quartier"
+                placeholder="Fidjrossè, Akpakpa..." autocomplete="off" required>
+        </div>
+      <div class="form-group">
+        <label class="form-label">Type de bien</label>
+        <select name="typeBien" class="form-control">
+          <option value="">Tous</option>
+          <% ['Maison','Appartement','Appartement meublé','Studio','Studio meublé','Chambre','Boutique','Magasin','Bureau','Terrain'].forEach(t => { %>
+            <option value="<%= t %>"><%= t %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Prix max (FCFA)</label>
+        <input type="number" name="prixMax" class="form-control" placeholder="150 000">
+      </div>
+      <div class="form-group" style="justify-content:flex-end;">
+        <button type="submit" class="btn btn-gold btn-full">Rechercher</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- DERNIÈRES ANNONCES -->
+<section class="section">
+  <div class="container">
+    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
+    <% if (error) { %><div class="alert alert-error">⚠️ <%= error %></div><% } %>
+
+    <h2 class="section-title">Dernières <span class="gold">annonces</span></h2>
+    <p class="section-subtitle">Les logements publiés récemment sur la plateforme</p>
+
+    <% if (dernieres.length === 0) { %>
+      <div class="empty-state">
+        <div class="icon">🏠</div>
+        <h3>Aucune annonce pour l'instant</h3>
+        <p>Soyez le premier à publier !</p>
+        <a href="/annonces/creer" class="btn btn-gold" style="margin-top:1rem">Publier une annonce</a>
+      </div>
+    <% } else { %>
+      <div class="annonces-grid">
+        <% dernieres.forEach(annonce => { %>
+          <a href="/annonces/<%= annonce.id %>" class="card-annonce <%= annonce.enAvant ? 'en-avant' : '' %>">
+            <div class="card-photo">
+              <% if (annonce.photos && annonce.photos.length > 0) { %>
+                <img src="<%= annonce.photos[0] %>" alt="<%= annonce.titre %>">
+              <% } else { %>
+                <div class="card-photo-placeholder">🏠</div>
+              <% } %>
+              <span class="badge-type"><%= annonce.typeBien %></span>
+              <% if (annonce.enAvant) { %><span class="badge-avant">⭐ En avant</span><% } %>
+            </div>
+            <div class="card-body">
+              <div class="card-price"><%= annonce.loyer.toLocaleString('fr-FR') %> FCFA <span>/ mois</span></div>
+              <div class="card-title"><%= annonce.titre %></div>
+              <div class="card-location">📍 <%= annonce.ville %><% if (annonce.quartier) { %>, <%= annonce.quartier %><% } %></div>
+              <div class="card-infos">
+                <% if (annonce.nbPieces) { %><span>🛏 <%= annonce.nbPieces %> pièce<%= annonce.nbPieces > 1 ? 's' : '' %></span><% } %>
+                <% if (annonce.nbDouches) { %><span>🚿 <%= annonce.nbDouches %> douche<%= annonce.nbDouches > 1 ? 's' : '' %></span><% } %>
+              </div>
+            </div>
+          </a>
+        <% }) %>
+      </div>
+      <div style="text-align:center; margin-top:2.5rem;">
+        <a href="/annonces" class="btn btn-outline">Voir toutes les annonces</a>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- POURQUOI IMMOROYAL -->
+<section class="section section-dark">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center; color:#fff; margin-bottom:0.5rem">Pourquoi <span style="color:#D4AF37">ImmoRoyal</span> ?</h2>
+    <p style="text-align:center; color:rgba(255,255,255,0.6); margin-bottom:2.5rem">La meilleure façon de trouver un logement au Bénin</p>
+    <div class="features-grid">
+      <div class="feature-item"><div class="feature-icon">⚡</div><h4>Rapide</h4><p>Trouvez votre logement en quelques minutes grâce à nos filtres précis.</p></div>
+      <div class="feature-item"><div class="feature-icon">🎯</div><h4>Local</h4><p>Des annonces exclusivement au Bénin, par des gens qui connaissent le terrain.</p></div>
+      <div class="feature-item"><div class="feature-icon">🆓</div><h4>Gratuit</h4><p>Publication et consultation d'annonces 100% gratuit pour tous.</p></div>
+      <div class="feature-item"><div class="feature-icon">🔒</div><h4>Fiable</h4><p>Des annonces modérées pour vous protéger des arnaques.</p></div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
