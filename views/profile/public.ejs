@@ -1,0 +1,167 @@
+<%- include('../partials/header', { title: user.nom + ' — ImmoRoyal' }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section" style="padding-top:2rem;">
+  <div class="container" style="max-width:1000px;">
+
+    <!-- En-tête profil -->
+    <div class="profil-header">
+
+      <!-- Avatar -->
+      <div class="profil-avatar">
+        <%= user.nom.charAt(0).toUpperCase() %>
+      </div>
+
+      <!-- Infos principales -->
+      <div class="profil-infos">
+        <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.5rem;">
+          <h1 style="font-size:1.6rem; font-weight:800; color:var(--white);"><%= user.nom %></h1>
+          <% if (user.typeVendeur) { %>
+            <span class="badge badge-gold">
+              <% if (user.typeVendeur === 'demarcheur') { %>
+                <i class='bx bx-briefcase'></i> Démarcheur
+              <% } else if (user.typeVendeur === 'proprietaire') { %>
+                <i class='bx bx-home-alt-2'></i> Propriétaire
+              <% } else { %>
+                <i class='bx bx-user'></i> Particulier
+              <% } %>
+            </span>
+          <% } %>
+        </div>
+
+        <% if (user.bio) { %>
+          <p style="color:rgba(255,255,255,0.75); font-size:0.95rem; margin-bottom:1rem; line-height:1.6;">
+            <%= user.bio %>
+          </p>
+        <% } %>
+
+        <div class="profil-meta">
+          <span><i class='bx bx-calendar' style="color:var(--gold);"></i> Membre depuis <%= new Date(user.dateInscription || user.createdAt).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }) %></span>
+          <span><i class='bx bx-list-ul' style="color:var(--gold);"></i> <%= stats.totalAnnonces %> annonce<%= stats.totalAnnonces !== 1 ? 's' : '' %> active<%= stats.totalAnnonces !== 1 ? 's' : '' %></span>
+          <% if (stats.villes.length > 0) { %>
+            <span><i class='bx bx-map' style="color:var(--gold);"></i> <%= stats.villes.join(', ') %></span>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="profil-actions">
+        <a href="tel:<%= user.telephone %>" class="btn btn-gold btn-sm">
+          <i class='bx bx-phone'></i> <%= user.telephone %>
+        </a>
+
+        <!-- WhatsApp -->
+        <%
+          const waNum = (user.whatsapp && user.whatsapp.trim() !== '')
+            ? user.whatsapp
+            : user.telephone;
+          const waLink = 'https://wa.me/' + waNum.replace(/\D/g, '');
+        %>
+        <a href="<%= waLink %>" target="_blank" class="btn btn-whatsapp btn-sm">
+          <i class='bx bxl-whatsapp'></i> WhatsApp
+        </a>
+
+        <% if (locals.user && locals.user.id !== user.id) { %>
+          <a href="/messages/user/<%= user.id %>" class="btn btn-outline btn-sm">
+            <i class='bx bx-message-rounded'></i> Envoyer un message
+          </a>
+        <% } else if (!locals.user) { %>
+          <a href="/login" class="btn btn-outline btn-sm">
+            <i class='bx bx-message-rounded'></i> Contacter
+          </a>
+        <% } %>
+
+        <button class="btn btn-outline btn-sm" onclick="copyProfileLink()" id="btnCopy">
+          <i class='bx bx-link'></i> Copier le lien
+        </button>
+      </div>
+    </div>
+
+    <!-- Types principaux -->
+    <% if (stats.typesPrincipaux.length > 0) { %>
+      <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom:2rem; align-items:center;">
+        <span style="font-size:0.85rem; color:var(--grey);">Spécialisé en :</span>
+        <% stats.typesPrincipaux.forEach(type => { %>
+          <span class="badge badge-gold"><%= type %></span>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <!-- Annonces -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:0.5rem;">
+      <h2 style="font-size:1.3rem; font-weight:800;">
+        Annonces de <span style="color:var(--gold);"><%= user.nom.split(' ')[0] %></span>
+      </h2>
+      <span style="font-size:0.85rem; color:var(--grey);"><%= annonces.length %> publiée<%= annonces.length !== 1 ? 's' : '' %></span>
+    </div>
+
+    <% if (annonces.length === 0) { %>
+      <div class="empty-state">
+        <i class='bx bx-home-alt-2' style="font-size:3rem; color:var(--grey); display:block; margin-bottom:1rem;"></i>
+        <h3>Aucune annonce active</h3>
+        <p>Cet utilisateur n'a pas encore publié d'annonce.</p>
+      </div>
+    <% } else { %>
+      <div class="annonces-grid">
+        <% annonces.forEach(annonce => { %>
+          <a href="/annonces/<%= annonce.id %>" class="card-annonce <%= annonce.enAvant ? 'en-avant' : '' %>">
+            <div class="card-photo">
+              <% if (annonce.photos && annonce.photos.length > 0) { %>
+                <img src="<%= annonce.photos[0] %>" alt="<%= annonce.titre %>" loading="lazy">
+              <% } else { %>
+                <div class="card-photo-placeholder"><i class='bx bx-home-alt-2'></i></div>
+              <% } %>
+              <span class="badge-type"><%= annonce.typeBien %></span>
+              <% if (annonce.enAvant) { %><span class="badge-avant"><i class='bx bx-star'></i> En avant</span><% } %>
+            </div>
+            <div class="card-body">
+              <div class="card-price"><%= annonce.loyer.toLocaleString('fr-FR') %> FCFA <span>/ mois</span></div>
+              <div class="card-title"><%= annonce.titre %></div>
+              <div class="card-location">
+                <i class='bx bx-map'></i>
+                <%= annonce.ville %><% if (annonce.quartier) { %>, <%= annonce.quartier %><% } %>
+              </div>
+              <div class="card-infos">
+                <% if (annonce.nbPieces) { %>
+                  <span><i class='bx bx-building-house'></i> <%= annonce.nbPieces %> pièce<%= annonce.nbPieces > 1 ? 's' : '' %></span>
+                <% } %>
+                <% if (annonce.nbDouches) { %>
+                  <span><i class='bx bx-droplet'></i> <%= annonce.nbDouches %> douche<%= annonce.nbDouches > 1 ? 's' : '' %></span>
+                <% } %>
+                <span style="margin-left:auto; color:#D4AF37; font-size:0.75rem;">
+                  <%= new Date(annonce.createdAt).toLocaleDateString('fr-FR') %>
+                </span>
+              </div>
+            </div>
+          </a>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <div style="text-align:center; margin-top:3rem;">
+      <a href="/annonces" class="btn btn-outline">
+        <i class='bx bx-arrow-back'></i> Voir toutes les annonces
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+function copyProfileLink() {
+  const url = window.location.href;
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('btnCopy');
+    const original = btn.innerHTML;
+    btn.innerHTML = "<i class='bx bx-check'></i> Lien copié !";
+    btn.style.borderColor = '#28a745';
+    btn.style.color = '#28a745';
+    setTimeout(() => {
+      btn.innerHTML = original;
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }, 2500);
+  });
+}
+</script>
+
+<%- include('../partials/footer') %>

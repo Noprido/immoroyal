@@ -3,8 +3,8 @@
 
 <section class="section">
   <div class="container">
-    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
-    <% if (error) { %><div class="alert alert-error">⚠️ <%= error %></div><% } %>
+    <% if (success) { %><div class="alert alert-success"><i class='bx bx-check-circle'></i> <%= success %></div><% } %>
+    <% if (error) { %><div class="alert alert-error"><i class='bx bx-error-circle'></i> <%= error %></div><% } %>
 
     <div class="dashboard-grid">
       <!-- Sidebar -->
@@ -12,14 +12,30 @@
         <div class="sidebar-user">
           <div class="avatar"><%= user.nom.charAt(0).toUpperCase() %></div>
           <h3><%= user.nom %></h3>
-          <p><%= user.email %></p>
+          <p style="font-size:0.8rem; opacity:0.7;"><%= user.telephone %></p>
         </div>
         <nav class="sidebar-nav">
-          <a href="/profile/dashboard" class="active">🏠 Tableau de bord</a>
-          <a href="/profile/annonces">📋 Mes annonces</a>
-          <a href="/messages">💬 Messages <% if (unread > 0) { %><span class="badge badge-gold" style="margin-left:auto;"><%= unread %></span><% } %></a>
-          <a href="/annonces/creer">➕ Publier</a>
-          <a href="/logout" style="color:#dc3545;">🚪 Déconnexion</a>
+          <a href="/profile/dashboard" class="active">
+            <i class='bx bx-grid-alt'></i> Tableau de bord
+          </a>
+          <a href="/profile/public/<%= user.id %>">
+            <i class='bx bx-user-circle'></i> Mon profil public
+          </a>
+          <a href="/profile/annonces">
+            <i class='bx bx-list-ul'></i> Mes annonces
+          </a>
+          <a href="/messages">
+            <i class='bx bx-message-rounded'></i> Messages
+            <% if (unread > 0) { %>
+              <span class="badge badge-gold" style="margin-left:auto;"><%= unread %></span>
+            <% } %>
+          </a>
+          <a href="/annonces/creer">
+            <i class='bx bx-plus-circle'></i> Publier
+          </a>
+          <a href="/logout" style="color:#dc3545;">
+            <i class='bx bx-log-out'></i> Déconnexion
+          </a>
         </nav>
       </div>
 
@@ -27,27 +43,87 @@
       <div>
         <!-- Stats -->
         <div class="stat-cards">
-          <div class="stat-card"><div class="number"><%= annonces.length %></div><div class="label">Annonces publiées</div></div>
-          <div class="stat-card"><div class="number"><%= annonces.filter(a => a.statut === 'actif').length %></div><div class="label">Annonces actives</div></div>
-          <div class="stat-card"><div class="number"><%= unread %></div><div class="label">Messages non lus</div></div>
+          <div class="stat-card">
+            <div class="number"><%= annonces.length %></div>
+            <div class="label">Annonces publiées</div>
+          </div>
+          <div class="stat-card">
+            <div class="number"><%= annonces.filter(a => a.actif !== false).length %></div>
+            <div class="label">Annonces actives</div>
+          </div>
+          <div class="stat-card">
+            <div class="number"><%= unread %></div>
+            <div class="label">Messages non lus</div>
+          </div>
         </div>
 
         <!-- Modifier profil -->
         <div class="info-block">
-          <h3>👤 Modifier mon profil</h3>
+          <h3><i class='bx bx-user'></i> Modifier mon profil</h3>
           <form action="/profile/modifier" method="POST" style="display:flex; flex-direction:column; gap:1rem;">
+
             <div class="form-grid-2">
+              <!-- Nom -->
               <div class="form-group">
                 <label class="form-label">Nom complet</label>
                 <input type="text" name="nom" class="form-control" value="<%= user.nom %>">
               </div>
+
+              <!-- Téléphone — lecture seule -->
               <div class="form-group">
-                <label class="form-label">Téléphone</label>
-                <input type="tel" name="telephone" class="form-control" value="<%= user.telephone %>">
+                <label class="form-label">
+                  Téléphone
+                  <span style="font-size:0.75rem; color:var(--grey); font-weight:400; margin-left:0.4rem;">
+                    (non modifiable)
+                  </span>
+                </label>
+                <input type="tel" class="form-control" value="<%= user.telephone %>" readonly
+                       style="background:#F5F5F5; color:#6B6B6B; cursor:not-allowed;">
+              </div>
+
+              <!-- WhatsApp -->
+              <div class="form-group">
+                <label class="form-label">Numéro WhatsApp</label>
+                <input type="tel" name="whatsapp" class="form-control"
+                       value="<%= user.whatsapp || '' %>"
+                       placeholder="<%= user.telephone %>">
+                <small style="color:var(--grey); font-size:0.78rem; margin-top:0.3rem;">
+                  Laissez vide pour utiliser votre numéro de téléphone.
+                </small>
+              </div>
+
+              <!-- Email (optionnel) -->
+              <div class="form-group">
+                <label class="form-label">
+                  Adresse email
+                  <span style="font-size:0.75rem; color:var(--grey); font-weight:400; margin-left:0.4rem;">
+                    (optionnel)
+                  </span>
+                </label>
+                <input type="email" name="email" class="form-control"
+                       value="<%= user.email || '' %>"
+                       placeholder="vous@exemple.com">
+              </div>
+
+              <!-- Type de vendeur -->
+              <div class="form-group">
+                <label class="form-label">Type de vendeur</label>
+                <select name="typeVendeur" class="form-control">
+                  <option value="particulier" <%= user.typeVendeur === 'particulier' || !user.typeVendeur ? 'selected' : '' %>>Particulier</option>
+                  <option value="proprietaire" <%= user.typeVendeur === 'proprietaire' ? 'selected' : '' %>>Propriétaire</option>
+                  <option value="demarcheur" <%= user.typeVendeur === 'demarcheur' ? 'selected' : '' %>>Démarcheur</option>
+                </select>
+              </div>
+
+              <!-- Bio -->
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">Bio <span style="font-size:0.75rem; color:var(--grey); font-weight:400;">(optionnel)</span></label>
+                <textarea name="bio" class="form-control" placeholder="Présentez-vous en quelques mots..."><%= user.bio || '' %></textarea>
               </div>
             </div>
+
             <div class="gold-line"></div>
-            <p style="font-size:0.85rem; color:#6B6B6B; font-weight:600;">Changer de mot de passe (optionnel)</p>
+            <p style="font-size:0.85rem; color:#6B6B6B; font-weight:600;">Changer de mot de passe <span style="font-weight:400;">(optionnel)</span></p>
             <div class="form-grid-3">
               <div class="form-group">
                 <label class="form-label">Mot de passe actuel</label>
@@ -58,31 +134,47 @@
                 <input type="password" name="newPassword" class="form-control" placeholder="••••••••">
               </div>
             </div>
-            <div><button type="submit" class="btn btn-gold">Enregistrer</button></div>
+
+            <div>
+              <button type="submit" class="btn btn-gold">
+                <i class='bx bx-save'></i> Enregistrer
+              </button>
+            </div>
           </form>
         </div>
 
         <!-- Dernières annonces -->
         <div class="info-block">
-          <h3>📋 Mes dernières annonces</h3>
+          <h3><i class='bx bx-list-ul'></i> Mes dernières annonces</h3>
           <% if (annonces.length === 0) { %>
             <div class="empty-state" style="padding:2rem;">
-              <div class="icon">🏠</div>
+              <i class='bx bx-home-alt-2' style="font-size:3rem; color:var(--grey); display:block; margin-bottom:1rem;"></i>
               <p>Vous n'avez pas encore publié d'annonce.</p>
-              <a href="/annonces/creer" class="btn btn-gold" style="margin-top:1rem;">Publier une annonce</a>
+              <a href="/annonces/creer" class="btn btn-gold" style="margin-top:1rem;">
+                <i class='bx bx-plus'></i> Publier une annonce
+              </a>
             </div>
           <% } else { %>
             <% annonces.slice(0, 3).forEach(a => { %>
               <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem 0; border-bottom:1px solid #F5F5F5;">
                 <div>
                   <p style="font-weight:600; font-size:0.9rem;"><%= a.titre %></p>
-                  <p style="font-size:0.8rem; color:#6B6B6B;"><%= a.loyer.toLocaleString('fr-FR') %> FCFA · <%= a.ville %></p>
+                  <p style="font-size:0.8rem; color:#6B6B6B;">
+                    <i class='bx bx-money' style="color:var(--gold);"></i>
+                    <%= a.loyer.toLocaleString('fr-FR') %> FCFA ·
+                    <i class='bx bx-map' style="color:var(--gold);"></i>
+                    <%= a.ville %>
+                  </p>
                 </div>
-                <a href="/annonces/<%= a.id %>" class="btn btn-outline btn-sm">Voir</a>
+                <a href="/annonces/<%= a.id %>" class="btn btn-outline btn-sm">
+                  <i class='bx bx-show'></i> Voir
+                </a>
               </div>
             <% }) %>
             <% if (annonces.length > 3) { %>
-              <a href="/profile/annonces" style="font-size:0.85rem; color:#D4AF37; display:block; margin-top:1rem;">Voir toutes mes annonces →</a>
+              <a href="/profile/annonces" style="font-size:0.85rem; color:#D4AF37; display:block; margin-top:1rem;">
+                Voir toutes mes annonces <i class='bx bx-right-arrow-alt'></i>
+              </a>
             <% } %>
           <% } %>
         </div>

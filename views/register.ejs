@@ -8,29 +8,41 @@
       <p>Créez votre compte gratuitement</p>
     </div>
 
-    <% if (error) { %><div class="alert alert-error">⚠️ <%= error %></div><% } %>
+    <% if (error) { %><div class="alert alert-error"><i class='bx bx-error-circle'></i> <%= error %></div><% } %>
 
     <form action="/register" method="POST" style="display:flex; flex-direction:column; gap:1.2rem;">
       <div class="form-group">
-        <label class="form-label">Nom complet</label>
+        <label class="form-label">Nom complet *</label>
         <input type="text" name="nom" class="form-control" placeholder="Jean Koffi" required>
       </div>
       <div class="form-group">
-        <label class="form-label">Adresse email</label>
-        <input type="email" name="email" class="form-control" placeholder="vous@exemple.com" required>
+        <label class="form-label">Téléphone *</label>
+        <input type="tel" name="telephone" id="telephone" class="form-control" placeholder="+229 01 97 00 00 00" required>
       </div>
+
+      <!-- WhatsApp -->
       <div class="form-group">
-        <label class="form-label">Téléphone</label>
-        <input type="tel" name="telephone" class="form-control" placeholder="+229 97 00 00 00" required>
+        <label style="display:flex; align-items:center; gap:0.6rem; cursor:pointer; font-size:0.9rem; color:var(--dark);">
+          <input type="checkbox" name="whatsappSame" id="whatsappSame" value="1" checked
+                 onchange="toggleWhatsapp(this)"
+                 style="width:16px; height:16px; accent-color:var(--gold); cursor:pointer;">
+          <span>Mon numéro WhatsApp est le même que mon téléphone</span>
+        </label>
       </div>
+      <div class="form-group" id="whatsappField" style="display:none;">
+        <label class="form-label">Numéro WhatsApp</label>
+        <input type="tel" name="whatsapp" id="whatsapp" class="form-control" placeholder="+229 97 00 00 00">
+      </div>
+
       <div class="form-group">
-        <label class="form-label">Mot de passe</label>
+        <label class="form-label">Mot de passe *</label>
         <input type="password" name="password" class="form-control" placeholder="Min. 6 caractères" required>
       </div>
       <div class="form-group">
-        <label class="form-label">Confirmer le mot de passe</label>
+        <label class="form-label">Confirmer le mot de passe *</label>
         <input type="password" name="confirmPassword" class="form-control" placeholder="••••••••" required>
       </div>
+
       <button type="submit" class="btn btn-gold btn-full btn-lg">Créer mon compte</button>
     </form>
 
@@ -40,5 +52,21 @@
     </p>
   </div>
 </div>
+
+<script>
+function toggleWhatsapp(checkbox) {
+  const field = document.getElementById('whatsappField');
+  const input = document.getElementById('whatsapp');
+  if (checkbox.checked) {
+    field.style.display = 'none';
+    input.removeAttribute('required');
+    input.value = '';
+  } else {
+    field.style.display = 'flex';
+    input.setAttribute('required', 'required');
+    input.focus();
+  }
+}
+</script>
 
 <%- include('partials/footer') %>

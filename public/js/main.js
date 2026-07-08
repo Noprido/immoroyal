@@ -84,7 +84,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   btnNext.addEventListener('click', () => {
+    // Validation standard des champs required
     if (!validateStep(current)) return;
+
+    // Validation spéciale étape 3 : au moins une pièce
+    if (current === 3) {
+      const nbPieces = parseInt(document.getElementById('nbPieces')?.value) || 0;
+      if (nbPieces < 1) {
+        // Afficher une erreur visuelle sous le champ nbPieces
+        const el = document.getElementById('nbPieces');
+        el.style.borderColor = '#dc3545';
+        let msg = document.getElementById('nbPiecesError');
+        if (!msg) {
+          msg = document.createElement('p');
+          msg.id = 'nbPiecesError';
+          msg.style.cssText = 'color:#dc3545; font-size:0.82rem; margin-top:0.4rem;';
+          el.parentNode.appendChild(msg);
+        }
+        msg.textContent = 'Au moins une pièce (chambre, salon, douche ou cuisine) est requise.';
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      } else {
+        // Reset style si valide
+        const el = document.getElementById('nbPieces');
+        el.style.borderColor = '';
+        const msg = document.getElementById('nbPiecesError');
+        if (msg) msg.remove();
+      }
+    }
+
     if (current < total) showStep(current + 1);
   });
 
@@ -98,5 +126,59 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = parseInt(item.dataset.step);
       if (target < current) showStep(target);
     });
+  });
+});
+
+// ─── Calcul automatique nbPieces ─────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const fields = ['nbChambres', 'nbSalons', 'nbDouches', 'nbCuisines'];
+  const nbPiecesInput = document.getElementById('nbPieces');
+  if (!nbPiecesInput) return;
+
+  function calcPieces() {
+    const total = fields.reduce((sum, id) => {
+      const el = document.getElementById(id);
+      return sum + (el ? parseInt(el.value) || 0 : 0);
+    }, 0);
+    nbPiecesInput.value = total > 0 ? total : '';
+
+    // Reset l'erreur visuelle au fur et à mesure que l'utilisateur remplit
+    if (total > 0) {
+      nbPiecesInput.style.borderColor = '';
+      const msg = document.getElementById('nbPiecesError');
+      if (msg) msg.remove();
+    }
+  }
+
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', calcPieces);
+  });
+
+  // Calcul initial au chargement (utile pour edit.ejs)
+  calcPieces();
+});
+
+// ─── Validation nbPieces sur edit.ejs ────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const editForm = document.querySelector('form[action*="/edit"]');
+  if (!editForm) return;
+
+  editForm.addEventListener('submit', (e) => {
+    const nbPieces = parseInt(document.getElementById('nbPieces')?.value) || 0;
+    if (nbPieces < 1) {
+      e.preventDefault();
+      const el = document.getElementById('nbPieces');
+      el.style.borderColor = '#dc3545';
+      let msg = document.getElementById('nbPiecesError');
+      if (!msg) {
+        msg = document.createElement('p');
+        msg.id = 'nbPiecesError';
+        msg.style.cssText = 'color:#dc3545; font-size:0.82rem; margin-top:0.4rem;';
+        el.parentNode.appendChild(msg);
+      }
+      msg.textContent = 'Au moins une pièce (chambre, salon, douche ou cuisine) est requise.';
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   });
 });

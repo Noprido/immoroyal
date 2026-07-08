@@ -3,10 +3,38 @@
     "id": "59e2e16d-75a0-4764-83ca-1596cb63182b",
     "nom": "Prince Steed Noumon Dossou",
     "email": "steednoumon@gmail.com",
-    "telephone": "+22952398046",
+    "telephone": "+2290152398046",
+    "whatsapp": "+22952398046",
+    "password": "$2b$10$u9yPF9/wJ4hWILaLDrphCOR88Vm86jZnMNeUimFL57GnTWrtANtP.",
+    "role": "admin",
+    "banni": false,
+    "createdAt": "2026-06-22T03:18:13.386Z",
+    "bio": "",
+    "typeVendeur": "particulier"
+  },
+  {
+    "id": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "nom": "Lord Noprido",
+    "email": "steednoumon7@gmail.com",
+    "telephone": "+22963098301",
+    "whatsapp": "22963098301",
     "password": "$2b$10$u9yPF9/wJ4hWILaLDrphCOR88Vm86jZnMNeUimFL57GnTWrtANtP.",
     "role": "user",
-    "banni": false,
+    "banni": true,
     "createdAt": "2026-06-22T03:18:13.386Z"
+  },
+  {
+    "id": "60990f5a-41f0-4962-a872-e4e9707c3c02",
+    "nom": "Jean Eude",
+    "email": "",
+    "telephone": "+22997020697",
+    "whatsapp": "+22997020697",
+    "password": "$2b$10$y3b5AprT6QgOCNznuQ9C2Osxa/jcDifaYtOSkmgTRVqAfebIkO4Oe",
+    "role": "user",
+    "banni": false,
+    "bio": "",
+    "typeVendeur": "particulier",
+    "suspendu": false,
+    "createdAt": "2026-07-07T22:58:09.820Z"
   }
 ]

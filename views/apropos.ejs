@@ -1,0 +1,99 @@
+<%- include('partials/header', { title: 'À propos' }) %>
+<%- include('partials/navbar') %>
+
+<!-- Hero page -->
+<div style="background:var(--black); padding:4rem 2rem; text-align:center;">
+  <div class="container">
+    <h1 style="color:#fff; font-size:2.2rem; font-weight:800; margin-bottom:0.75rem;">
+      À propos d'<span style="color:#D4AF37;">ImmoRoyal</span>
+    </h1>
+    <p style="color:rgba(255,255,255,0.65); font-size:1.05rem; max-width:600px; margin:0 auto;">
+      La plateforme immobilière pensée pour les réalités du Bénin
+    </p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container" style="max-width:860px;">
+
+    <!-- Notre histoire -->
+    <div class="info-block">
+      <h3>Notre mission</h3>
+      <p style="line-height:1.9; color:#2C2C2E;">
+        ImmoRoyal est né d'un constat simple : trouver un logement au Bénin relève souvent du parcours du combattant. 
+        Les annonces sont dispersées, les informations incomplètes, et les arnaques fréquentes. 
+        Notre mission est de centraliser l'offre immobilière locale dans une plateforme moderne, transparente et accessible à tous.
+      </p>
+      <p style="line-height:1.9; color:#2C2C2E; margin-top:1rem;">
+        Que vous soyez locataire à la recherche d'un studio à Cotonou, propriétaire souhaitant louer votre maison à Parakou, 
+        ou démarcheur cherchant à élargir votre clientèle, ImmoRoyal est fait pour vous.
+      </p>
+    </div>
+
+    <!-- Valeurs -->
+    <div class="info-block">
+      <h3>Nos valeurs</h3>
+      <div class="form-grid-3" style="margin-top:1rem;">
+        <div style="text-align:center; padding:1rem;">
+          <i class='bx bx-check-shield' style="font-size:2.2rem; color:var(--gold); margin-bottom:0.5rem; display:block;"></i>
+          <h4 style="font-weight:700; margin-bottom:0.4rem;">Transparence</h4>
+          <p style="font-size:0.85rem; color:#6B6B6B;">Toutes les informations financières affichées clairement, sans surprise à la signature.</p>
+        </div>
+        <div style="text-align:center; padding:1rem;">
+          <i class='bx bx-world' style="font-size:2.2rem; color:var(--gold); margin-bottom:0.5rem; display:block;"></i>
+          <h4 style="font-weight:700; margin-bottom:0.4rem;">Localité</h4>
+          <p style="font-size:0.85rem; color:#6B6B6B;">Une plateforme pensée pour les 12 départements du Bénin, avec les réalités locales au cœur.</p>
+        </div>
+        <div style="text-align:center; padding:1rem;">
+          <i class='bx bx-gift' style="font-size:2.2rem; color:var(--gold); margin-bottom:0.5rem; display:block;"></i>
+          <h4 style="font-weight:700; margin-bottom:0.4rem;">Gratuité</h4>
+          <p style="font-size:0.85rem; color:#6B6B6B;">Publication et consultation 100% gratuites. Aucun abonnement, aucune commission cachée.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment ça marche -->
+    <div class="info-block">
+      <h3>Comment ça marche ?</h3>
+      <div style="display:flex; flex-direction:column; gap:1.2rem; margin-top:1rem;">
+        <div style="display:flex; gap:1.2rem; align-items:flex-start;">
+          <div style="min-width:36px; height:36px; background:#D4AF37; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#1C1C1E; font-size:0.95rem;">1</div>
+          <div>
+            <h4 style="font-weight:700; margin-bottom:0.3rem;">Créez votre compte</h4>
+            <p style="font-size:0.9rem; color:#6B6B6B;">Inscription gratuite en moins d'une minute. Pas de carte bancaire requise.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:1.2rem; align-items:flex-start;">
+          <div style="min-width:36px; height:36px; background:#D4AF37; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#1C1C1E; font-size:0.95rem;">2</div>
+          <div>
+            <h4 style="font-weight:700; margin-bottom:0.3rem;">Publiez ou recherchez</h4>
+            <p style="font-size:0.9rem; color:#6B6B6B;">Publiez votre annonce avec photos en 4 étapes guidées, ou parcourez les annonces avec nos filtres précis.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:1.2rem; align-items:flex-start;">
+          <div style="min-width:36px; height:36px; background:#D4AF37; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#1C1C1E; font-size:0.95rem;">3</div>
+          <div>
+            <h4 style="font-weight:700; margin-bottom:0.3rem;">Contactez directement</h4>
+            <p style="font-size:0.9rem; color:#6B6B6B;">Échangez avec le propriétaire via notre messagerie intégrée ou par téléphone directement.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:1.2rem; align-items:flex-start;">
+          <div style="min-width:36px; height:36px; background:#D4AF37; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#1C1C1E; font-size:0.95rem;">4</div>
+          <div>
+            <h4 style="font-weight:700; margin-bottom:0.3rem;">Emménagez</h4>
+            <p style="font-size:0.9rem; color:#6B6B6B;">Visitez le bien, finalisez l'accord et installez-vous dans votre nouveau chez-vous.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="text-align:center; padding:2rem 0;">
+      <a href="/annonces" class="btn btn-gold btn-lg" style="margin-right:1rem;">Parcourir les annonces</a>
+      <a href="/contact" class="btn btn-outline btn-lg">Nous contacter</a>
+    </div>
+
+  </div>
+</section>
+
+<%- include('partials/footer') %>

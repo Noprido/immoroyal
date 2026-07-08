@@ -11,14 +11,14 @@
     "cautionEau": 20000,
     "cautionElec": 0,
     "commissionDemarcheur": 0,
-    "nbPieces": 2,
+    "nbPieces": 4,
     "nbChambres": 1,
     "nbSalons": 1,
     "nbDouches": 1,
     "nbCuisines": 1,
-    "electriciteType": "",
-    "electriciteCompteur": "",
-    "eauType": "",
+    "electriciteType": "personnel",
+    "electriciteCompteur": "standard",
+    "eauType": "personnel",
     "photos": [
       "/uploads/annonces/73fd5f86-555f-40a6-b7db-e81a7f7a72d2.jpeg",
       "/uploads/annonces/94233cff-9220-45de-8693-cef75719263e.jpeg",
@@ -30,20 +30,22 @@
     "enAvant": false,
     "actif": true,
     "createdAt": "2026-06-22T03:51:22.450Z",
-    "updatedAt": "2026-06-25T11:47:02.324Z"
+    "updatedAt": "2026-07-06T09:16:26.897Z",
+    "suspendu": false,
+    "suspendéLe": null
   },
   {
     "id": "b94225c2-15f1-47bf-ae0a-0dce67fe656e",
     "titre": "Appartement meublé à Godomey",
-    "description": "Charmant appartement situé dans le quartier animé de Fleurs-Gambetta à Nice, sur la Rue de France.\r\nAvec ses 48 m², cet espace moderne comprend une grande chambre, un salon avec canapé lit, une cuisine equipée, une salle de bain, et un agréable balcon de 8 m².\r\nIl se situe à seulement 50 mètres de la Promenade des Anglaises, à 50 mètres de la station de bus Grosso CUM et à 300 mètres de la station de tram Centre Universitaire Méditerranéen.",
+    "description": "Grand et charmant appartement situé dans le quartier animé de Fleurs-Gambetta à Nice, sur la Rue de France.\r\nAvec ses 48 m², cet espace moderne comprend une grande chambre, un salon avec canapé lit, une cuisine equipée, une salle de bain, et un agréable balcon de 8 m².\r\nIl se situe à seulement 50 mètres de la Promenade des Anglaises, à 50 mètres de la station de bus Grosso CUM et à 300 mètres de la station de tram Centre Universitaire Méditerranéen.",
     "typeBien": "Appartement meublé",
     "ville": "cotonou",
     "quartier": "Godomey",
     "loyer": 35000,
     "moisAvance": 3,
     "cautionEau": 10000,
-    "cautionElec": 10000,
-    "commissionDemarcheur": 35000,
+    "cautionElec": 0,
+    "commissionDemarcheur": 0,
     "nbPieces": 3,
     "nbChambres": 2,
     "nbSalons": 1,
@@ -62,13 +64,15 @@
     "auteurTelephone": "+22952398046",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-22T06:33:45.275Z"
+    "createdAt": "2026-06-22T06:33:45.275Z",
+    "updatedAt": "2026-07-05T09:20:13.883Z",
+    "suspendu": false
   },
   {
     "id": "4cb86f0e-7de6-47eb-a957-30894f6fa97d",
     "titre": "studio meublé",
     "description": "Charmant appartement situé dans le quartier animé de Fleurs-Gambetta à Nice, sur la Rue de France.\r\nAvec ses 48 m², cet espace moderne comprend une grande chambre, un salon avec canapé lit, une cuisine equipée, une salle de bain, et un agréable balcon de 8 m².\r\nIl se situe à seulement 50 mètres de la Promenade des Anglaises, à 50 mètres de la station de bus Grosso CUM et à 300 mètres de la station de tram Centre Universitaire Méditerranéen.",
-    "typeBien": "Studio meublé",
+    "typeBien": "Appartement meublé",
     "ville": "Cotonou - 1er Arrondissement",
     "quartier": "Tchanhounkpamè",
     "loyer": 15000,
@@ -76,11 +80,11 @@
     "cautionEau": 7500,
     "cautionElec": 0,
     "commissionDemarcheur": 0,
-    "nbPieces": 1,
+    "nbPieces": 2,
     "nbChambres": 1,
     "nbSalons": 0,
     "nbDouches": 1,
-    "nbCuisines": 1,
+    "nbCuisines": 0,
     "electriciteType": "personnel",
     "electriciteCompteur": "standard",
     "eauType": "commun",
@@ -93,9 +97,11 @@
     "enAvant": false,
     "actif": true,
     "createdAt": "2026-06-25T11:19:06.920Z",
-    "updatedAt": "2026-06-25T11:23:58.265Z"
+    "updatedAt": "2026-07-05T11:13:44.024Z",
+    "suspendu": false,
+    "suspendéLe": null
   },
-    {
+  {
     "id": "e1f0827c-0fad-4b37-8868-3694ea03c6a1",
     "titre": "Magasin à louer à Agori",
     "description": "Situé à Agori, ce bien offre un cadre de vie agréable, calme et bien aéré. Proche des écoles et centres de santé.",
@@ -125,7 +131,9 @@
     "auteurTelephone": "+22997123456",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-25T10:21:00.000Z"
+    "createdAt": "2026-06-25T10:21:00.000Z",
+    "suspendu": false,
+    "suspendéLe": null
   },
   {
     "id": "a34a67a8-7fe2-4476-b68a-a29f77444970",
@@ -156,7 +164,9 @@
     "auteurTelephone": "+22961234567",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-24T18:22:00.000Z"
+    "createdAt": "2026-06-24T18:22:00.000Z",
+    "suspendu": false,
+    "suspendéLe": null
   },
   {
     "id": "15f7f9be-14e1-4f26-a287-d8f25b51a461",
@@ -187,7 +197,8 @@
     "auteurTelephone": "+22961234567",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-24T07:43:00.000Z"
+    "createdAt": "2026-06-24T07:43:00.000Z",
+    "suspendu": false
   },
   {
     "id": "e50f7a8b-254c-4e28-814b-54573e47a8df",
@@ -218,7 +229,8 @@
     "auteurTelephone": "+22996543210",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-23T06:02:00.000Z"
+    "createdAt": "2026-06-23T06:02:00.000Z",
+    "suspendu": false
   },
   {
     "id": "ca57c8e1-a836-4366-ae69-2e4f5d1d4920",
@@ -251,7 +263,9 @@
     "auteurTelephone": "+22952398046",
     "enAvant": true,
     "actif": true,
-    "createdAt": "2026-06-22T09:53:00.000Z"
+    "createdAt": "2026-06-22T09:53:00.000Z",
+    "suspendu": false,
+    "suspendéLe": null
   },
   {
     "id": "e2531ff6-f77d-4f29-aaf9-08339a55e331",
@@ -284,7 +298,8 @@
     "auteurTelephone": "+22997123456",
     "enAvant": true,
     "actif": true,
-    "createdAt": "2026-06-18T23:21:00.000Z"
+    "createdAt": "2026-06-18T23:21:00.000Z",
+    "suspendu": false
   },
   {
     "id": "57021141-4397-4d14-9d03-fde39f5b5102",
@@ -314,7 +329,8 @@
     "auteurTelephone": "+22996543210",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-17T23:01:00.000Z"
+    "createdAt": "2026-06-17T23:01:00.000Z",
+    "suspendu": false
   },
   {
     "id": "2bb88754-0a64-46db-b5bc-c4455e4a1964",
@@ -346,7 +362,8 @@
     "auteurTelephone": "+22961234567",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-16T20:39:00.000Z"
+    "createdAt": "2026-06-16T20:39:00.000Z",
+    "suspendu": false
   },
   {
     "id": "aff12fa4-d547-4d06-8939-2a40bd2148c2",
@@ -379,7 +396,8 @@
     "auteurTelephone": "+22996543210",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-04T14:36:00.000Z"
+    "createdAt": "2026-06-04T14:36:00.000Z",
+    "suspendu": false
   },
   {
     "id": "a89517f8-9165-4126-82bd-66992de26953",
@@ -412,7 +430,8 @@
     "auteurTelephone": "+22961234567",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-03T13:20:00.000Z"
+    "createdAt": "2026-06-03T13:20:00.000Z",
+    "suspendu": false
   },
   {
     "id": "1c32bede-b6a9-4493-826e-99e8cbbe5f0e",
@@ -442,7 +461,8 @@
     "auteurTelephone": "+22952398046",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-02T21:12:00.000Z"
+    "createdAt": "2026-06-02T21:12:00.000Z",
+    "suspendu": false
   },
   {
     "id": "cb880a39-ae37-4a19-a3d8-e8c9f1caf652",
@@ -475,7 +495,8 @@
     "auteurTelephone": "+22997123456",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-02T11:02:00.000Z"
+    "createdAt": "2026-06-02T11:02:00.000Z",
+    "suspendu": false
   },
   {
     "id": "96b20e32-dd20-4341-948a-f4941e46044b",
@@ -508,7 +529,8 @@
     "auteurTelephone": "+22952398046",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-06-01T13:44:00.000Z"
+    "createdAt": "2026-06-01T13:44:00.000Z",
+    "suspendu": false
   },
   {
     "id": "386694ee-06cd-4e22-9533-0e8870c770cd",
@@ -539,7 +561,8 @@
     "auteurTelephone": "+22996543210",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-05-26T09:06:00.000Z"
+    "createdAt": "2026-05-26T09:06:00.000Z",
+    "suspendu": false
   },
   {
     "id": "2ab32c5f-6b7e-4417-9e8d-5bdb67a250de",
@@ -572,7 +595,8 @@
     "auteurTelephone": "+22961234567",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-05-24T12:06:00.000Z"
+    "createdAt": "2026-05-24T12:06:00.000Z",
+    "suspendu": false
   },
   {
     "id": "6ec352de-5c3b-401d-b487-fc0c67d3695b",
@@ -604,7 +628,8 @@
     "auteurTelephone": "+22961234567",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-05-23T19:03:00.000Z"
+    "createdAt": "2026-05-23T19:03:00.000Z",
+    "suspendu": false
   },
   {
     "id": "b35211ce-b047-48fe-92fe-90736a2cd195",
@@ -636,7 +661,8 @@
     "auteurTelephone": "+22997123456",
     "enAvant": true,
     "actif": true,
-    "createdAt": "2026-05-23T14:08:00.000Z"
+    "createdAt": "2026-05-23T14:08:00.000Z",
+    "suspendu": false
   },
   {
     "id": "774958c9-9f6a-42d5-b388-a9c3ddd2484e",
@@ -666,7 +692,8 @@
     "auteurTelephone": "+22961234567",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-05-23T03:05:00.000Z"
+    "createdAt": "2026-05-23T03:05:00.000Z",
+    "suspendu": false
   },
   {
     "id": "9997cccf-1b1d-45fb-af73-e8e5a6c07284",
@@ -696,7 +723,8 @@
     "auteurTelephone": "+22952398046",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-05-21T20:39:00.000Z"
+    "createdAt": "2026-05-21T20:39:00.000Z",
+    "suspendu": false
   },
   {
     "id": "22a3cc98-042b-4106-bd97-a61e05c776d2",
@@ -726,7 +754,8 @@
     "auteurTelephone": "+22996543210",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-05-21T11:53:00.000Z"
+    "createdAt": "2026-05-21T11:53:00.000Z",
+    "suspendu": false
   },
   {
     "id": "c75b680d-d0df-459b-b91d-77bfe1e69651",
@@ -756,7 +785,8 @@
     "auteurTelephone": "+22952398046",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-05-14T09:52:00.000Z"
+    "createdAt": "2026-05-14T09:52:00.000Z",
+    "suspendu": false
   },
   {
     "id": "7dfeefbb-ae65-4825-8413-e1caa66c64ca",
@@ -786,6 +816,7 @@
     "auteurTelephone": "+22961234567",
     "enAvant": false,
     "actif": true,
-    "createdAt": "2026-05-13T17:08:00.000Z"
+    "createdAt": "2026-05-13T17:08:00.000Z",
+    "suspendu": false
   }
 ]

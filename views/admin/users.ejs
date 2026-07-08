@@ -3,49 +3,151 @@
 
 <section class="section">
   <div class="container">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
-      <h1 style="font-size:1.8rem; font-weight:800;">👥 <span style="color:#D4AF37;">Utilisateurs</span></h1>
-      <a href="/admin/dashboard" class="btn btn-outline btn-sm">← Retour</a>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+      <h1 style="font-size:1.8rem; font-weight:800;">
+        <i class='bx bx-group' style="color:var(--gold);"></i> <span style="color:#D4AF37;">Utilisateurs</span>
+      </h1>
+      <a href="/admin/dashboard" class="btn btn-outline btn-sm">
+        <i class='bx bx-arrow-back'></i> Retour
+      </a>
     </div>
-    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
 
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr><th>Nom</th><th>Email</th><th>Téléphone</th><th>Rôle</th><th>Inscrit le</th><th>Statut</th><th>Actions</th></tr>
-        </thead>
-        <tbody>
-          <% users.forEach(u => { %>
+    <% if (success) { %><div class="alert alert-success"><i class='bx bx-check-circle'></i> <%= success %></div><% } %>
+    <% if (error) { %><div class="alert alert-error"><i class='bx bx-error-circle'></i> <%= error %></div><% } %>
+
+    <% if (users.length === 0) { %>
+      <div class="empty-state">
+        <i class='bx bx-group' style="font-size:3rem; color:var(--grey); display:block; margin-bottom:1rem;"></i>
+        <h3>Aucun utilisateur</h3>
+      </div>
+    <% } else { %>
+
+      <!-- Version desktop : tableau -->
+      <div class="table-wrapper admin-table-desktop">
+        <table>
+          <thead>
             <tr>
-              <td><strong><%= u.nom %></strong></td>
-              <td style="font-size:0.85rem;"><%= u.email %></td>
-              <td style="font-size:0.85rem;"><%= u.telephone %></td>
-              <td><span class="badge <%= u.role === 'admin' ? 'badge-gold' : 'badge-grey' %>"><%= u.role %></span></td>
-              <td style="font-size:0.82rem; color:#6B6B6B;"><%= new Date(u.dateInscription).toLocaleDateString('fr-FR') %></td>
-              <td><span class="badge <%= u.banni ? 'badge-red' : 'badge-green' %>"><%= u.banni ? 'Banni' : 'Actif' %></span></td>
-              <td>
-                <div style="display:flex; gap:0.4rem;">
-                  <% if (u.role !== 'admin') { %>
-                    <% if (!u.banni) { %>
-                      <form action="/admin/users/<%= u.id %>/bannir" method="POST">
-                        <button class="btn btn-danger btn-sm">Bannir</button>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Téléphone</th>
+              <th>Rôle</th>
+              <th>Inscrit le</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(u => { %>
+              <tr>
+                <td><strong><%= u.nom %></strong></td>
+                <td style="font-size:0.85rem;">
+                  <i class='bx bx-envelope' style="color:var(--gold);"></i> <%= u.email || '—' %>
+                </td>
+                <td style="font-size:0.85rem;">
+                  <i class='bx bx-phone' style="color:var(--gold);"></i> <%= u.telephone %>
+                </td>
+                <td>
+                  <span class="badge <%= u.role === 'admin' ? 'badge-gold' : 'badge-grey' %>">
+                    <%= u.role === 'admin' ? 'Admin' : 'Utilisateur' %>
+                  </span>
+                </td>
+                <td style="font-size:0.82rem; color:#6B6B6B;">
+                  <i class='bx bx-calendar'></i>
+                  <%= new Date(u.dateInscription || u.createdAt).toLocaleDateString('fr-FR') %>
+                </td>
+                <td>
+                  <span class="badge <%= u.banni ? 'badge-red' : 'badge-green' %>">
+                    <%= u.banni ? 'Banni' : 'Actif' %>
+                  </span>
+                </td>
+                <td>
+                  <div style="display:flex; gap:0.4rem;">
+                    <% if (u.role !== 'admin') { %>
+                      <% if (!u.banni) { %>
+                        <form action="/admin/users/<%= u.id %>/ban" method="POST">
+                          <button class="btn btn-danger btn-sm">
+                            <i class='bx bx-block'></i> Bannir
+                          </button>
+                        </form>
+                      <% } else { %>
+                        <form action="/admin/users/<%= u.id %>/unban" method="POST">
+                          <button class="btn btn-outline btn-sm">
+                            <i class='bx bx-check'></i> Débannir
+                          </button>
+                        </form>
+                      <% } %>
+                      <form action="/admin/users/<%= u.id %>/delete" method="POST" onsubmit="return confirm('Supprimer ce compte définitivement ?')">
+                        <button class="btn btn-danger btn-sm">
+                          <i class='bx bx-trash'></i>
+                        </button>
                       </form>
                     <% } else { %>
-                      <form action="/admin/users/<%= u.id %>/debannir" method="POST">
-                        <button class="btn btn-outline btn-sm">Débannir</button>
-                      </form>
+                      <span style="font-size:0.8rem; color:var(--grey); padding:0.4rem;">—</span>
                     <% } %>
-                    <form action="/admin/users/<%= u.id %>/supprimer" method="POST" onsubmit="return confirm('Supprimer ce compte ?')">
-                      <button class="btn btn-danger btn-sm">🗑</button>
-                    </form>
-                  <% } %>
+                  </div>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Version mobile : cartes -->
+      <div class="admin-cards-mobile">
+        <% users.forEach(u => { %>
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <strong style="font-size:0.95rem;"><%= u.nom %></strong>
+                <div style="font-size:0.8rem; color:#6B6B6B; margin-top:0.2rem;">
+                  <i class='bx bx-envelope' style="color:var(--gold);"></i> <%= u.email || '—'%>
                 </div>
-              </td>
-            </tr>
-          <% }) %>
-        </tbody>
-      </table>
-    </div>
+              </div>
+              <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.3rem;">
+                <span class="badge <%= u.role === 'admin' ? 'badge-gold' : 'badge-grey' %>">
+                  <%= u.role === 'admin' ? 'Admin' : 'Utilisateur' %>
+                </span>
+                <span class="badge <%= u.banni ? 'badge-red' : 'badge-green' %>">
+                  <%= u.banni ? 'Banni' : 'Actif' %>
+                </span>
+              </div>
+            </div>
+            <div class="admin-card-body">
+              <div class="admin-card-row">
+                <span><i class='bx bx-phone' style="color:var(--gold);"></i> <%= u.telephone %></span>
+                <span style="font-size:0.8rem; color:#6B6B6B;">
+                  <i class='bx bx-calendar'></i>
+                  <%= new Date(u.dateInscription || u.createdAt).toLocaleDateString('fr-FR') %>
+                </span>
+              </div>
+            </div>
+            <% if (u.role !== 'admin') { %>
+              <div class="admin-card-actions">
+                <% if (!u.banni) { %>
+                  <form action="/admin/users/<%= u.id %>/ban" method="POST">
+                    <button class="btn btn-danger btn-sm">
+                      <i class='bx bx-block'></i> Bannir
+                    </button>
+                  </form>
+                <% } else { %>
+                  <form action="/admin/users/<%= u.id %>/unban" method="POST">
+                    <button class="btn btn-outline btn-sm">
+                      <i class='bx bx-check'></i> Débannir
+                    </button>
+                  </form>
+                <% } %>
+                <form action="/admin/users/<%= u.id %>/delete" method="POST" onsubmit="return confirm('Supprimer ce compte définitivement ?')">
+                  <button class="btn btn-danger btn-sm">
+                    <i class='bx bx-trash'></i> Supprimer
+                  </button>
+                </form>
+              </div>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+
+    <% } %>
   </div>
 </section>
 

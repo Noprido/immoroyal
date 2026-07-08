@@ -6,6 +6,10 @@ const authRoutes = require('./routes/auth');
 const annoncesRoutes = require('./routes/annonces');
 const profileRoutes = require('./routes/profile');
 const adminRoutes = require('./routes/admin');
+const pagesRoutes = require('./routes/pages');
+
+const { TYPES_BIEN } = require('./utils/validateAnnonce');
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -46,6 +50,8 @@ app.use('/annonces', annoncesRoutes);
 app.use('/profile', profileRoutes);
 app.use('/admin', adminRoutes);
 app.use('/messages', require('./routes/messages'));
+app.use('/', pagesRoutes);
+// app.use('/profil', require('./routes/profile'));
 
 // Page d'accueil
 app.get('/', (req, res) => {
@@ -55,7 +61,7 @@ app.get('/', (req, res) => {
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 6);
 
-  res.render('home', { dernieres, searchParams: {} });
+  res.render('home', { dernieres, searchParams: {} , TYPES_BIEN});
 });
 
 // 404

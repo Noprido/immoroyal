@@ -10,5 +10,13 @@
       "date": "2026-06-25T15:58:50.818Z",
       "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b"
     }
+  },
+  {
+    "id": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "annonceId": "e1f0827c-0fad-4b37-8868-3694ea03c6a1",
+    "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "userId2": "877d2ac2-b5d6-4212-ab01-3b042baacede",
+    "dateCreation": "2026-07-06T01:29:58.820Z",
+    "dernierMessage": null
   }
 ]

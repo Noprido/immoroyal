@@ -9,17 +9,61 @@
 
   <div class="navbar-links" id="navbarLinks">
     <a href="/annonces" class="nav-link">Annonces</a>
+    <a href="/apropos" class="nav-link">À propos</a>
+    <a href="/contact" class="nav-link">Contact</a>
+
     <% if (user) { %>
       <a href="/annonces/creer" class="nav-link">Publier</a>
       <a href="/messages" class="nav-link">Messages</a>
-      <a href="/profile/dashboard" class="nav-link">Mon compte</a>
-      <% if (user.role === 'admin') { %>
-        <a href="/admin/dashboard" class="nav-link" style="color: #D4AF37;">Admin</a>
-      <% } %>
-      <a href="/logout" class="btn btn-outline btn-sm">Déconnexion</a>
+
+      <!-- Dropdown compte -->
+      <div class="nav-dropdown" id="navDropdown">
+        <button class="nav-dropdown-btn" onclick="toggleDropdown()">
+          <i class='bx bx-user-circle'></i> Mon compte <i class='bx bx-chevron-down' id="dropdownChevron"></i>
+        </button>
+        <div class="nav-dropdown-menu" id="navDropdownMenu">
+          <a href="/profile/dashboard" class="nav-dropdown-item">
+            <i class='bx bx-grid-alt'></i> Tableau de bord
+          </a>
+          <a href="/profile/public/<%= user.id %>" class="nav-dropdown-item">
+            <i class='bx bx-user-circle'></i> Mon profil public
+          </a>
+          <% if (user.role === 'admin') { %>
+            <div class="nav-dropdown-divider"></div>
+            <a href="/admin/dashboard" class="nav-dropdown-item" style="color:#D4AF37;">
+              <i class='bx bx-shield-quarter'></i> Panel Admin
+            </a>
+          <% } %>
+          <div class="nav-dropdown-divider"></div>
+          <a href="/logout" class="nav-dropdown-item" style="color:#dc3545;">
+            <i class='bx bx-log-out'></i> Déconnexion
+          </a>
+        </div>
+      </div>
+
     <% } else { %>
       <a href="/login" class="nav-link">Connexion</a>
-      <a href="/register" class="btn btn-nav-primary">S'inscrire</a>
+      <a href="/annonces/creer" class="btn btn-nav-primary">Publier une annonce</a>
     <% } %>
   </div>
 </nav>
+<main style="flex:1;">
+
+<script>
+function toggleDropdown() {
+  const menu = document.getElementById('navDropdownMenu');
+  const chevron = document.getElementById('dropdownChevron');
+  const isOpen = menu.classList.toggle('open');
+  chevron.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+
+// Fermer si clic en dehors
+document.addEventListener('click', (e) => {
+  const dropdown = document.getElementById('navDropdown');
+  if (dropdown && !dropdown.contains(e.target)) {
+    document.getElementById('navDropdownMenu')?.classList.remove('open');
+    const chevron = document.getElementById('dropdownChevron');
+    if (chevron) chevron.style.transform = 'rotate(0deg)';
+  }
+});
+</script>

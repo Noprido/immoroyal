@@ -8,13 +8,13 @@
       <p>Connectez-vous à votre compte</p>
     </div>
 
-    <% if (error) { %><div class="alert alert-error">⚠️ <%= error %></div><% } %>
-    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
+    <% if (error) { %><div class="alert alert-error"><i class='bx bx-error-circle'></i> <%= error %></div><% } %>
+    <% if (success) { %><div class="alert alert-success"><i class='bx bx-check-circle'></i> <%= success %></div><% } %>
 
     <form action="/login" method="POST" style="display:flex; flex-direction:column; gap:1.2rem;">
       <div class="form-group">
-        <label class="form-label">Adresse email</label>
-        <input type="email" name="email" class="form-control" placeholder="vous@exemple.com" required>
+        <label class="form-label">Numéro de téléphone</label>
+        <input type="tel" name="telephone" class="form-control" placeholder="+229 01 97 00 00 00" required>
       </div>
       <div class="form-group">
         <label class="form-label">Mot de passe</label>

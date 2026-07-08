@@ -13,7 +13,7 @@
       <div>
         <h2 style="font-size:1.1rem; font-weight:700;"><%= autreUser ? autreUser.nom : 'Utilisateur' %></h2>
         <% if (annonce) { %>
-          <a href="/annonces/<%= annonce.id %>" style="font-size:0.82rem; color:#D4AF37;">🏠 <%= annonce.titre %></a>
+          <a href="/annonces/<%= annonce.id %>" style="font-size:0.82rem; color:#D4AF37;"><i class='bx bx-home-alt-2 bx-trfm' style="color:var(--gold);"></i> <%= annonce.titre %></a>
         <% } %>
       </div>
     </div>

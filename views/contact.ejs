@@ -1,0 +1,119 @@
+<%- include('partials/header', { title: 'Contact' }) %>
+<%- include('partials/navbar') %>
+
+<!-- Hero page -->
+<div style="background:var(--black); padding:4rem 2rem; text-align:center;">
+  <div class="container">
+    <h1 style="color:#fff; font-size:2.2rem; font-weight:800; margin-bottom:0.75rem;">
+      Nous <span style="color:#D4AF37;">contacter</span>
+    </h1>
+    <p style="color:rgba(255,255,255,0.65); font-size:1.05rem; max-width:600px; margin:0 auto;">
+      Une question, un signalement ou une suggestion ? Nous vous répondons rapidement.
+    </p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container" style="max-width:900px;">
+    <div class="detail-grid">
+
+      <!-- Formulaire de contact -->
+      <div>
+        <div class="info-block">
+          <h3>Envoyer un message</h3>
+
+          <% if (typeof success !== 'undefined' && success) { %>
+            <div class="alert alert-success"><%= success %></div>
+          <% } %>
+          <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-error"><%= error %></div>
+          <% } %>
+
+          <form action="/contact" method="POST" style="display:flex; flex-direction:column; gap:1.2rem; margin-top:1rem;">
+            <div class="form-group">
+              <label class="form-label">Nom complet *</label>
+              <input type="text" name="nom" class="form-control" placeholder="Jean Koffi" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Adresse email *</label>
+              <input type="email" name="email" class="form-control" placeholder="vous@exemple.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sujet *</label>
+              <select name="sujet" class="form-control" required>
+                <option value="">Choisir un sujet...</option>
+                <option value="question">Question générale</option>
+                <option value="signalement">Signalement d'annonce</option>
+                <option value="probleme">Problème technique</option>
+                <option value="partenariat">Partenariat</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message *</label>
+              <textarea name="message" class="form-control" placeholder="Décrivez votre demande..." style="min-height:150px;" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold btn-lg">Envoyer le message</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Infos de contact -->
+      <div>
+        <div class="contact-card" style="margin-bottom:1.5rem;">
+          <h3>Informations</h3>
+          <div style="display:flex; flex-direction:column; gap:1.2rem; margin-top:1rem;">
+            <div style="display:flex; gap:0.9rem; align-items:flex-start;">
+              <i class='bx bx-envelope' style="font-size:1.4rem; color:var(--gold); flex-shrink:0; margin-top:0.1rem;"></i>
+              <div>
+                <div style="font-weight:600; color:#D4AF37; font-size:0.85rem; margin-bottom:0.2rem;">Email</div>
+                <div style="color:rgba(255,255,255,0.8); font-size:0.9rem;">contact@immoroyal.bj</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:0.9rem; align-items:flex-start;">
+              <i class='bx bx-phone' style="font-size:1.4rem; color:var(--gold); flex-shrink:0; margin-top:0.1rem;"></i>
+              <div>
+                <div style="font-weight:600; color:#D4AF37; font-size:0.85rem; margin-bottom:0.2rem;">Téléphone / WhatsApp</div>
+                <div style="color:rgba(255,255,255,0.8); font-size:0.9rem;">+229 97 00 00 00</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:0.9rem; align-items:flex-start;">
+              <i class='bx bx-map' style="font-size:1.4rem; color:var(--gold); flex-shrink:0; margin-top:0.1rem;"></i>
+              <div>
+                <div style="font-weight:600; color:#D4AF37; font-size:0.85rem; margin-bottom:0.2rem;">Adresse</div>
+                <div style="color:rgba(255,255,255,0.8); font-size:0.9rem;">Cotonou, République du Bénin</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:0.9rem; align-items:flex-start;">
+              <i class='bx bx-time' style="font-size:1.4rem; color:var(--gold); flex-shrink:0; margin-top:0.1rem;"></i>
+              <div>
+                <div style="font-weight:600; color:#D4AF37; font-size:0.85rem; margin-bottom:0.2rem;">Disponibilité</div>
+                <div style="color:rgba(255,255,255,0.8); font-size:0.9rem;">Lun – Sam, 8h – 18h</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <h3>FAQ rapide</h3>
+          <div style="display:flex; flex-direction:column; gap:1rem; margin-top:0.5rem;">
+            <div>
+              <p style="font-weight:600; font-size:0.9rem; margin-bottom:0.3rem;">La publication est-elle vraiment gratuite ?</p>
+              <p style="font-size:0.85rem; color:#6B6B6B;">Oui, totalement. Pas d'abonnement, pas de commission.</p>
+            </div>
+            <div>
+              <p style="font-weight:600; font-size:0.9rem; margin-bottom:0.3rem;">Comment signaler une annonce frauduleuse ?</p>
+              <p style="font-size:0.85rem; color:#6B6B6B;">Utilisez ce formulaire avec le sujet "Signalement d'annonce" et l'URL de l'annonce en question.</p>
+            </div>
+            <div>
+              <p style="font-weight:600; font-size:0.9rem; margin-bottom:0.3rem;">Puis-je publier depuis n'importe quelle ville du Bénin ?</p>
+              <p style="font-size:0.85rem; color:#6B6B6B;">Oui, ImmoRoyal couvre les 77 communes des 12 départements du Bénin.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

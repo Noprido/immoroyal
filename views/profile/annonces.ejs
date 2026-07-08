@@ -3,28 +3,40 @@
 
 <section class="section">
   <div class="container">
-    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
+    <% if (success) { %><div class="alert alert-success"><i class='bx bx-check-circle'></i> <%= success %></div><% } %>
+    <% if (error) { %><div class="alert alert-error"><i class='bx bx-error-circle'></i> <%= error %></div><% } %>
 
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
       <div>
         <h1 style="font-size:1.8rem; font-weight:800;">Mes <span style="color:#D4AF37;">annonces</span></h1>
         <p style="color:#6B6B6B;"><%= annonces.length %> annonce<%= annonces.length !== 1 ? 's' : '' %></p>
       </div>
-      <a href="/annonces/creer" class="btn btn-gold">+ Publier</a>
+      <a href="/annonces/creer" class="btn btn-gold"><i class='bx bx-plus'></i> Publier</a>
     </div>
 
     <% if (annonces.length === 0) { %>
       <div class="empty-state">
-        <div class="icon">📋</div>
+        <i class='bx bx-list-ul' style="font-size:3rem; color:var(--grey); display:block; margin-bottom:1rem;"></i>
         <h3>Aucune annonce</h3>
         <p>Vous n'avez pas encore publié d'annonce.</p>
-        <a href="/annonces/creer" class="btn btn-gold" style="margin-top:1rem;">Publier ma première annonce</a>
+        <a href="/annonces/creer" class="btn btn-gold" style="margin-top:1rem;">
+          <i class='bx bx-plus'></i> Publier ma première annonce
+        </a>
       </div>
     <% } else { %>
-      <div class="table-wrapper">
+
+      <!-- Desktop : tableau -->
+      <div class="table-wrapper admin-table-desktop">
         <table>
           <thead>
-            <tr><th>Annonce</th><th>Ville</th><th>Loyer</th><th>Date</th><th>Statut</th><th>Actions</th></tr>
+            <tr>
+              <th>Annonce</th>
+              <th>Ville</th>
+              <th>Loyer</th>
+              <th>Date</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
           </thead>
           <tbody>
             <% annonces.forEach(a => { %>
@@ -33,17 +45,49 @@
                   <div style="font-weight:600; font-size:0.9rem;"><%= a.titre %></div>
                   <div style="font-size:0.8rem; color:#6B6B6B;"><%= a.typeBien %></div>
                 </td>
-                <td><%= a.ville %></td>
+                <td><i class='bx bx-map' style="color:var(--gold);"></i> <%= a.ville %></td>
                 <td style="font-weight:700; color:#B8960C;"><%= a.loyer.toLocaleString('fr-FR') %> FCFA</td>
-                <td style="font-size:0.85rem; color:#6B6B6B;"><%= new Date(a.datePublication).toLocaleDateString('fr-FR') %></td>
-                <td><span class="badge <%= a.statut === 'actif' ? 'badge-green' : 'badge-grey' %>"><%= a.statut %></span></td>
+                <td style="font-size:0.85rem; color:#6B6B6B;">
+                  <%= new Date(a.createdAt).toLocaleDateString('fr-FR') %>
+                </td>
+                <td>
+                  <% if (a.suspendu) { %>
+                    <span class="badge badge-red" title="Suspendue par un administrateur">
+                      <i class='bx bx-shield-x'></i> Suspendue
+                    </span>
+                  <% } else if (a.actif !== false) { %>
+                    <span class="badge badge-green">
+                      <i class='bx bx-check-circle'></i> Active
+                    </span>
+                  <% } else { %>
+                    <span class="badge badge-grey">
+                      <i class='bx bx-minus-circle'></i> Inactive
+                    </span>
+                  <% } %>
+                </td>
                 <td>
                   <div style="display:flex; gap:0.5rem;">
-                    <a href="/annonces/<%= a.id %>" class="btn btn-outline btn-sm">Voir</a>
-                    <a href="/annonces/<%= a.id %>/modifier" class="btn btn-dark btn-sm">Modifier</a>
-                    <form action="/annonces/<%= a.id %>/supprimer" method="POST" onsubmit="return confirm('Supprimer ?')">
-                      <button type="submit" class="btn btn-danger btn-sm">🗑</button>
-                    </form>
+                    <a href="/annonces/<%= a.id %>" class="btn btn-outline btn-sm">
+                      <i class='bx bx-show'></i> Voir
+                    </a>
+                    <% if (!a.suspendu) { %>
+                      <a href="/annonces/<%= a.id %>/edit" class="btn btn-dark btn-sm">
+                        <i class='bx bx-edit'></i> Modifier
+                      </a>
+                      <form action="/annonces/<%= a.id %>/toggle" method="POST">
+                        <button type="submit" class="btn <%= a.actif !== false ? 'btn-outline' : 'btn-gold' %> btn-sm">
+                          <% if (a.actif !== false) { %>
+                            <i class='bx bx-pause'></i> Désactiver
+                          <% } else { %>
+                            <i class='bx bx-play'></i> Activer
+                          <% } %>
+                        </button>
+                      </form>
+                    <% } else { %>
+                      <span style="font-size:0.78rem; color:#dc3545; padding:0.4rem 0;">
+                        <i class='bx bx-info-circle'></i> Contactez l'admin
+                      </span>
+                    <% } %>
                   </div>
                 </td>
               </tr>
@@ -51,6 +95,70 @@
           </tbody>
         </table>
       </div>
+
+      <!-- Mobile : cartes -->
+      <div class="admin-cards-mobile">
+        <% annonces.forEach(a => { %>
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div style="flex:1; min-width:0;">
+                <div style="font-weight:700; font-size:0.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                  <%= a.titre %>
+                </div>
+                <div style="font-size:0.78rem; color:#6B6B6B; margin-top:0.2rem;"><%= a.typeBien %></div>
+              </div>
+              <% if (a.suspendu) { %>
+                <span class="badge badge-red" style="flex-shrink:0;">
+                  <i class='bx bx-shield-x'></i> Suspendue
+                </span>
+              <% } else if (a.actif !== false) { %>
+                <span class="badge badge-green" style="flex-shrink:0;">
+                  <i class='bx bx-check-circle'></i> Active
+                </span>
+              <% } else { %>
+                <span class="badge badge-grey" style="flex-shrink:0;">
+                  <i class='bx bx-minus-circle'></i> Inactive
+                </span>
+              <% } %>
+            </div>
+            <div class="admin-card-body">
+              <div class="admin-card-row">
+                <span><i class='bx bx-map' style="color:var(--gold);"></i> <%= a.ville %></span>
+                <span style="font-weight:700; color:#B8960C;"><%= a.loyer.toLocaleString('fr-FR') %> FCFA</span>
+              </div>
+              <div class="admin-card-row">
+                <span style="font-size:0.8rem; color:#6B6B6B;">
+                  <i class='bx bx-calendar'></i> <%= new Date(a.createdAt).toLocaleDateString('fr-FR') %>
+                </span>
+              </div>
+            </div>
+            <div class="admin-card-actions">
+              <a href="/annonces/<%= a.id %>" class="btn btn-outline btn-sm">
+                <i class='bx bx-show'></i> Voir
+              </a>
+              <% if (!a.suspendu) { %>
+                <a href="/annonces/<%= a.id %>/edit" class="btn btn-dark btn-sm">
+                  <i class='bx bx-edit'></i> Modifier
+                </a>
+                <form action="/annonces/<%= a.id %>/toggle" method="POST">
+                  <button type="submit" class="btn <%= a.actif !== false ? 'btn-outline' : 'btn-gold' %> btn-sm">
+                    <% if (a.actif !== false) { %>
+                      <i class='bx bx-pause'></i> Désactiver
+                    <% } else { %>
+                      <i class='bx bx-play'></i> Activer
+                    <% } %>
+                  </button>
+                </form>
+              <% } else { %>
+                <p style="font-size:0.78rem; color:#dc3545; margin:0;">
+                  <i class='bx bx-info-circle'></i> Suspendue par un admin — contactez le support
+                </p>
+              <% } %>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+
     <% } %>
   </div>
 </section>

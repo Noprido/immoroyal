@@ -8,8 +8,8 @@
     <h1>Trouvez votre futur logement <span>au Bénin</span></h1>
     <p>Des centaines d'annonces de location vérifiées, publiées par des particuliers et des démarcheurs locaux.</p>
     <div class="hero-actions">
-      <a href="/annonces" class="btn btn-gold btn-lg">🔍 Rechercher</a>
-      <a href="/annonces/creer" class="btn btn-outline btn-lg">+ Publier une annonce</a>
+      <a href="/annonces" class="btn btn-gold btn-lg">Rechercher un bien</a>
+      <a href="/annonces/creer" class="btn btn-outline btn-lg">Publier une annonce</a>
     </div>
   </div>
 </section>
@@ -19,21 +19,21 @@
   <div class="search-bar">
     <h3>Recherche rapide</h3>
     <form action="/annonces" method="GET" class="search-grid">
-        <div class="form-group">
-          <label class="form-label">Ville / Commune *</label>
-          <input type="text" name="ville" class="form-control" data-autocomplete="ville"
-                placeholder="Cotonou, Abomey-Calavi..." autocomplete="off" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Quartier / Village *</label>
-          <input type="text" name="quartier" class="form-control" data-autocomplete="quartier"
-                placeholder="Fidjrossè, Akpakpa..." autocomplete="off" required>
-        </div>
+      <div class="form-group">
+        <label class="form-label">Ville / Commune</label>
+        <input type="text" name="ville" class="form-control" data-autocomplete="ville"
+               placeholder="Cotonou, Abomey-Calavi..." autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Quartier / Village</label>
+        <input type="text" name="quartier" class="form-control" data-autocomplete="quartier"
+               placeholder="Fidjrossè, Akpakpa..." autocomplete="off">
+      </div>
       <div class="form-group">
         <label class="form-label">Type de bien</label>
         <select name="typeBien" class="form-control">
           <option value="">Tous</option>
-          <% ['Maison','Appartement','Appartement meublé','Studio','Studio meublé','Chambre','Boutique','Magasin','Bureau','Terrain'].forEach(t => { %>
+          <% TYPES_BIEN.forEach(t => { %>
             <option value="<%= t %>"><%= t %></option>
           <% }) %>
         </select>
@@ -49,21 +49,81 @@
   </div>
 </div>
 
-<!-- DERNIÈRES ANNONCES -->
+<!-- CHIFFRES CLÉS -->
+<section class="section section-grey">
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-number"><%= dernieres.length > 0 ? '500+' : '0' %></div>
+        <div class="stat-label">Annonces publiées</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Départements couverts</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-number">77</div>
+        <div class="stat-label">Communes disponibles</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Gratuit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPES DE BIENS -->
 <section class="section">
   <div class="container">
-    <% if (success) { %><div class="alert alert-success">✅ <%= success %></div><% } %>
-    <% if (error) { %><div class="alert alert-error">⚠️ <%= error %></div><% } %>
+    <h2 class="section-title">Parcourir par <span class="gold">type de bien</span></h2>
+    <p class="section-subtitle">Trouvez exactement ce que vous cherchez</p>
+    <%
+    const icones = {
+      'Maison': 'bx-home-alt-2',
+      'Appartement vide': 'bx-building',
+      'Appartement meublé': 'bx-bed',
+      'Boutique': 'bx-store',
+      'Magasin': 'bx-store-alt',
+      'Bureau': 'bx-briefcase',
+      'Terrain': 'bx-landscape',
+      'Entrée personnelle': 'bx-door-open'
+    };
+    %>
+    <div class="types-grid">
+      <% TYPES_BIEN.forEach(type => { %>
+        <a href="/annonces?typeBien=<%= encodeURIComponent(type) %>" class="type-card">
+          <i class='bx <%= icones[type] || "bx-home" %> type-icon'></i>
+          <div class="type-name"><%= type %></div>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
 
-    <h2 class="section-title">Dernières <span class="gold">annonces</span></h2>
-    <p class="section-subtitle">Les logements publiés récemment sur la plateforme</p>
+<!-- DERNIÈRES ANNONCES -->
+<section class="section section-grey">
+  <div class="container">
+    <% if (success) { %><div class="alert alert-success"><%= success %></div><% } %>
+    <% if (error) { %><div class="alert alert-error"><%= error %></div><% } %>
+
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h2 class="section-title" style="margin-bottom:0.25rem;">Dernières <span class="gold">annonces</span></h2>
+        <p class="section-subtitle" style="margin-bottom:0;">Les logements publiés récemment sur la plateforme</p>
+      </div>
+      <a href="/annonces" class="btn btn-outline">Voir tout</a>
+    </div>
 
     <% if (dernieres.length === 0) { %>
       <div class="empty-state">
         <div class="icon">🏠</div>
         <h3>Aucune annonce pour l'instant</h3>
         <p>Soyez le premier à publier !</p>
-        <a href="/annonces/creer" class="btn btn-gold" style="margin-top:1rem">Publier une annonce</a>
+        <a href="/annonces/creer" class="btn btn-gold" style="margin-top:1rem;">Publier une annonce</a>
       </div>
     <% } else { %>
       <div class="annonces-grid">
@@ -71,20 +131,26 @@
           <a href="/annonces/<%= annonce.id %>" class="card-annonce <%= annonce.enAvant ? 'en-avant' : '' %>">
             <div class="card-photo">
               <% if (annonce.photos && annonce.photos.length > 0) { %>
-                <img src="<%= annonce.photos[0] %>" alt="<%= annonce.titre %>">
+                <img src="<%= annonce.photos[0] %>" alt="<%= annonce.titre %>" loading="lazy">
               <% } else { %>
                 <div class="card-photo-placeholder">🏠</div>
               <% } %>
               <span class="badge-type"><%= annonce.typeBien %></span>
-              <% if (annonce.enAvant) { %><span class="badge-avant">⭐ En avant</span><% } %>
+              <% if (annonce.enAvant) { %><span class="badge-avant">En avant</span><% } %>
             </div>
             <div class="card-body">
               <div class="card-price"><%= annonce.loyer.toLocaleString('fr-FR') %> FCFA <span>/ mois</span></div>
               <div class="card-title"><%= annonce.titre %></div>
-              <div class="card-location">📍 <%= annonce.ville %><% if (annonce.quartier) { %>, <%= annonce.quartier %><% } %></div>
+              <div class="card-location">
+                <i class='bx bx-map'></i> <%= annonce.ville %><% if (annonce.quartier) { %>, <%= annonce.quartier %><% } %>
+              </div>
               <div class="card-infos">
-                <% if (annonce.nbPieces) { %><span>🛏 <%= annonce.nbPieces %> pièce<%= annonce.nbPieces > 1 ? 's' : '' %></span><% } %>
-                <% if (annonce.nbDouches) { %><span>🚿 <%= annonce.nbDouches %> douche<%= annonce.nbDouches > 1 ? 's' : '' %></span><% } %>
+                <% if (annonce.nbPieces) { %>
+                  <span><i class='bx bx-building-house bx-trfm'></i> <%= annonce.nbPieces %> pièce<%= annonce.nbPieces > 1 ? 's' : '' %></span>
+                <% } %>
+                <% if (annonce.nbDouches) { %>
+                  <span><i class='bx bx-droplet bx-trfm'></i> <%= annonce.nbDouches %> douche<%= annonce.nbDouches > 1 ? 's' : '' %></span>
+                <% } %>
               </div>
             </div>
           </a>
@@ -97,16 +163,120 @@
   </div>
 </section>
 
+<!-- COMMENT ÇA MARCHE -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center;">Comment ça <span class="gold">marche ?</span></h2>
+    <p class="section-subtitle" style="text-align:center;">Trouver ou publier un logement n'a jamais été aussi simple</p>
+
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-number">1</div>
+        <h4>Recherchez</h4>
+        <p>Entrez votre ville, votre quartier et vos critères. Des centaines d'annonces s'offrent à vous en quelques secondes.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-item">
+        <div class="step-number">2</div>
+        <h4>Contactez</h4>
+        <p>Envoyez un message directement au propriétaire ou au démarcheur via notre messagerie intégrée.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-item">
+        <div class="step-number">3</div>
+        <h4>Emménagez</h4>
+        <p>Visitez le bien, signez votre contrat et installez-vous. ImmoRoyal vous a accompagné jusqu'au bout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section class="section section-grey">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center;">Ce qu'ils disent <span class="gold">de nous</span></h2>
+    <p class="section-subtitle" style="text-align:center;">Des milliers de Béninois nous font confiance</p>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"J'ai trouvé mon appartement à Cotonou en moins de 48 heures. Le processus était simple, rapide et totalement gratuit. Je recommande ImmoRoyal à tous mes proches."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Adjoavi K.</div>
+            <div class="testimonial-location">Cotonou, Littoral</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"En tant que démarcheur, ImmoRoyal m'a permis de toucher beaucoup plus de clients. Je publie mes annonces gratuitement et je reçois des messages directement."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">K</div>
+          <div>
+            <div class="testimonial-name">Kossi M.</div>
+            <div class="testimonial-location">Porto-Novo, Ouémé</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★☆</div>
+        <p class="testimonial-text">"Très bonne plateforme, beaucoup d'annonces dans ma zone. J'aurais aimé encore plus de photos sur certaines annonces, mais globalement l'expérience est excellente."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">F</div>
+          <div>
+            <div class="testimonial-name">Fatima B.</div>
+            <div class="testimonial-location">Parakou, Borgou</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- POURQUOI IMMOROYAL -->
 <section class="section section-dark">
   <div class="container">
-    <h2 class="section-title" style="text-align:center; color:#fff; margin-bottom:0.5rem">Pourquoi <span style="color:#D4AF37">ImmoRoyal</span> ?</h2>
-    <p style="text-align:center; color:rgba(255,255,255,0.6); margin-bottom:2.5rem">La meilleure façon de trouver un logement au Bénin</p>
+    <h2 class="section-title" style="text-align:center; color:#fff; margin-bottom:0.5rem;">Pourquoi <span style="color:#D4AF37;">ImmoRoyal</span> ?</h2>
+    <p style="text-align:center; color:rgba(255,255,255,0.6); margin-bottom:2.5rem;">La meilleure façon de trouver un logement au Bénin</p>
     <div class="features-grid">
-      <div class="feature-item"><div class="feature-icon">⚡</div><h4>Rapide</h4><p>Trouvez votre logement en quelques minutes grâce à nos filtres précis.</p></div>
-      <div class="feature-item"><div class="feature-icon">🎯</div><h4>Local</h4><p>Des annonces exclusivement au Bénin, par des gens qui connaissent le terrain.</p></div>
-      <div class="feature-item"><div class="feature-icon">🆓</div><h4>Gratuit</h4><p>Publication et consultation d'annonces 100% gratuit pour tous.</p></div>
-      <div class="feature-item"><div class="feature-icon">🔒</div><h4>Fiable</h4><p>Des annonces modérées pour vous protéger des arnaques.</p></div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class='bx bx-rocket'></i></div>
+        <h4>Rapide</h4>
+        <p>Trouvez votre logement en quelques minutes grâce à nos filtres précis.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class='bx bx-map-pin'></i></div>
+        <h4>Local</h4>
+        <p>Des annonces exclusivement au Bénin, par des gens qui connaissent le terrain.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class='bx bx-gift'></i></div>
+        <h4>Gratuit</h4>
+        <p>Publication et consultation d'annonces 100% gratuit pour tous.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class='bx bx-shield-quarter'></i></div>
+        <h4>Fiable</h4>
+        <p>Des annonces modérées pour vous protéger des arnaques.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-block">
+      <div class="cta-text">
+        <h2>Vous avez un bien à louer ?</h2>
+        <p>Publiez votre annonce gratuitement en moins de 5 minutes et touchez des milliers de locataires potentiels partout au Bénin.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="/annonces/creer" class="btn btn-gold btn-lg">Publier gratuitement</a>
+        <a href="/apropos" class="btn btn-outline-white btn-lg">En savoir plus</a>
+      </div>
     </div>
   </div>
 </section>
