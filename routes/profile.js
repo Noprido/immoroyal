@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 const { isAuthenticated } = require('../middleware/auth');
 const { countUnread } = require('../controllers/messagesController');
 
+const { getPrixAffiche, getLabelDuree } = require('../utils/validateAnnonce');
+
 // ─── Route publique (pas de isAuthenticated) ──────────────────────
 router.get('/public/:id', (req, res) => {
   const user = db.findById('users', req.params.id);
@@ -29,7 +31,9 @@ router.get('/public/:id', (req, res) => {
   res.render('profile/public', {
     user: userPublic,
     annonces,
-    stats: { totalAnnonces: annonces.length, villes: villes.slice(0, 4), typesPrincipaux }
+    stats: { totalAnnonces: annonces.length, villes: villes.slice(0, 4), typesPrincipaux },
+    getPrixAffiche,
+    getLabelDuree
   });
 });
 
