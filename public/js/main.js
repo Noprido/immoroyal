@@ -87,8 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Validation standard des champs required
     if (!validateStep(current)) return;
 
+    const esTerrain = steps[0].querySelector("#typeBien").value == "Terrain" ? true : false;
+
     // Validation spéciale étape 3 : au moins une pièce
-    if (current === 3) {
+    if (current === 3 && !esTerrain) {
       const nbPieces = parseInt(document.getElementById('nbPieces')?.value) || 0;
       if (nbPieces < 1) {
         // Afficher une erreur visuelle sous le champ nbPieces

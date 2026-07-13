@@ -39,6 +39,14 @@
         </select>
       </div>
       <div class="form-group">
+        <label class="form-label">Transaction</label>
+        <select name="typeTransaction" class="form-control">
+          <option value="">Vente & Location</option>
+          <option value="location">À louer</option>
+          <option value="vente">À vendre</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label class="form-label">Prix max (FCFA)</label>
         <input type="number" name="prixMax" class="form-control" placeholder="150 000">
       </div>
@@ -107,20 +115,20 @@
 <!-- DERNIÈRES ANNONCES -->
 <section class="section section-grey">
   <div class="container">
-    <% if (success) { %><div class="alert alert-success"><%= success %></div><% } %>
-    <% if (error) { %><div class="alert alert-error"><%= error %></div><% } %>
+    <% if (success) { %><div class="alert alert-success"><i class='bx bx-check-circle'></i> <%= success %></div><% } %>
+    <% if (error) { %><div class="alert alert-error"><i class='bx bx-error-circle'></i> <%= error %></div><% } %>
 
     <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
       <div>
         <h2 class="section-title" style="margin-bottom:0.25rem;">Dernières <span class="gold">annonces</span></h2>
-        <p class="section-subtitle" style="margin-bottom:0;">Les logements publiés récemment sur la plateforme</p>
+        <p class="section-subtitle" style="margin-bottom:0;">Les biens publiés récemment sur la plateforme</p>
       </div>
       <a href="/annonces" class="btn btn-outline">Voir tout</a>
     </div>
 
     <% if (dernieres.length === 0) { %>
       <div class="empty-state">
-        <div class="icon">🏠</div>
+        <i class='bx bx-home-alt-2' style="font-size:3rem; color:var(--grey); display:block; margin-bottom:1rem;"></i>
         <h3>Aucune annonce pour l'instant</h3>
         <p>Soyez le premier à publier !</p>
         <a href="/annonces/creer" class="btn btn-gold" style="margin-top:1rem;">Publier une annonce</a>
@@ -128,28 +136,51 @@
     <% } else { %>
       <div class="annonces-grid">
         <% dernieres.forEach(annonce => { %>
+          <%
+            const estVente = annonce.typeTransaction === 'vente';
+            const prix = getPrixAffiche(annonce);
+            const duree = getLabelDuree(annonce);
+            const miniature = (annonce.photos && annonce.photos.length > 0) ? annonce.photos[0] : null;
+          %>
           <a href="/annonces/<%= annonce.id %>" class="card-annonce <%= annonce.enAvant ? 'en-avant' : '' %>">
             <div class="card-photo">
-              <% if (annonce.photos && annonce.photos.length > 0) { %>
-                <img src="<%= annonce.photos[0] %>" alt="<%= annonce.titre %>" loading="lazy">
+              <% if (annonce.videos && annonce.videos.length > 0) { %>
+                <video class="card-video-thumb" preload="metadata" muted playsinline
+                      onloadedmetadata="this.currentTime=0.001">
+                  <source src="<%= annonce.videos[0] %>" type="video/mp4">
+                  <source src="<%= annonce.videos[0] %>" type="video/webm">
+                </video>
+                <div class="card-video-play">
+                  <div class="card-video-play-circle"><i class='bx bx-play'></i></div>
+                </div>
+              <% } else if (miniature) { %>
+                <img src="<%= miniature %>" alt="<%= annonce.titre %>" loading="lazy">
               <% } else { %>
-                <div class="card-photo-placeholder">🏠</div>
+                <div class="card-photo-placeholder"><i class='bx bx-home-alt-2'></i></div>
               <% } %>
               <span class="badge-type"><%= annonce.typeBien %></span>
-              <% if (annonce.enAvant) { %><span class="badge-avant">En avant</span><% } %>
+              <% if (annonce.enAvant) { %><span class="badge-avant"><i class='bx bx-star'></i> En avant</span><% } %>
+              <span class="badge-transaction <%= estVente ? 'badge-transaction-vente' : 'badge-transaction-location' %>">
+                <i class='bx <%= estVente ? "bx-transfer" : "bx-key" %>'></i>
+                <%= estVente ? 'À vendre' : 'À louer' %>
+              </span>
             </div>
             <div class="card-body">
-              <div class="card-price"><%= annonce.loyer.toLocaleString('fr-FR') %> FCFA <span>/ mois</span></div>
+              <div class="card-price">
+                <%= prix.toLocaleString('fr-FR') %> FCFA
+                <% if (!estVente) { %><span><%= duree %></span><% } %>
+              </div>
               <div class="card-title"><%= annonce.titre %></div>
               <div class="card-location">
-                <i class='bx bx-map'></i> <%= annonce.ville %><% if (annonce.quartier) { %>, <%= annonce.quartier %><% } %>
+                <i class='bx bx-map'></i>
+                <%= annonce.ville %><% if (annonce.quartier) { %>, <%= annonce.quartier %><% } %>
               </div>
               <div class="card-infos">
                 <% if (annonce.nbPieces) { %>
-                  <span><i class='bx bx-building-house bx-trfm'></i> <%= annonce.nbPieces %> pièce<%= annonce.nbPieces > 1 ? 's' : '' %></span>
+                  <span><i class='bx bx-building-house'></i> <%= annonce.nbPieces %> pièce<%= annonce.nbPieces > 1 ? 's' : '' %></span>
                 <% } %>
                 <% if (annonce.nbDouches) { %>
-                  <span><i class='bx bx-droplet bx-trfm'></i> <%= annonce.nbDouches %> douche<%= annonce.nbDouches > 1 ? 's' : '' %></span>
+                  <span><i class='bx bx-droplet'></i> <%= annonce.nbDouches %> douche<%= annonce.nbDouches > 1 ? 's' : '' %></span>
                 <% } %>
               </div>
             </div>
@@ -168,7 +199,6 @@
   <div class="container">
     <h2 class="section-title" style="text-align:center;">Comment ça <span class="gold">marche ?</span></h2>
     <p class="section-subtitle" style="text-align:center;">Trouver ou publier un logement n'a jamais été aussi simple</p>
-
     <div class="steps-grid">
       <div class="step-item">
         <div class="step-number">1</div>
@@ -196,7 +226,6 @@
   <div class="container">
     <h2 class="section-title" style="text-align:center;">Ce qu'ils disent <span class="gold">de nous</span></h2>
     <p class="section-subtitle" style="text-align:center;">Des milliers de Béninois nous font confiance</p>
-
     <div class="testimonials-grid">
       <div class="testimonial-card">
         <div class="testimonial-stars">★★★★★</div>
@@ -270,8 +299,8 @@
   <div class="container">
     <div class="cta-block">
       <div class="cta-text">
-        <h2>Vous avez un bien à louer ?</h2>
-        <p>Publiez votre annonce gratuitement en moins de 5 minutes et touchez des milliers de locataires potentiels partout au Bénin.</p>
+        <h2>Vous avez un bien à louer ou à vendre ?</h2>
+        <p>Publiez votre annonce gratuitement en moins de 5 minutes et touchez des milliers de clients potentiels partout au Bénin.</p>
       </div>
       <div class="cta-actions">
         <a href="/annonces/creer" class="btn btn-gold btn-lg">Publier gratuitement</a>

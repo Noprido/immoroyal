@@ -31,6 +31,14 @@
           </select>
         </div>
         <div class="form-group">
+          <label class="form-label">Transaction</label>
+          <select name="typeTransaction" class="form-control">
+            <option value="">Vente & Location</option>
+            <option value="location" <%= filtres.typeTransaction === 'location' ? 'selected' : '' %>>À louer</option>
+            <option value="vente" <%= filtres.typeTransaction === 'vente' ? 'selected' : '' %>>À vendre</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label class="form-label">Prix min</label>
           <input type="number" name="prixMin" class="form-control" value="<%= filtres.prixMin || '' %>" placeholder="0">
         </div>
@@ -62,18 +70,43 @@
     <% } else { %>
       <div class="annonces-grid">
         <% annonces.forEach(annonce => { %>
+          <%
+            const estVente = annonce.typeTransaction === 'vente';
+            const prix = getPrixAffiche(annonce);
+            const duree = getLabelDuree(annonce);
+            const miniature = (annonce.photos && annonce.photos.length > 0)
+              ? annonce.photos[0]
+              : (annonce.videos && annonce.videos.length > 0 ? null : null);
+          %>
           <a href="/annonces/<%= annonce.id %>" class="card-annonce <%= annonce.enAvant ? 'en-avant' : '' %>">
             <div class="card-photo">
-              <% if (annonce.photos && annonce.photos.length > 0) { %>
-                <img src="<%= annonce.photos[0] %>" alt="<%= annonce.titre %>">
+              <% if (annonce.videos && annonce.videos.length > 0) { %>
+                <video class="card-video-thumb" preload="metadata" muted playsinline
+                      onloadedmetadata="this.currentTime=0.001">
+                  <source src="<%= annonce.videos[0] %>" type="video/mp4">
+                  <source src="<%= annonce.videos[0] %>" type="video/webm">
+                </video>
+                <div class="card-video-play">
+                  <div class="card-video-play-circle"><i class='bx bx-play'></i></div>
+                </div>
+              <% } else if (miniature) { %>
+                <img src="<%= miniature %>" alt="<%= annonce.titre %>" loading="lazy">
               <% } else { %>
                 <div class="card-photo-placeholder"><i class='bx bx-home-alt-2'></i></div>
               <% } %>
               <span class="badge-type"><%= annonce.typeBien %></span>
               <% if (annonce.enAvant) { %><span class="badge-avant"><i class='bx bx-star'></i> En avant</span><% } %>
+              <!-- Badge vente/location -->
+              <span class="badge-transaction <%= estVente ? 'badge-transaction-vente' : 'badge-transaction-location' %>">
+                <i class='bx <%= estVente ? "bx-transfer" : "bx-key" %>'></i>
+                <%= estVente ? 'À vendre' : 'À louer' %>
+              </span>
             </div>
             <div class="card-body">
-              <div class="card-price"><%= annonce.loyer.toLocaleString('fr-FR') %> FCFA <span>/ mois</span></div>
+              <div class="card-price">
+                <%= prix.toLocaleString('fr-FR') %> FCFA
+                <% if (!estVente) { %><span><%= duree %></span><% } %>
+              </div>
               <div class="card-title"><%= annonce.titre %></div>
               <div class="card-location">
                 <i class='bx bx-map'></i>
@@ -81,10 +114,10 @@
               </div>
               <div class="card-infos">
                 <% if (annonce.nbPieces) { %>
-                  <span><i class='bx bx-building-house bx-trfm'></i> <%= annonce.nbPieces %> pièce<%= annonce.nbPieces > 1 ? 's' : '' %></span>
+                  <span><i class='bx bx-building-house'></i> <%= annonce.nbPieces %> pièce<%= annonce.nbPieces > 1 ? 's' : '' %></span>
                 <% } %>
                 <% if (annonce.nbDouches) { %>
-                  <span><i class='bx bx-droplet bx-trfm'></i> <%= annonce.nbDouches %> douche<%= annonce.nbDouches > 1 ? 's' : '' %></span>
+                  <span><i class='bx bx-droplet'></i> <%= annonce.nbDouches %> douche<%= annonce.nbDouches > 1 ? 's' : '' %></span>
                 <% } %>
                 <span style="margin-left:auto; color:#D4AF37; font-size:0.75rem;">
                   <%= new Date(annonce.createdAt).toLocaleDateString('fr-FR') %>

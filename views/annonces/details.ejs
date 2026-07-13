@@ -13,117 +13,194 @@
       <%= annonce.titre %>
     </p>
 
-    <!-- Galerie photos en grille -->
-    <% if (annonce.photos && annonce.photos.length > 0) { %>
-      <div class="photo-grid photo-grid-<%= Math.min(annonce.photos.length, 5) %>" id="photoGrid">
-        <% annonce.photos.slice(0, 5).forEach((p, i) => { %>
-          <div class="photo-grid-item" data-index="<%= i %>" onclick="openLightbox(<%= i %>)">
-            <img src="<%= p %>" alt="<%= annonce.titre %> - photo <%= i + 1 %>" loading="lazy">
-            <% if (i === 4 && annonce.photos.length > 5) { %>
-              <div class="photo-grid-more">+<%= annonce.photos.length - 5 %></div>
+    <%
+      const videos = annonce.videos || [];
+      const photos = annonce.photos || [];
+      const estVente = annonce.typeTransaction === 'vente';
+
+      /* Vidéos en premier, puis photos */
+      const tousMedias = [
+        ...videos.map(v => ({ type: 'video', src: v })),
+        ...photos.map(p => ({ type: 'photo', src: p }))
+      ];
+      const totalMedias = tousMedias.length;
+      const mediasFiche = tousMedias.slice(0, 5);
+    %>
+
+    <!-- ══════════════════════════════════════════════════
+         GRILLE MÉDIAS UNIFIÉE
+    ══════════════════════════════════════════════════ -->
+    <% if (totalMedias > 0) { %>
+
+      <!-- DESKTOP : grille mosaïque -->
+      <div class="media-grid-desktop media-grid-count-<%= Math.min(totalMedias, 5) %>">
+        <% mediasFiche.forEach((m, i) => { %>
+          <div class="media-grid-item <%= i === 0 ? 'media-grid-hero' : '' %>"
+               onclick="openModal(<%= i %>)">
+
+            <% if (m.type === 'video') { %>
+              <video class="media-grid-thumb" preload="metadata" muted playsinline
+                     onloadedmetadata="this.currentTime=0.001">
+                <source src="<%= m.src %>" type="video/mp4">
+                <source src="<%= m.src %>" type="video/webm">
+              </video>
+              <div class="media-grid-video-badge">
+                <div class="media-play-circle<%= i === 0 ? ' media-play-circle-lg' : '' %>">
+                  <i class='bx bx-play'></i>
+                </div>
+              </div>
+              <span class="media-type-label">
+                <i class='bx bx-video'></i>
+                <% if (videos.length > 1) { %>Vidéo <%= videos.indexOf(m.src) + 1 %>/<%= videos.length %><% } else { %>Vidéo<% } %>
+              </span>
+            <% } else { %>
+              <img class="media-grid-thumb" src="<%= m.src %>"
+                   alt="<%= annonce.titre %> photo" loading="lazy">
+            <% } %>
+
+            <% if (i === 4 && totalMedias > 5) { %>
+              <div class="media-grid-more">+<%= totalMedias - 5 %></div>
             <% } %>
           </div>
         <% }) %>
       </div>
-      <% if (annonce.photos.length > 1) { %>
-        <button class="btn btn-outline btn-sm" style="margin-top:0.75rem;" onclick="openLightbox(0)">
-          <i class='bx bx-images'></i> Voir les <%= annonce.photos.length %> photos
-        </button>
-      <% } %>
+
+      <!-- MOBILE : 1 seule case -->
+      <div class="media-mobile-single">
+        <% const heroMedia = tousMedias[0]; %>
+        <div class="media-mobile-item" onclick="openModal(0)">
+          <% if (heroMedia.type === 'video') { %>
+            <video class="media-grid-thumb" preload="metadata" muted playsinline
+                   onloadedmetadata="this.currentTime=0.001">
+              <source src="<%= heroMedia.src %>" type="video/mp4">
+              <source src="<%= heroMedia.src %>" type="video/webm">
+            </video>
+            <div class="media-grid-video-badge">
+              <div class="media-play-circle media-play-circle-lg">
+                <i class='bx bx-play'></i>
+              </div>
+            </div>
+          <% } else { %>
+            <img class="media-grid-thumb" src="<%= heroMedia.src %>"
+                 alt="<%= annonce.titre %>" loading="lazy">
+          <% } %>
+
+          <% if (totalMedias > 1) { %>
+            <div class="media-mobile-more-bar" onclick="event.stopPropagation(); openGalleryOverlay()">
+              <i class='bx bx-images'></i>
+              Voir les <%= totalMedias %> médias
+              <i class='bx bx-chevron-right'></i>
+            </div>
+          <% } %>
+        </div>
+      </div>
+
     <% } else { %>
-      <div style="background:#F5F5F5; border-radius:12px; height:280px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+      <div style="background:#F5F5F5; border-radius:12px; height:280px; display:flex;
+                  align-items:center; justify-content:center; margin-bottom:1rem;">
         <i class='bx bx-home-alt-2' style="font-size:4rem; color:#ccc;"></i>
       </div>
     <% } %>
 
+    <!-- ══════════════════════════════════════════════════
+         CONTENU ANNONCE
+    ══════════════════════════════════════════════════ -->
     <div class="detail-grid">
-      <!-- Colonne gauche : infos -->
+      <!-- Colonne gauche -->
       <div>
-        <!-- En-tête -->
         <div style="margin-bottom:1.5rem;">
-          <span class="badge badge-gold" style="margin-bottom:0.75rem;"><%= annonce.typeBien %></span>
-          <% if (annonce.enAvant) { %>
-            <span class="badge badge-gold" style="margin-left:0.5rem;">
-              <i class='bx bx-star'></i> En avant
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="badge badge-gold"><%= annonce.typeBien %></span>
+            <span class="badge <%= estVente ? 'badge-vente' : 'badge-location' %>">
+              <i class='bx <%= estVente ? "bx-transfer" : "bx-key" %>'></i>
+              <%= estVente ? 'À vendre' : 'À louer' %>
             </span>
-          <% } %>
+            <% if (annonce.enAvant) { %>
+              <span class="badge badge-gold"><i class='bx bx-star'></i> En avant</span>
+            <% } %>
+          </div>
           <h1 style="font-size:1.7rem; font-weight:800; margin-bottom:0.5rem;"><%= annonce.titre %></h1>
           <p style="color:#6B6B6B; font-size:1rem;">
-            <i class='bx bx-map bx-trfm' style="color:#D4AF37;"></i>
+            <i class='bx bx-map' style="color:#D4AF37;"></i>
             <%= annonce.ville %><% if (annonce.quartier) { %>, <%= annonce.quartier %><% } %>
           </p>
           <div style="font-size:2rem; font-weight:800; color:#B8960C; margin-top:0.75rem;">
-            <%= annonce.loyer.toLocaleString('fr-FR') %> FCFA <span style="font-size:1rem; font-weight:400; color:#6B6B6B;">/ mois</span>
+            <%= prixAffiche.toLocaleString('fr-FR') %> FCFA
+            <span style="font-size:1rem; font-weight:400; color:#6B6B6B;">
+              <%= estVente ? '' : labelDuree %>
+            </span>
           </div>
         </div>
 
         <!-- Infos financières -->
         <div class="info-block">
-          <h3><i class='bx bx-wallet bx-trfm'></i> Informations financières</h3>
-          <div class="info-row"><span class="label">Loyer mensuel</span><span class="value"><%= annonce.loyer.toLocaleString('fr-FR') %> FCFA</span></div>
-          <% if (annonce.moisAvance !== undefined && annonce.moisAvance !== null) { %>
-            <div class="info-row"><span class="label">Mois d'avance</span><span class="value"><%= annonce.moisAvance %> mois</span></div>
+          <h3><i class='bx bx-wallet'></i> Informations financières</h3>
+          <div class="info-row">
+            <span class="label"><%= estVente ? 'Prix de vente' : labelPrix %></span>
+            <span class="value"><%= prixAffiche.toLocaleString('fr-FR') %> FCFA</span>
+          </div>
+          <% if (!estVente) { %>
+            <% if (annonce.dureeLocation && annonce.dureeLocation !== 'mois') { %>
+              <div class="info-row"><span class="label">Durée</span><span class="value"><%= labelDuree %></span></div>
+            <% } %>
+            <% if (annonce.moisAvance) { %>
+              <div class="info-row"><span class="label">Mois d'avance</span><span class="value"><%= annonce.moisAvance %> mois</span></div>
+            <% } %>
+            <% if (annonce.cautionEau) { %>
+              <div class="info-row"><span class="label">Caution eau</span><span class="value"><%= annonce.cautionEau.toLocaleString('fr-FR') %> FCFA</span></div>
+            <% } %>
+            <% if (annonce.cautionElec) { %>
+              <div class="info-row"><span class="label">Caution électricité</span><span class="value"><%= annonce.cautionElec.toLocaleString('fr-FR') %> FCFA</span></div>
+            <% } %>
           <% } %>
-          <% if (annonce.cautionEau !== undefined && annonce.cautionEau !== null) { %>
-            <div class="info-row"><span class="label">Caution eau</span><span class="value"><%= annonce.cautionEau.toLocaleString('fr-FR') %> FCFA</span></div>
-          <% } %>
-          <% if (annonce.cautionElec !== undefined && annonce.cautionElec !== null) { %>
-            <div class="info-row"><span class="label">Caution électricité</span><span class="value"><%= annonce.cautionElec.toLocaleString('fr-FR') %> FCFA</span></div>
-          <% } %>
-          <% if (annonce.commissionDemarcheur !== undefined && annonce.commissionDemarcheur !== null) { %>
+          <% if (annonce.commissionDemarcheur) { %>
             <div class="info-row"><span class="label">Commission démarcheur</span><span class="value"><%= annonce.commissionDemarcheur.toLocaleString('fr-FR') %> FCFA</span></div>
           <% } %>
-          <%
-            const totalInitial = (annonce.loyer || 0) * (annonce.moisAvance || 0)
-              + (annonce.cautionEau || 0)
-              + (annonce.cautionElec || 0)
-              + (annonce.commissionDemarcheur || 0);
-          %>
-          <div class="info-row info-row-total">
-            <span class="label">Total à prévoir à l'entrée</span>
-            <span class="value"><%= totalInitial.toLocaleString('fr-FR') %> FCFA</span>
-          </div>
+          <% if (!estVente) { %>
+            <%
+              const totalInitial = (prixAffiche || 0) * (annonce.moisAvance || 0)
+                + (annonce.cautionEau || 0)
+                + (annonce.cautionElec || 0)
+                + (annonce.commissionDemarcheur || 0);
+            %>
+            <div class="info-row info-row-total">
+              <span class="label">Total à prévoir à l'entrée</span>
+              <span class="value"><%= totalInitial.toLocaleString('fr-FR') %> FCFA</span>
+            </div>
+          <% } %>
         </div>
 
         <!-- Caractéristiques -->
-        <div class="info-block">
-          <h3><i class='bx bx-home-alt-2 bx-trfm'></i> Caractéristiques du logement</h3>
-          <% if (annonce.nbPieces !== undefined && annonce.nbPieces !== null) { %>
-            <div class="info-row"><span class="label">Nombre de pièces</span><span class="value"><%= annonce.nbPieces %></span></div>
-          <% } %>
-          <% if (annonce.nbChambres !== undefined && annonce.nbChambres !== null) { %>
-            <div class="info-row"><span class="label">Chambres</span><span class="value"><%= annonce.nbChambres %></span></div>
-          <% } %>
-          <% if (annonce.nbSalons !== undefined && annonce.nbSalons !== null) { %>
-            <div class="info-row"><span class="label">Salons</span><span class="value"><%= annonce.nbSalons %></span></div>
-          <% } %>
-          <% if (annonce.nbDouches !== undefined && annonce.nbDouches !== null) { %>
-            <div class="info-row"><span class="label">Douches</span><span class="value"><%= annonce.nbDouches %></span></div>
-          <% } %>
-          <% if (annonce.nbCuisines !== undefined && annonce.nbCuisines !== null) { %>
-            <div class="info-row"><span class="label">Cuisines</span><span class="value"><%= annonce.nbCuisines %></span></div>
-          <% } %>
-          <% if (annonce.electriciteType) { %>
-            <div class="info-row">
-              <span class="label">Électricité</span>
-              <span class="value">
-                <%= annonce.electriciteType === 'personnel' ? 'Compteur personnel' : 'Compteur commun' %>
-                <% if (annonce.electriciteCompteur) { %> (<%= annonce.electriciteCompteur === 'carte' ? 'à carte' : 'standard' %>)<% } %>
-              </span>
-            </div>
-          <% } %>
-          <% if (annonce.eauType) { %>
-            <div class="info-row">
-              <span class="label">Eau</span>
-              <span class="value"><%= annonce.eauType === 'personnel' ? 'Personnelle' : 'Commune' %></span>
-            </div>
-          <% } %>
-        </div>
+        <% if (annonce.typeBien !== 'Terrain' && annonce.nbPieces > 0) { %>
+          <div class="info-block">
+            <h3><i class='bx bx-home-alt-2'></i> Caractéristiques du logement</h3>
+            <% if (annonce.nbPieces) { %><div class="info-row"><span class="label">Nombre de pièces</span><span class="value"><%= annonce.nbPieces %></span></div><% } %>
+            <% if (annonce.nbChambres) { %><div class="info-row"><span class="label">Chambres</span><span class="value"><%= annonce.nbChambres %></span></div><% } %>
+            <% if (annonce.nbSalons) { %><div class="info-row"><span class="label">Salons</span><span class="value"><%= annonce.nbSalons %></span></div><% } %>
+            <% if (annonce.nbDouches) { %><div class="info-row"><span class="label">Douches</span><span class="value"><%= annonce.nbDouches %></span></div><% } %>
+            <% if (annonce.nbCuisines) { %><div class="info-row"><span class="label">Cuisines</span><span class="value"><%= annonce.nbCuisines %></span></div><% } %>
+            <% if (annonce.electriciteType) { %>
+              <div class="info-row">
+                <span class="label">Électricité</span>
+                <span class="value">
+                  <%= annonce.electriciteType === 'personnel' ? 'Compteur personnel' : 'Compteur commun' %>
+                  <% if (annonce.electriciteCompteur) { %>(<%= annonce.electriciteCompteur === 'carte' ? 'à carte' : 'standard' %>)<% } %>
+                </span>
+              </div>
+            <% } %>
+            <% if (annonce.eauType) { %>
+              <div class="info-row">
+                <span class="label">Eau</span>
+                <span class="value"><%= annonce.eauType === 'personnel' ? 'Personnelle' : 'Commune' %></span>
+              </div>
+            <% } %>
+          </div>
+        <% } %>
 
-        <!-- Description avec "voir plus" -->
+        <!-- Description -->
         <% if (annonce.description) { %>
           <div class="info-block">
-            <h3><i class='bx bx-detail bx-trfm'></i> Description</h3>
+            <h3><i class='bx bx-detail'></i> Description</h3>
             <% const descCourte = annonce.description.length > 280; %>
             <p class="description-text <%= descCourte ? 'collapsed' : '' %>" id="descText"
                style="line-height:1.8; color:#2C2C2E; white-space:pre-line;"><%= annonce.description %></p>
@@ -139,7 +216,8 @@
             <a href="/annonces/<%= annonce.id %>/edit" class="btn btn-outline">
               <i class='bx bx-edit'></i> Modifier
             </a>
-            <form action="/annonces/<%= annonce.id %>/delete" method="POST" onsubmit="return confirm('Supprimer cette annonce ?')">
+            <form action="/annonces/<%= annonce.id %>/delete" method="POST"
+                  onsubmit="return confirm('Supprimer cette annonce ?')">
               <button type="submit" class="btn btn-danger">
                 <i class='bx bx-trash'></i> Supprimer
               </button>
@@ -152,23 +230,22 @@
       <div>
         <div class="contact-card">
           <h3><i class='bx bx-phone-call'></i> Contacter le propriétaire</h3>
-          <p style="color:rgba(255,255,255,0.7); font-size:0.9rem; margin-bottom:0.5rem;">Publié par 
+          <p style="color:rgba(255,255,255,0.7); font-size:0.9rem; margin-bottom:0.5rem;">Publié par
             <a href="/profile/public/<%= annonce.auteurId %>" style="color:var(--gold); font-weight:700;">
               <%= annonce.auteurNom %>
             </a>
           </p>
           <p style="color:rgba(255,255,255,0.7); font-size:0.85rem; margin-bottom:1.5rem;">
-            <i class='bx bx-calendar bx-trfm' style="color:var(--gold);"></i>
+            <i class='bx bx-calendar' style="color:var(--gold);"></i>
             Le <%= new Date(annonce.createdAt).toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' }) %>
           </p>
-
           <a href="tel:<%= annonce.auteurTelephone %>" class="btn btn-gold btn-full" style="margin-bottom:0.75rem;">
             <i class='bx bx-phone'></i> <%= annonce.auteurTelephone %>
           </a>
-          <a href="https://wa.me/<%= whatsapp.replace(/\D/g, '') %>" target="_blank" class="btn btn-whatsapp btn-full" style="margin-bottom:0.75rem;">
+          <a href="https://wa.me/<%= whatsapp.replace(/\D/g, '') %>" target="_blank"
+             class="btn btn-whatsapp btn-full" style="margin-bottom:0.75rem;">
             <i class='bx bxl-whatsapp'></i> WhatsApp
           </a>
-
           <% if (!user) { %>
             <a href="/login" class="btn btn-outline btn-full">
               <i class='bx bx-message-rounded'></i> Envoyer un message
@@ -191,61 +268,310 @@
   </div>
 </section>
 
-<!-- LIGHTBOX -->
-<% if (annonce.photos && annonce.photos.length > 0) { %>
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" onclick="closeLightbox()"><i class='bx bx-x'></i></button>
-  <button class="lightbox-arrow lightbox-prev" onclick="changeSlide(-1)"><i class='bx bx-chevron-left'></i></button>
-  <div class="lightbox-content">
-    <img id="lightboxImg" src="" alt="">
-    <div class="lightbox-counter"><span id="lightboxCounter"></span></div>
+<!-- ══════════════════════════════════════════════════════════════
+     MODALE UNIFIÉE — photos ET vidéos avec navigation commune
+══════════════════════════════════════════════════════════════ -->
+<div class="media-modal-overlay" id="mediaModal" onclick="closeModal()">
+  <div class="media-modal-box" onclick="event.stopPropagation()">
+
+    <button class="media-modal-close" onclick="closeModal()">
+      <i class='bx bx-x'></i>
+    </button>
+
+    <!-- Zone photo -->
+    <div class="media-modal-content" id="modalPhotoZone" style="display:none;">
+      <img id="modalImg" class="media-modal-img" src="" alt="">
+    </div>
+
+    <!-- Zone vidéo -->
+    <div class="media-modal-content" id="modalVideoZone" style="display:none;">
+      <div class="media-modal-video-wrapper" id="modalVideoWrapper">
+        <!-- La balise <video> est injectée dynamiquement pour éviter tout état résiduel -->
+        <div class="video-controls" id="modalControls">
+          <div class="video-progress-bar" id="modalProgressBar" onclick="seekVideo(event)">
+            <div class="video-progress-fill" id="modalProgressFill"></div>
+          </div>
+          <div class="video-controls-row">
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+              <button class="video-btn" onclick="togglePlay()" id="modalBtnPlay">
+                <i class='bx bx-play'></i>
+              </button>
+              <button class="video-btn" onclick="toggleMute()" id="modalBtnMute">
+                <i class='bx bx-volume-full'></i>
+              </button>
+              <span class="video-time" id="modalTime">0:00 / 0:00</span>
+            </div>
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+              <button class="video-btn" onclick="toggleFullscreen()">
+                <i class='bx bx-fullscreen'></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="video-overlay" id="modalOverlay" onclick="togglePlay()">
+          <div class="video-play-btn"><i class='bx bx-play'></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer : compteur + navigation -->
+    <div class="media-modal-footer">
+      <span class="media-modal-counter" id="modalCounter"></span>
+      <div class="media-modal-nav">
+        <button class="media-modal-nav-btn" onclick="navigateModal(-1)">
+          <i class='bx bx-chevron-left'></i> Préc.
+        </button>
+        <button class="media-modal-nav-btn" onclick="navigateModal(1)">
+          Suiv. <i class='bx bx-chevron-right'></i>
+        </button>
+      </div>
+    </div>
   </div>
-  <button class="lightbox-arrow lightbox-next" onclick="changeSlide(1)"><i class='bx bx-chevron-right'></i></button>
+
+  <!-- Flèches latérales -->
+  <button class="media-modal-arrow media-modal-arrow-prev" onclick="event.stopPropagation(); navigateModal(-1)">
+    <i class='bx bx-chevron-left'></i>
+  </button>
+  <button class="media-modal-arrow media-modal-arrow-next" onclick="event.stopPropagation(); navigateModal(1)">
+    <i class='bx bx-chevron-right'></i>
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     OVERLAY GALERIE MOBILE
+══════════════════════════════════════════════════════════════ -->
+<div class="gallery-overlay" id="galleryOverlay">
+  <div class="gallery-overlay-header">
+    <span id="galleryOverlayTitle"></span>
+    <button onclick="closeGalleryOverlay()"><i class='bx bx-x'></i></button>
+  </div>
+  <div class="gallery-overlay-grid" id="galleryOverlayGrid"></div>
 </div>
 
 <script>
-  const photos = <%- JSON.stringify(annonce.photos) %>;
-  let currentSlide = 0;
+/* ─── Données ────────────────────────────────────────────────── */
+const tousMedias = <%- JSON.stringify(tousMedias) %>;
+const totalMedias = tousMedias.length;
 
-  function openLightbox(index) {
-    currentSlide = index;
-    updateLightbox();
-    document.getElementById('lightbox').classList.add('open');
-    document.body.style.overflow = 'hidden';
+/* ─── État de la modale ──────────────────────────────────────── */
+let currentIndex = 0;
+let videoEl = null; /* référence à l'élément <video> actif */
+
+/* ─── Ouvrir la modale sur un index ─────────────────────────── */
+function openModal(index) {
+  currentIndex = ((index % totalMedias) + totalMedias) % totalMedias;
+  renderModal();
+  document.getElementById('mediaModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+/* ─── Fermer proprement ──────────────────────────────────────── */
+function closeModal() {
+  stopAndDestroyVideo();
+  document.getElementById('mediaModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ─── Détruire proprement la vidéo en cours ─────────────────── */
+function stopAndDestroyVideo() {
+  if (videoEl) {
+    videoEl.pause();
+    videoEl.removeAttribute('src');
+    /* Supprimer toutes les sources */
+    while (videoEl.firstChild) videoEl.removeChild(videoEl.firstChild);
+    videoEl.load(); /* déclenche l'annulation du chargement */
+    videoEl.remove(); /* retirer du DOM */
+    videoEl = null;
   }
+  /* Réinitialiser l'UI lecteur */
+  document.getElementById('modalProgressFill').style.width = '0%';
+  document.getElementById('modalTime').textContent = '0:00 / 0:00';
+  document.getElementById('modalBtnPlay').innerHTML = "<i class='bx bx-play'></i>";
+  document.getElementById('modalOverlay').style.opacity = '1';
+  const wrapper = document.getElementById('modalVideoWrapper');
+  wrapper.classList.remove('video-portrait', 'video-landscape');
+}
 
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
+/* ─── Rendre le contenu selon le média courant ───────────────── */
+function renderModal() {
+  const m = tousMedias[currentIndex];
+  const photoZone = document.getElementById('modalPhotoZone');
+  const videoZone = document.getElementById('modalVideoZone');
+
+  /* Compteur */
+  document.getElementById('modalCounter').textContent =
+    (currentIndex + 1) + ' / ' + totalMedias;
+
+  if (m.type === 'photo') {
+    /* Arrêter la vidéo si on quitte une vidéo */
+    stopAndDestroyVideo();
+    videoZone.style.display = 'none';
+    photoZone.style.display = 'block';
+    document.getElementById('modalImg').src = m.src;
+
+  } else {
+    /* Vidéo : détruire l'ancienne puis créer une nouvelle */
+    stopAndDestroyVideo();
+    photoZone.style.display = 'none';
+    videoZone.style.display = 'block';
+
+    /* Créer un nouvel élément <video> vierge */
+    videoEl = document.createElement('video');
+    videoEl.preload = 'metadata';
+    videoEl.playsInline = true;
+
+    const s1 = document.createElement('source');
+    s1.src = m.src; s1.type = 'video/mp4';
+    const s2 = document.createElement('source');
+    s2.src = m.src; s2.type = 'video/webm';
+    videoEl.appendChild(s1);
+    videoEl.appendChild(s2);
+
+    /* Insérer avant les contrôles */
+    const wrapper = document.getElementById('modalVideoWrapper');
+    wrapper.insertBefore(videoEl, wrapper.firstChild);
+
+    /* Détection orientation */
+    videoEl.addEventListener('loadedmetadata', () => {
+      const isPortrait = videoEl.videoHeight > videoEl.videoWidth;
+      wrapper.classList.toggle('video-portrait', isPortrait);
+      wrapper.classList.toggle('video-landscape', !isPortrait);
+    });
+
+    /* Progression */
+    videoEl.addEventListener('timeupdate', () => {
+      if (!videoEl || !videoEl.duration) return;
+      const pct = (videoEl.currentTime / videoEl.duration) * 100;
+      document.getElementById('modalProgressFill').style.width = pct + '%';
+      document.getElementById('modalTime').textContent =
+        fmt(videoEl.currentTime) + ' / ' + fmt(videoEl.duration);
+    });
+
+    /* Fin de lecture */
+    videoEl.addEventListener('ended', () => {
+      document.getElementById('modalOverlay').style.opacity = '1';
+      document.getElementById('modalBtnPlay').innerHTML = "<i class='bx bx-play'></i>";
+      document.getElementById('modalProgressFill').style.width = '0%';
+    });
+
+    videoEl.load();
+    videoEl.play().then(() => {
+      document.getElementById('modalOverlay').style.opacity = '0';
+      document.getElementById('modalBtnPlay').innerHTML = "<i class='bx bx-pause'></i>";
+    }).catch(() => {
+      /* autoplay bloqué : afficher l'overlay play */
+      document.getElementById('modalOverlay').style.opacity = '1';
+    });
   }
+}
 
-  function changeSlide(dir) {
-    currentSlide = (currentSlide + dir + photos.length) % photos.length;
-    updateLightbox();
+/* ─── Navigation entre médias ────────────────────────────────── */
+function navigateModal(dir) {
+  currentIndex = ((currentIndex + dir) + totalMedias) % totalMedias;
+  renderModal();
+}
+
+/* ─── Contrôles lecteur ──────────────────────────────────────── */
+function togglePlay() {
+  if (!videoEl) return;
+  const overlay = document.getElementById('modalOverlay');
+  const btn = document.getElementById('modalBtnPlay');
+  if (videoEl.paused) {
+    videoEl.play();
+    overlay.style.opacity = '0';
+    btn.innerHTML = "<i class='bx bx-pause'></i>";
+  } else {
+    videoEl.pause();
+    overlay.style.opacity = '1';
+    btn.innerHTML = "<i class='bx bx-play'></i>";
   }
+}
 
-  function updateLightbox() {
-    document.getElementById('lightboxImg').src = photos[currentSlide];
-    document.getElementById('lightboxCounter').textContent = (currentSlide + 1) + ' / ' + photos.length;
+function toggleMute() {
+  if (!videoEl) return;
+  videoEl.muted = !videoEl.muted;
+  document.getElementById('modalBtnMute').innerHTML = videoEl.muted
+    ? "<i class='bx bx-volume-mute'></i>"
+    : "<i class='bx bx-volume-full'></i>";
+}
+
+function toggleFullscreen() {
+  const wrapper = document.getElementById('modalVideoWrapper');
+  if (!document.fullscreenElement) {
+    wrapper.requestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
   }
+}
 
-  document.addEventListener('keydown', (e) => {
-    const lb = document.getElementById('lightbox');
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') changeSlide(-1);
-    if (e.key === 'ArrowRight') changeSlide(1);
+function seekVideo(e) {
+  if (!videoEl || !videoEl.duration) return;
+  const bar = document.getElementById('modalProgressBar');
+  const rect = bar.getBoundingClientRect();
+  videoEl.currentTime = ((e.clientX - rect.left) / rect.width) * videoEl.duration;
+}
+
+function fmt(s) {
+  if (isNaN(s) || s === Infinity) return '0:00';
+  return Math.floor(s / 60) + ':' + Math.floor(s % 60).toString().padStart(2, '0');
+}
+
+/* ─── Clavier ────────────────────────────────────────────────── */
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('mediaModal').classList.contains('open')) return;
+  if (e.key === 'Escape')      closeModal();
+  if (e.key === 'ArrowLeft')   navigateModal(-1);
+  if (e.key === 'ArrowRight')  navigateModal(1);
+  if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+});
+
+/* ─── Overlay galerie mobile ─────────────────────────────────── */
+function openGalleryOverlay() {
+  const grid  = document.getElementById('galleryOverlayGrid');
+  const title = document.getElementById('galleryOverlayTitle');
+  title.textContent = totalMedias + ' médias';
+  grid.innerHTML = '';
+
+  tousMedias.forEach((m, i) => {
+    const item = document.createElement('div');
+    item.className = 'media-grid-item';
+
+    if (m.type === 'video') {
+      item.innerHTML = `
+        <video class="media-grid-thumb" preload="metadata" muted playsinline
+               onloadedmetadata="this.currentTime=0.001">
+          <source src="${m.src}" type="video/mp4">
+          <source src="${m.src}" type="video/webm">
+        </video>
+        <div class="media-grid-video-badge">
+          <div class="media-play-circle" style="width:38px;height:38px;font-size:1.1rem;">
+            <i class='bx bx-play'></i>
+          </div>
+        </div>`;
+    } else {
+      item.innerHTML = `<img class="media-grid-thumb" src="${m.src}" alt="" loading="lazy">`;
+    }
+
+    item.onclick = () => { closeGalleryOverlay(); openModal(i); };
+    grid.appendChild(item);
   });
-</script>
-<% } %>
 
-<script>
-  function toggleDescription() {
-    const desc = document.getElementById('descText');
-    const btn = document.getElementById('btnVoirPlus');
-    desc.classList.toggle('collapsed');
-    btn.textContent = desc.classList.contains('collapsed') ? 'Voir plus ▾' : 'Voir moins ▴';
-  }
+  document.getElementById('galleryOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGalleryOverlay() {
+  document.getElementById('galleryOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ─── Description toggle ─────────────────────────────────────── */
+function toggleDescription() {
+  const desc = document.getElementById('descText');
+  const btn  = document.getElementById('btnVoirPlus');
+  desc.classList.toggle('collapsed');
+  btn.textContent = desc.classList.contains('collapsed') ? 'Voir plus ▾' : 'Voir moins ▴';
+}
 </script>
 
 <%- include('../partials/footer') %>

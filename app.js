@@ -8,7 +8,7 @@ const profileRoutes = require('./routes/profile');
 const adminRoutes = require('./routes/admin');
 const pagesRoutes = require('./routes/pages');
 
-const { TYPES_BIEN } = require('./utils/validateAnnonce');
+const { TYPES_BIEN, getLabelDuree, getPrixAffiche } = require('./utils/validateAnnonce');
 
 
 const app = express();
@@ -23,8 +23,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Body parsers
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use((req, res, next) => {
+  const contentType = req.headers['content-type'] || '';
+  if (contentType.includes('multipart/form-data')) {
+    return next(); // laisser multer gérer
+  }
+  express.urlencoded({ extended: true })(req, res, () => {
+    express.json()(req, res, next);
+  });
+});
 
 // Session
 app.use(session({
@@ -61,7 +68,7 @@ app.get('/', (req, res) => {
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 6);
 
-  res.render('home', { dernieres, searchParams: {} , TYPES_BIEN});
+  res.render('home', { dernieres, TYPES_BIEN, getLabelDuree, getPrixAffiche });
 });
 
 // 404
