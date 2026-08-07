@@ -8,36 +8,7 @@
 
     <div class="dashboard-grid">
       <!-- Sidebar -->
-      <div class="sidebar">
-        <div class="sidebar-user">
-          <div class="avatar"><%= user.nom.charAt(0).toUpperCase() %></div>
-          <h3><%= user.nom %></h3>
-          <p style="font-size:0.8rem; opacity:0.7;"><%= user.telephone %></p>
-        </div>
-        <nav class="sidebar-nav">
-          <a href="/profile/dashboard" class="active">
-            <i class='bx bx-grid-alt'></i> Tableau de bord
-          </a>
-          <a href="/profile/public/<%= user.id %>">
-            <i class='bx bx-user-circle'></i> Mon profil public
-          </a>
-          <a href="/profile/annonces">
-            <i class='bx bx-list-ul'></i> Mes annonces
-          </a>
-          <a href="/messages">
-            <i class='bx bx-message-rounded'></i> Messages
-            <% if (unread > 0) { %>
-              <span class="badge badge-gold" style="margin-left:auto;"><%= unread %></span>
-            <% } %>
-          </a>
-          <a href="/annonces/creer">
-            <i class='bx bx-plus-circle'></i> Publier
-          </a>
-          <a href="/logout" style="color:#dc3545;">
-            <i class='bx bx-log-out'></i> Déconnexion
-          </a>
-        </nav>
-      </div>
+      <%- include('../partials/sidebar') %>
 
       <!-- Contenu -->
       <div>
@@ -54,6 +25,10 @@
           <div class="stat-card">
             <div class="number"><%= unread %></div>
             <div class="label">Messages non lus</div>
+          </div>
+          <div class="stat-card">
+            <div class="number"><%= recherches.length %></div>
+            <div class="label">Recherches publiées</div>
           </div>
         </div>
 

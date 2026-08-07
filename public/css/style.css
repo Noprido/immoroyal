@@ -944,3 +944,47 @@ footer span { color: var(--gold); }
   transition: transform 0.2s;
 }
 .card-annonce:hover .card-video-play-circle { transform: scale(1.1); }
+
+
+/* ─── Recherches ─────────────────────────────────────── */
+.badge-recherche {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  background: rgba(99,102,241,0.12); color: #4f46e5;
+  border: 1px solid rgba(99,102,241,0.25);
+  padding: 0.25rem 0.7rem; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 700;
+}
+.badge-fonds {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  background: rgba(40,167,69,0.12); color: #1e7e34;
+  border: 1px solid rgba(40,167,69,0.25);
+  padding: 0.25rem 0.7rem; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 700;
+}
+.card-recherche {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(99,102,241,0.2);
+  transition: all 0.3s;
+  display: block;
+  color: var(--black);
+}
+.card-recherche:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 40px rgba(99,102,241,0.15);
+  border-color: #6366f1;
+}
+.card-recherche-header {
+  background: rgba(99,102,241,0.06);
+  padding: 0.75rem 1.2rem;
+  display: flex; align-items: center;
+  gap: 0.6rem; flex-wrap: wrap;
+  border-bottom: 1px solid rgba(99,102,241,0.1);
+}
+
+/* .table-wrapper table td { 
+  word-break: break-word; 
+  max-width: 200px; 
+} */

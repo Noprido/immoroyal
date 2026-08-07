@@ -1,10 +1,8 @@
-const TYPES_BIEN = [
-  'Appartement vide', 'Appartement meublé',
-  'Boutique', 'Magasin', 'Bureau', 'Terrain', 'Maison', 'Entrée personnelle',
-];
+const categories = require('../data/categories.json');
+const { genererTitre } = require('./titleGenerator');
 
-// Types pré-sélectionnés sur "vente" par défaut
-const TYPES_VENTE_DEFAUT = ['Terrain'];
+const TYPES_BIEN         = categories.map(c => c.value);
+const TYPES_VENTE_DEFAUT = categories.filter(c => c.venteParDefaut).map(c => c.value);
 
 const DUREES_LOCATION = [
   { value: 'heure', label: 'par heure' },
@@ -15,27 +13,46 @@ const DUREES_LOCATION = [
   { value: 'mois', label: 'par mois' },
 ];
 
+const STANDINGS = ['sanitaire', 'semi-sanitaire', 'ordinaire'];
+
+function getCategorie(typeBien) {
+  return categories.find(c => c.value === typeBien) || null;
+}
+
+function champsAutorises(typeBien) {
+  const cat = getCategorie(typeBien);
+  return cat ? cat.champsCaracteristiques : [];
+}
+
+function afficheDimension(typeBien) {
+  const cat = getCategorie(typeBien);
+  return cat ? cat.afficheDimension : false;
+}
+
 function validateAnnonce(body) {
   const {
-    titre, typeBien, ville, quartier,
+    typeBien, ville, quartier,
     typeTransaction, prix, loyer,
     moisAvance, cautionEau, cautionElec, commissionDemarcheur,
     dureeLocation,
-    nbPieces, nbChambres, nbSalons, nbDouches, nbCuisines,
-    electriciteType, electriciteCompteur, eauType
+    nbChambres, nbSalons, nbDouches, nbCuisines,
+    electriciteType, eauType,
+    standing, dimension
   } = body;
-  
-  const estVente = typeTransaction === 'vente';
 
-  // ─── Champs toujours obligatoires ────────────────────────────
-  const champsCommuns = { titre, typeBien, ville, quartier, commissionDemarcheur };
+  const estVente = typeTransaction === 'vente';
+  const champs = champsAutorises(typeBien);
+  const estDimension = afficheDimension(typeBien);
+
+  const champsCommuns = { typeBien, ville, quartier, commissionDemarcheur };
   for (const [champ, valeur] of Object.entries(champsCommuns)) {
     if (valeur === undefined || valeur === null || valeur.toString().trim() === '') {
       return `Le champ "${champ}" est obligatoire.`;
     }
   }
 
-  // ─── Prix / Loyer selon le mode ──────────────────────────────
+  if (!TYPES_BIEN.includes(typeBien)) return 'Type de bien invalide.';
+
   if (estVente) {
     if (!prix || prix.toString().trim() === '') return 'Le prix de vente est obligatoire.';
     if (parseInt(prix) <= 0) return 'Le prix de vente doit être supérieur à 0.';
@@ -43,28 +60,36 @@ function validateAnnonce(body) {
     if (!loyer || loyer.toString().trim() === '') return 'Le loyer est obligatoire.';
     if (parseInt(loyer) <= 0) return 'Le loyer doit être supérieur à 0.';
 
-    // Champs spécifiques à la location
     const champsLocation = { moisAvance, cautionEau, cautionElec };
     for (const [champ, valeur] of Object.entries(champsLocation)) {
       if (valeur === undefined || valeur === null || valeur.toString().trim() === '') {
         return `Le champ "${champ}" est obligatoire.`;
       }
     }
-
     if (!dureeLocation) return 'La durée de location est obligatoire.';
   }
 
-  // ─── Caractéristiques (sauf Terrain) ─────────────────────────
-  if (typeBien !== 'Terrain') {
-    const champsCarac = { nbChambres, nbSalons, nbDouches, nbCuisines, electriciteType, electriciteCompteur, eauType };
-    for (const [champ, valeur] of Object.entries(champsCarac)) {
-      if (valeur === undefined || valeur === null || valeur.toString().trim() === '') {
+  if (estDimension) {
+    if (!dimension || parseFloat(dimension) <= 0) return 'La dimension du terrain est obligatoire.';
+  } else {
+    if (!electriciteType) return 'Le type d\'électricité est obligatoire.';
+    if (!eauType) return 'Le type d\'eau est obligatoire.';
+  }
+
+  if (champs.length > 0) {
+    const champsNombres = ['nbChambres', 'nbSalons', 'nbDouches', 'nbCuisines'].filter(c => champs.includes(c));
+    const valeurs = { nbChambres, nbSalons, nbDouches, nbCuisines };
+    for (const champ of champsNombres) {
+      if (valeurs[champ] === undefined || valeurs[champ] === null || valeurs[champ].toString().trim() === '') {
         return `Le champ "${champ}" est obligatoire.`;
       }
     }
-
-    if (!nbPieces || parseInt(nbPieces) < 1) {
-      return 'Au moins une pièce (chambre, salon, douche ou cuisine) est requise.';
+    if (champsNombres.length > 0) {
+      const totalPieces = champsNombres.reduce((sum, c) => sum + (parseInt(valeurs[c]) || 0), 0);
+      if (totalPieces < 1) return 'Au moins une pièce (chambre, salon, douche ou cuisine) est requise.';
+    }
+    if (champs.includes('standing')) {
+      if (!standing || !STANDINGS.includes(standing)) return 'Le standing (sanitaire/semi-sanitaire/ordinaire) est obligatoire.';
     }
   }
 
@@ -73,58 +98,67 @@ function validateAnnonce(body) {
 
 function buildAnnonce(body, medias, extra = {}) {
   const {
-    titre, description, typeBien, ville, quartier,
+    description, typeBien, ville, quartier,
     typeTransaction, prix, loyer,
     moisAvance, cautionEau, cautionElec, commissionDemarcheur,
     dureeLocation,
-    nbPieces, nbChambres, nbSalons, nbDouches, nbCuisines,
-    electriciteType, electriciteCompteur, eauType
+    nbChambres, nbSalons, nbDouches, nbCuisines,
+    electriciteType, electriciteCompteur, eauType,
+    standing, dimension
   } = body;
 
   const estVente = typeTransaction === 'vente';
-  const estTerrain = typeBien === 'Terrain';
+  const champs = champsAutorises(typeBien);
+  const estDimension = afficheDimension(typeBien);
+  const supportsStanding = champs.includes('standing');
 
-  return {
-    titre: titre.trim(),
-    description: (description || '').trim(),
+  const nbChambresFinal = champs.includes('nbChambres') ? parseInt(nbChambres) || 0 : 0;
+  const nbSalonsFinal   = champs.includes('nbSalons')   ? parseInt(nbSalons)   || 0 : 0;
+  const nbDouchesFinal  = champs.includes('nbDouches')  ? parseInt(nbDouches)  || 0 : 0;
+  const nbCuisinesFinal = champs.includes('nbCuisines') ? parseInt(nbCuisines) || 0 : 0;
+  const nbPiecesFinal   = nbChambresFinal + nbSalonsFinal + nbDouchesFinal + nbCuisinesFinal;
+
+  const data = {
     typeBien,
     typeTransaction: typeTransaction || 'location',
     ville: ville.trim(),
     quartier: quartier.trim(),
+    description: (description || '').trim(),
 
-    // Prix unifié
     prix: estVente ? parseInt(prix) || 0 : parseInt(loyer) || 0,
-    // Garde loyer pour rétrocompatibilité avec les annonces existantes
     loyer: estVente ? 0 : parseInt(loyer) || 0,
 
-    // Location uniquement
     dureeLocation: estVente ? null : (dureeLocation || 'mois'),
     moisAvance: estVente ? 0 : parseInt(moisAvance) || 0,
     cautionEau: estVente ? 0 : parseInt(cautionEau) || 0,
     cautionElec: estVente ? 0 : parseInt(cautionElec) || 0,
 
-    // Commun
     commissionDemarcheur: parseInt(commissionDemarcheur) || 0,
 
-    // Caractéristiques (0 pour terrain)
-    nbPieces: estTerrain ? 0 : parseInt(nbPieces) || 0,
-    nbChambres: estTerrain ? 0 : parseInt(nbChambres) || 0,
-    nbSalons: estTerrain ? 0 : parseInt(nbSalons) || 0,
-    nbDouches: estTerrain ? 0 : parseInt(nbDouches) || 0,
-    nbCuisines: estTerrain ? 0 : parseInt(nbCuisines) || 0,
-    electriciteType: estTerrain ? '' : electriciteType,
-    electriciteCompteur: estTerrain ? '' : electriciteCompteur,
-    eauType: estTerrain ? '' : eauType,
+    nbPieces: nbPiecesFinal,
+    nbChambres: nbChambresFinal,
+    nbSalons: nbSalonsFinal,
+    nbDouches: nbDouchesFinal,
+    nbCuisines: nbCuisinesFinal,
+    electriciteType: !estDimension ? electriciteType : '',
+    electriciteCompteur: !estDimension ? electriciteCompteur : '',
+    eauType: !estDimension ? eauType : '',
 
-    // Médias
+    standing: supportsStanding ? (standing || null) : null,
+    dimension: estDimension ? (parseFloat(dimension) || 0) : 0,
+
     photos: medias.photos || [],
     videos: medias.videos || [],
 
     ...extra
   };
+
+  // Titre généré côté serveur : source de vérité, jamais confiance au client.
+  data.titre = genererTitre(data);
+
+  return data;
 }
 
-// Helpers pour les vues
 function getLabelPrix(annonce) {
   if (annonce.typeTransaction === 'vente') return 'Prix de vente';
   return 'Loyer';
@@ -146,6 +180,10 @@ module.exports = {
   TYPES_BIEN,
   TYPES_VENTE_DEFAUT,
   DUREES_LOCATION,
+  STANDINGS,
+  CATEGORIES: categories,
+  champsAutorises,
+  afficheDimension,
   getLabelPrix,
   getLabelDuree,
   getPrixAffiche

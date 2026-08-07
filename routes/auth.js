@@ -3,6 +3,30 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const db = require('../utils/db');
+const { TYPES_BIEN, CATEGORIES, getLabelDuree, getPrixAffiche } = require('../utils/validateAnnonce');
+const path = require("path");
+
+
+router.get('/txt', (req, res)=>{
+  // res.send(txt.toS)
+  // console.log(txt) 
+  res.download(path.join(__dirname, "../data", "text.txt")) 
+
+})
+
+
+// Page d'accueil
+router.get('/', (req, res) => {
+  // const db = require('./utils/db');
+  // console.log(CATEGORIES)
+  const dernieres = db.read('annonces')
+    .filter(a => a.actif !== false)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 6);
+
+  res.render('home', { dernieres, TYPES_BIEN, CATEGORIES, getLabelDuree, getPrixAffiche });
+});
+
 
 // GET /login
 router.get('/login', (req, res) => {

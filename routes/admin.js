@@ -83,7 +83,7 @@ router.post('/annonces/:id/suspendre', (req, res) => {
   db.update('annonces', req.params.id, {
     suspendu: true,
     actif: false,
-    suspendéLe: new Date().toISOString()
+    suspenduLe: new Date().toISOString()
   });
   req.session.success = 'Annonce suspendue.';
   res.redirect('/admin/annonces');
@@ -96,7 +96,7 @@ router.post('/annonces/:id/reactiver', (req, res) => {
   db.update('annonces', req.params.id, {
     suspendu: false,
     actif: true,
-    suspendéLe: null
+    suspenduLe: null
   });
   req.session.success = 'Annonce réactivée.';
   res.redirect('/admin/annonces');

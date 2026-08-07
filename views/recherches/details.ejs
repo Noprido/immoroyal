@@ -1,0 +1,165 @@
+<%- include('../partials/header', { title: recherche.titre }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section" style="padding-top:2rem;">
+  <div class="container">
+
+    <p style="font-size:0.85rem; color:var(--grey); margin-bottom:1.5rem;">
+      <a href="/" style="color:var(--gold);">Accueil</a> ›
+      <a href="/recherches" style="color:var(--gold);">Je cherche</a> ›
+      <%= recherche.titre %>
+    </p>
+
+    <div class="detail-grid">
+      <!-- Colonne gauche -->
+      <div>
+        <!-- Badges -->
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem;">
+          <span class="badge-recherche"><i class='bx bx-search-alt'></i> Je cherche</span>
+          <% if (recherche.fondsDisponibles) { %>
+            <span class="badge-fonds"><i class='bx bx-check-circle'></i> Fonds disponibles</span>
+          <% } %>
+          <span class="badge <%= recherche.typeTransaction === 'achat' ? 'badge-vente' : 'badge-location' %>">
+            <i class='bx <%= recherche.typeTransaction === "achat" ? "bx-transfer" : "bx-key" %>'></i>
+            <%= recherche.typeTransaction === 'achat' ? 'Achat' : 'Location' %>
+          </span>
+        </div>
+
+        <h1 style="font-size:1.7rem; font-weight:800; margin-bottom:0.5rem;"><%= recherche.titre %></h1>
+
+        <p style="color:var(--grey); font-size:1rem; margin-bottom:0.75rem;">
+          <i class='bx bx-map' style="color:var(--gold);"></i>
+          <% if (recherche.localisation.importe) { %>
+            Toute localisation acceptée
+          <% } else { %>
+            <%= recherche.localisation.ville %><% if (recherche.localisation.quartier) { %>, <%= recherche.localisation.quartier %><% } %>
+          <% } %>
+        </p>
+
+        <div style="font-size:2rem; font-weight:800; color:var(--gold-dark); margin-bottom:1.5rem;">
+          <%= recherche.budgetMax.toLocaleString('fr-FR') %> FCFA
+          <% if (recherche.typeTransaction === 'location' && recherche.dureeLocation) { %>
+            <span style="font-size:1rem; font-weight:400; color:var(--grey);">/ <%= recherche.dureeLocation %></span>
+          <% } %>
+        </div>
+
+        <!-- Infos -->
+        <div class="info-block">
+          <h3><i class='bx bx-info-circle'></i> Détails de la recherche</h3>
+          <div class="info-row">
+            <span class="label">Type de bien</span>
+            <span class="value"><%= recherche.typeBien === 'Autre' ? recherche.autreTypeBien : recherche.typeBien %></span>
+          </div>
+          <div class="info-row">
+            <span class="label">Transaction</span>
+            <span class="value"><%= recherche.typeTransaction === 'achat' ? 'Achat' : 'Location' %></span>
+          </div>
+          <% if (recherche.typeTransaction === 'location' && recherche.dureeLocation) { %>
+            <div class="info-row">
+              <span class="label">Durée souhaitée</span>
+              <span class="value"><%= recherche.dureeLocation %></span>
+            </div>
+          <% } %>
+          <div class="info-row">
+            <span class="label">Budget maximum</span>
+            <span class="value"><%= recherche.budgetMax.toLocaleString('fr-FR') %> FCFA</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Localisation</span>
+            <span class="value">
+              <% if (recherche.localisation.importe) { %>
+                Toute localisation acceptée
+              <% } else { %>
+                <%= recherche.localisation.ville %><% if (recherche.localisation.quartier) { %>, <%= recherche.localisation.quartier %><% } %>
+              <% } %>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="label">Publiée par</span>
+            <span class="value">
+              <a href="/profile/public/<%= recherche.auteurId %>" style="color:var(--gold-dark); font-weight:700;">
+                <%= recherche.auteurNom %>
+              </a>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="label">Date</span>
+            <span class="value"><%= new Date(recherche.createdAt).toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' }) %></span>
+          </div>
+        </div>
+
+        <!-- Caractéristiques souhaitées -->
+        <% if (recherche.nbChambres || recherche.nbSalons || recherche.nbDouches || recherche.nbCuisines) { %>
+          <div class="info-block">
+            <h3><i class='bx bx-home-alt-2'></i> Caractéristiques souhaitées</h3>
+            <% if (recherche.nbChambres) { %><div class="info-row"><span class="label">Chambres min.</span><span class="value"><%= recherche.nbChambres %></span></div><% } %>
+            <% if (recherche.nbSalons) { %><div class="info-row"><span class="label">Salons min.</span><span class="value"><%= recherche.nbSalons %></span></div><% } %>
+            <% if (recherche.nbDouches) { %><div class="info-row"><span class="label">Douches min.</span><span class="value"><%= recherche.nbDouches %></span></div><% } %>
+            <% if (recherche.nbCuisines) { %><div class="info-row"><span class="label">Cuisines min.</span><span class="value"><%= recherche.nbCuisines %></span></div><% } %>
+          </div>
+        <% } %>
+
+        <!-- Description -->
+        <% if (recherche.description) { %>
+          <div class="info-block">
+            <h3><i class='bx bx-detail'></i> Description</h3>
+            <p style="line-height:1.8; color:var(--dark); white-space:pre-line;"><%= recherche.description %></p>
+          </div>
+        <% } %>
+
+        <!-- Actions auteur -->
+        <% if (locals.user && locals.user.id === recherche.auteurId) { %>
+          <div class="owner-actions">
+            <a href="/recherches/<%= recherche.id %>/edit" class="btn btn-outline">
+              <i class='bx bx-edit'></i> Modifier
+            </a>
+            <form action="/recherches/<%= recherche.id %>/toggle" method="POST">
+              <button type="submit" class="btn <%= recherche.actif ? 'btn-danger' : 'btn-gold' %>">
+                <i class='bx <%= recherche.actif ? "bx-pause" : "bx-play" %>'></i>
+                <%= recherche.actif ? 'Désactiver' : 'Réactiver' %>
+              </button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+
+      <!-- Colonne droite : contact -->
+      <div>
+        <div class="contact-card">
+          <h3><i class='bx bx-phone-call'></i> Contacter le chercheur</h3>
+          <p style="color:rgba(255,255,255,0.7); font-size:0.85rem; margin-bottom:1.5rem;">
+            <i class='bx bx-user' style="color:var(--gold);"></i>
+            <a href="/profile/public/<%= recherche.auteurId %>" style="color:var(--gold); font-weight:700;">
+              <%= recherche.auteurNom %>
+            </a>
+          </p>
+          <a href="tel:<%= recherche.auteurTelephone %>" class="btn btn-gold btn-full" style="margin-bottom:0.75rem;">
+            <i class='bx bx-phone'></i> <%= recherche.auteurTelephone %>
+          </a>
+          <a href="https://wa.me/<%= recherche.auteurWhatsapp.replace(/\D/g, '') %>" target="_blank"
+             class="btn btn-whatsapp btn-full" style="margin-bottom:0.75rem;">
+            <i class='bx bxl-whatsapp'></i> WhatsApp
+          </a>
+          <% if (!locals.user) { %>
+            <a href="/login" class="btn btn-outline btn-full">
+              <i class='bx bx-message-rounded'></i> Envoyer un message
+            </a>
+            <p style="text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.5); margin-top:0.75rem;">
+              Connectez-vous pour envoyer un message
+            </p>
+          <% } else if (locals.user.id !== recherche.auteurId) { %>
+            <a href="/messages/user/<%= recherche.auteurId %>" class="btn btn-outline btn-full">
+              <i class='bx bx-message-rounded'></i> Envoyer un message
+            </a>
+          <% } else { %>
+            <p style="text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.5); margin-top:0.75rem;">
+              C'est votre recherche
+            </p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

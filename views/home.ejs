@@ -89,7 +89,7 @@
   <div class="container">
     <h2 class="section-title">Parcourir par <span class="gold">type de bien</span></h2>
     <p class="section-subtitle">Trouvez exactement ce que vous cherchez</p>
-    <%
+    <!-- <%
     const icones = {
       'Maison': 'bx-home-alt-2',
       'Appartement vide': 'bx-building',
@@ -100,12 +100,12 @@
       'Terrain': 'bx-landscape',
       'Entrée personnelle': 'bx-door-open'
     };
-    %>
+    %> -->
     <div class="types-grid">
-      <% TYPES_BIEN.forEach(type => { %>
-        <a href="/annonces?typeBien=<%= encodeURIComponent(type) %>" class="type-card">
-          <i class='bx <%= icones[type] || "bx-home" %> type-icon'></i>
-          <div class="type-name"><%= type %></div>
+      <% CATEGORIES.forEach(cat => { %>
+        <a href="/annonces?typeBien=<%= encodeURIComponent(cat.value) %>" class="type-card">
+          <i class='bx <%= cat.web_bx_class || "bx-home" %> type-icon'></i>
+          <div class="type-name"><%= cat.label %></div>
         </a>
       <% }) %>
     </div>

@@ -1,0 +1,184 @@
+<%- include('../partials/header', { title: 'Publier une recherche' }) %>
+<%- include('../partials/navbar') %>
+
+<div class="page-form">
+  <h1 style="font-size:1.8rem; font-weight:800; margin-bottom:0.5rem;">
+    Je <span style="color:#D4AF37;">cherche</span>
+  </h1>
+  <p style="color:var(--grey); margin-bottom:1.5rem;">Décrivez le bien que vous recherchez</p>
+
+  <% if (error) { %><div class="alert alert-error"><i class='bx bx-error-circle'></i> <%= error %></div><% } %>
+
+  <form action="/recherches/creer" method="POST">
+
+    <!-- Infos générales -->
+    <div class="form-card">
+      <h3><i class='bx bx-clipboard'></i> Informations générales</h3>
+      <div class="form-grid-2">
+
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label">Titre *</label>
+          <input type="text" name="titre" class="form-control"
+                 placeholder="Ex: Cherche studio meublé à Cotonou" required>
+        </div>
+
+        <!-- Transaction -->
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label">Type de transaction *</label>
+          <div class="transaction-toggle">
+            <label class="transaction-option">
+              <input type="radio" name="typeTransaction" value="location" checked
+                     onchange="onTransactionChange(this)">
+              <span><i class='bx bx-key'></i> Location</span>
+            </label>
+            <label class="transaction-option">
+              <input type="radio" name="typeTransaction" value="achat"
+                     onchange="onTransactionChange(this)">
+              <span><i class='bx bx-transfer'></i> Achat</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Type de bien -->
+        <div class="form-group">
+          <label class="form-label">Type de bien *</label>
+          <select name="typeBien" class="form-control" required onchange="onTypeBienChange(this)">
+            <option value="">Choisir...</option>
+            <% typesBien.forEach(t => { %>
+              <option value="<%= t %>"><%= t %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <!-- Autre type -->
+        <div class="form-group" id="groupAutreType" style="display:none;">
+          <label class="form-label">Précisez le type *</label>
+          <input type="text" name="autreTypeBien" class="form-control"
+                 placeholder="Ex: Villa, Duplex...">
+        </div>
+
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label">Description (optionnel)</label>
+          <textarea name="description" class="form-control"
+                    placeholder="Précisez vos attentes, contraintes, préférences..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Localisation -->
+    <div class="form-card">
+      <h3><i class='bx bx-map'></i> Localisation</h3>
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label style="display:flex; align-items:center; gap:0.6rem; cursor:pointer; font-size:0.9rem;">
+          <input type="checkbox" name="localisationImporte" id="localisationImporte"
+                 onchange="toggleLocalisation(this)" style="width:18px; height:18px; accent-color:var(--gold);">
+          La localisation m'importe peu
+        </label>
+      </div>
+      <div class="form-grid-2" id="groupLocalisation">
+        <div class="form-group">
+          <label class="form-label">Ville / Commune *</label>
+          <input type="text" name="ville" id="inputVille" class="form-control"
+                 data-autocomplete="ville" placeholder="Cotonou..." autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Quartier (optionnel)</label>
+          <input type="text" name="quartier" class="form-control"
+                 data-autocomplete="quartier" placeholder="Fidjrossè..." autocomplete="off">
+        </div>
+      </div>
+    </div>
+
+    <!-- Budget -->
+    <div class="form-card">
+      <h3><i class='bx bx-wallet'></i> Budget</h3>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label class="form-label">Budget maximum (FCFA) *</label>
+          <input type="number" name="budgetMax" class="form-control"
+                 placeholder="150 000" min="0" required>
+        </div>
+        <div class="form-group" id="groupDuree">
+          <label class="form-label">Durée *</label>
+          <select name="dureeLocation" class="form-control">
+            <% dureesLocation.forEach(d => { %>
+              <option value="<%= d.value %>" <%= d.value === 'mois' ? 'selected' : '' %>><%= d.label %></option>
+            <% }) %>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Caractéristiques -->
+    <div class="form-card">
+      <h3><i class='bx bx-home-alt-2'></i> Caractéristiques souhaitées <span style="font-weight:400; font-size:0.85rem; color:var(--grey);">(optionnel)</span></h3>
+      <div class="form-grid-3">
+        <div class="form-group">
+          <label class="form-label">Chambres min.</label>
+          <input type="number" name="nbChambres" class="form-control" min="0" placeholder="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Salons min.</label>
+          <input type="number" name="nbSalons" class="form-control" min="0" placeholder="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Douches min.</label>
+          <input type="number" name="nbDouches" class="form-control" min="0" placeholder="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cuisines min.</label>
+          <input type="number" name="nbCuisines" class="form-control" min="0" placeholder="0">
+        </div>
+      </div>
+    </div>
+
+    <!-- Fonds disponibles -->
+    <div class="form-card">
+      <h3><i class='bx bx-money'></i> Fonds disponibles</h3>
+      <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer;">
+        <input type="checkbox" name="fondsDisponibles"
+               style="width:18px; height:18px; margin-top:2px; accent-color:var(--gold); flex-shrink:0;">
+        <div>
+          <div style="font-weight:600; font-size:0.95rem;">J'ai déjà les fonds disponibles</div>
+          <div style="font-size:0.82rem; color:var(--grey); margin-top:0.25rem;">
+            En cochant cette case, vous déclarez sur l'honneur disposer du budget indiqué.
+          </div>
+        </div>
+      </label>
+    </div>
+
+    <!-- Navigation -->
+    <div class="wizard-nav">
+      <a href="/recherches" class="btn btn-outline"><i class='bx bx-x'></i> Annuler</a>
+      <button type="submit" class="btn btn-gold">
+        <i class='bx bx-check'></i> Publier ma recherche
+      </button>
+    </div>
+  </form>
+</div>
+
+<script>
+function onTransactionChange(radio) {
+  const groupDuree = document.getElementById('groupDuree');
+  groupDuree.style.display = radio.value === 'location' ? 'flex' : 'none';
+}
+
+function onTypeBienChange(select) {
+  const groupAutre = document.getElementById('groupAutreType');
+  const inputAutre = groupAutre.querySelector('input');
+  const isAutre = select.value === 'Autre';
+  groupAutre.style.display = isAutre ? 'block' : 'none';
+  isAutre ? inputAutre.setAttribute('required','required') : inputAutre.removeAttribute('required');
+}
+
+function toggleLocalisation(checkbox) {
+  const group = document.getElementById('groupLocalisation');
+  const inputVille = document.getElementById('inputVille');
+  group.style.display = checkbox.checked ? 'none' : 'grid';
+  checkbox.checked
+    ? inputVille.removeAttribute('required')
+    : inputVille.setAttribute('required','required');
+}
+</script>
+
+<%- include('../partials/footer') %>

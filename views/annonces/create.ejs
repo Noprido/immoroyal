@@ -36,11 +36,11 @@
         <h3><i class='bx bx-clipboard'></i> Informations générales</h3>
         <div class="form-grid-2">
 
-          <div class="form-group" style="grid-column:1/-1;">
+          <!-- <div class="form-group" style="grid-column:1/-1;">
             <label class="form-label">Titre de l'annonce *</label>
             <input type="text" name="titre" class="form-control"
                    placeholder="Ex: Beau studio meublé à Fidjrossè" required>
-          </div>
+          </div> -->
 
           <!-- Type de transaction -->
           <div class="form-group" style="grid-column:1/-1;">
@@ -61,13 +61,11 @@
 
           <div class="form-group">
             <label class="form-label">Type de bien *</label>
-            <select name="typeBien" id="typeBien" class="form-control" required
-                    onchange="onTypeBienChange(this)">
+            <select name="typeBien" id="typeBien" class="form-control" required onchange="onTypeBienChange(this)">
               <option value="">Choisir...</option>
-              <% typesBien.forEach(t => { %>
-                <option value="<%= t %>"
-                  <%= typesVenteDefaut.includes(t) ? 'data-vente-defaut="true"' : '' %>>
-                  <%= t %>
+              <% categories.forEach(c => { %>
+                <option value="<%= c.value %>" <%= c.venteParDefaut ? 'data-vente-defaut="true"' : '' %>>
+                  <%= c.label %>
                 </option>
               <% }) %>
             </select>
@@ -133,19 +131,19 @@
             <input type="number" name="moisAvance" class="form-control"
                    placeholder="3" min="0" required>
           </div>
-          <div class="form-group form-location-only">
+          <div class="form-group form-location-only" id="groupCautionEau">
             <label class="form-label">Caution eau (FCFA) *</label>
             <input type="number" name="cautionEau" class="form-control"
                    placeholder="10 000" min="0" required>
           </div>
-          <div class="form-group form-location-only">
+          <div class="form-group form-location-only" id="groupCautionElec">
             <label class="form-label">Caution électricité (FCFA) *</label>
             <input type="number" name="cautionElec" class="form-control"
                    placeholder="10 000" min="0" required>
           </div>
 
           <!-- Toujours visible -->
-          <div class="form-group">
+          <div class="form-group" id="groupCommission">
             <label class="form-label">Commission démarcheur (FCFA) *</label>
             <input type="number" name="commissionDemarcheur" class="form-control"
                    placeholder="0" min="0" required>
@@ -157,73 +155,87 @@
     <!-- ══════════════════════════════════════════════════
          ÉTAPE 3 : Caractéristiques (masqué pour Terrain)
     ══════════════════════════════════════════════════ -->
-    <div class="form-step" data-step="3">
-      <div class="form-card" id="cardCaracteristiques">
-        <h3><i class='bx bx-home-alt-2'></i> Caractéristiques du logement</h3>
-        <div class="form-grid-3" style="margin-bottom:1.5rem;">
-          <div class="form-group">
-            <label class="form-label">Chambres *</label>
-            <input type="number" name="nbChambres" id="nbChambres"
-                   class="form-control" min="0" placeholder="2" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Salons *</label>
-            <input type="number" name="nbSalons" id="nbSalons"
-                   class="form-control" min="0" placeholder="1" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Douches *</label>
-            <input type="number" name="nbDouches" id="nbDouches"
-                   class="form-control" min="0" placeholder="1" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Cuisines *</label>
-            <input type="number" name="nbCuisines" id="nbCuisines"
-                   class="form-control" min="0" placeholder="1" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" style="color:#D4AF37;">Nb. pièces (auto)</label>
-            <input type="number" name="nbPieces" id="nbPieces" class="form-control" min="0" readonly
-                   style="background:#F5F5F5; color:#6B6B6B; cursor:not-allowed;">
-          </div>
+<div class="form-step" data-step="3">
+    <div class="form-card" id="cardCaracteristiques">
+      <h3><i class='bx bx-home-alt-2'></i> Caractéristiques du logement</h3>
+      <div class="form-grid-3" style="margin-bottom:1.5rem;">
+        <div class="form-group field-carac" id="groupChambres" data-field="nbChambres">
+          <label class="form-label">Chambres *</label>
+          <input type="number" name="nbChambres" id="nbChambres" class="form-control" min="0" placeholder="2" oninput="updateTitrePreview()">
         </div>
-        <div class="form-grid-3">
-          <div class="form-group">
-            <label class="form-label">Électricité *</label>
-            <select name="electriciteType" class="form-control" required>
-              <option value="">Choisir...</option>
-              <option value="personnel">Compteur personnel</option>
-              <option value="commun">Compteur commun</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Type de compteur *</label>
-            <select name="electriciteCompteur" class="form-control" required>
-              <option value="">Choisir...</option>
-              <option value="standard">Standard</option>
-              <option value="carte">À carte</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Eau *</label>
-            <select name="eauType" class="form-control" required>
-              <option value="">Choisir...</option>
-              <option value="personnel">Personnelle</option>
-              <option value="commun">Commune</option>
-            </select>
-          </div>
+        <div class="form-group field-carac" id="groupSalons" data-field="nbSalons">
+          <label class="form-label">Salons *</label>
+          <input type="number" name="nbSalons" id="nbSalons" class="form-control" min="0" placeholder="1" oninput="updateTitrePreview()">
+        </div>
+        <div class="form-group field-carac" id="groupDouches" data-field="nbDouches">
+          <label class="form-label">Douches *</label>
+          <input type="number" name="nbDouches" id="nbDouches" class="form-control" min="0" placeholder="1" oninput="updateTitrePreview()">
+        </div>
+        <div class="form-group field-carac" id="groupCuisines" data-field="nbCuisines">
+          <label class="form-label">Cuisines *</label>
+          <input type="number" name="nbCuisines" id="nbCuisines" class="form-control" min="0" placeholder="1" oninput="updateTitrePreview()">
+        </div>
+        <div class="form-group">
+          <label class="form-label" style="color:#D4AF37;">Nb. pièces (auto)</label>
+          <input type="number" id="nbPieces" class="form-control" min="0" readonly
+                style="background:#F5F5F5; color:#6B6B6B; cursor:not-allowed;">
         </div>
       </div>
 
-      <!-- Message terrain -->
-      <div class="form-card" id="cardTerrain" style="display:none;">
-        <div style="text-align:center; padding:2rem; color:var(--grey);">
-          <i class='bx bx-landscape' style="font-size:3rem; color:var(--gold); display:block; margin-bottom:1rem;"></i>
-          <h3 style="color:var(--dark); margin-bottom:0.5rem;">Terrain</h3>
-          <p>Les terrains n'ont pas de caractéristiques de logement.<br>Passez directement à l'étape suivante.</p>
+      <div class="form-grid-3">
+        <div class="form-group">
+          <label class="form-label">Électricité *</label>
+          <select name="electriciteType" class="form-control" required>
+            <option value="">Choisir...</option>
+            <option value="personnel">Compteur personnel</option>
+            <option value="commun">Compteur commun</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Type de compteur *</label>
+          <select name="electriciteCompteur" class="form-control" required>
+            <option value="">Choisir...</option>
+            <option value="standard">Standard</option>
+            <option value="carte">À carte</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Eau *</label>
+          <select name="eauType" class="form-control" required>
+            <option value="">Choisir...</option>
+            <option value="personnel">Personnelle</option>
+            <option value="commun">Commune</option>
+          </select>
         </div>
       </div>
+
+      <div class="form-group" id="groupStanding" style="display:none;">
+        <label class="form-label">Standing *</label>
+        <select name="standing" id="selectStanding" class="form-control" onchange="updateTitrePreview()">
+          <option value="">Choisir...</option>
+          <% standings.forEach(s => { %>
+            <option value="<%= s %>"><%= s.charAt(0).toUpperCase() + s.slice(1) %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-top:1rem;">
+        <label class="form-label">Titre généré (aperçu)</label>
+        <div id="titrePreview" style="padding:0.75rem 1rem; background:#F5F5F5; border-radius:8px; color:#2C2C2E; font-weight:600;">—</div>
+        <input type="hidden" name="titre" id="titreHidden" value="">
+      </div>
     </div>
+</div>
+
+    <div class="form-card" id="cardTerrain" style="display:none;">
+      <h3><i class='bx bx-landscape'></i> Terrain</h3>
+      <div class="form-group">
+        <label class="form-label">Superficie (m²) *</label>
+        <input type="number" name="dimension" id="inputDimension" class="form-control"
+              placeholder="345" min="1" oninput="updateTitrePreview()">
+      </div>
+    </div>
+
 
     <!-- ══════════════════════════════════════════════════
          ÉTAPE 4 : Médias (photos + vidéos)
@@ -306,7 +318,15 @@ function updateFinancesUI() {
   const inputPrix = document.getElementById('inputPrix');
   const champsLocation = document.querySelectorAll('.form-location-only');
 
+  const groupCommission = document.getElementById('groupCommission');
+
+
   if (estVente) {
+
+    groupCommission.style.display = 'none';
+    groupCommission.querySelector('input').removeAttribute('required');
+    groupCommission.querySelector('input').value = '0';
+
     labelPrix.textContent = 'Prix de vente *';
     inputLoyer.style.display = 'none';
     inputLoyer.removeAttribute('required');
@@ -321,6 +341,9 @@ function updateFinancesUI() {
       el.querySelector('input').value = '0';
     });
   } else {
+    groupCommission.style.display = 'flex';
+    groupCommission.querySelector('input').setAttribute('required', 'required');
+
     labelPrix.textContent = 'Loyer *';
     inputLoyer.style.display = 'block';
     inputLoyer.setAttribute('required', 'required');
@@ -336,24 +359,140 @@ function updateFinancesUI() {
   }
 }
 
-function updateCaracteristiquesUI() {
-  const cardCarac = document.getElementById('cardCaracteristiques');
-  const cardTerrain = document.getElementById('cardTerrain');
+const CATEGORIES = <%- JSON.stringify(categories) %>;
 
-  if (estTerrain) {
-    const inputsCarac = cardCarac.querySelectorAll('input, select');
+function getCategorie(typeBien) {
+  return CATEGORIES.find(c => c.value === typeBien) || null;
+}
+function champsPourType(typeBien) {
+  const cat = getCategorie(typeBien);
+  return cat ? cat.champsCaracteristiques : [];
+}
+function afficheDimensionPourType(typeBien) {
+  const cat = getCategorie(typeBien);
+  return cat ? cat.afficheDimension : false;
+}
+
+function updateCaracteristiquesUI() {
+  const typeBien = document.getElementById('typeBien').value;
+  const champs = champsPourType(typeBien);
+  const dimensionActive = afficheDimensionPourType(typeBien);
+  estTerrain = dimensionActive;
+
+  const cautionEau  = document.getElementById('groupCautionEau');
+  const cautionElec = document.getElementById('groupCautionElec');
+  [cautionEau, cautionElec].forEach(el => {
+    if (!el) return;
+    el.style.display = dimensionActive ? 'none' : 'flex';
+    const input = el.querySelector('input');
+    if (dimensionActive) { input.removeAttribute('required'); input.value = '0'; }
+    else input.setAttribute('required', 'required');
+  });
+
+  const cardCarac     = document.getElementById('cardCaracteristiques');
+  const cardTerrain   = document.getElementById('cardTerrain');
+  const inputDim      = document.getElementById('inputDimension');
+  const groupStanding = document.getElementById('groupStanding');
+
+  if (dimensionActive) {
     cardCarac.style.display = 'none';
     cardTerrain.style.display = 'block';
-    inputsCarac.forEach(el => el.removeAttribute('required'));
+    cardCarac.querySelectorAll('input, select').forEach(el => el.removeAttribute('required'));
+    if (inputDim) inputDim.setAttribute('required', 'required');
   } else {
-    const inputsCarac = cardCarac.querySelectorAll('input, select');
     cardCarac.style.display = 'block';
     cardTerrain.style.display = 'none';
-    inputsCarac.forEach(el => {
-      if (el.id !== 'nbPieces') el.setAttribute('required', 'required');
+    if (inputDim) inputDim.removeAttribute('required');
+
+    document.querySelectorAll('.field-carac').forEach(group => {
+      const champ = group.dataset.field;
+      const actif = champs.includes(champ);
+      group.style.display = actif ? 'block' : 'none';
+      const input = group.querySelector('input');
+      if (actif) input.setAttribute('required', 'required');
+      else { input.removeAttribute('required'); input.value = ''; }
     });
+
+    const supportsStanding = champs.includes('standing');
+    groupStanding.style.display = supportsStanding ? 'block' : 'none';
+    const selStanding = document.getElementById('selectStanding');
+    if (supportsStanding) selStanding.setAttribute('required', 'required');
+    else { selStanding.removeAttribute('required'); selStanding.value = ''; }
+  }
+
+  updateNbPiecesDisplay();
+}
+
+function updateNbPiecesDisplay() {
+  const total = ['nbChambres', 'nbSalons', 'nbDouches', 'nbCuisines']
+    .reduce((sum, id) => sum + (parseInt(document.getElementById(id)?.value) || 0), 0);
+  const el = document.getElementById('nbPieces');
+  if (el) el.value = total;
+}
+
+function pieceWord(n, singulier, pluriel, feminin) {
+  n = parseInt(n) || 0;
+  if (n === 1) return (feminin ? 'une ' : 'un ') + singulier;
+  return n + ' ' + pluriel;
+}
+
+function genererTitre() {
+  const typeBien = document.getElementById('typeBien').value;
+  const villeInput = document.querySelector('[name="ville"]');
+  const ville = villeInput ? villeInput.value.trim() : '';
+  const cat = getCategorie(typeBien);
+  if (!cat || !ville) return '';
+
+  const champs = cat.champsCaracteristiques;
+  const supportsStanding = champs.includes('standing');
+  const standingEl = document.getElementById('selectStanding');
+  const standing = supportsStanding && standingEl ? standingEl.value : '';
+  const standingSuffix = (supportsStanding && standing) ? ' ' + standing : '';
+
+  const nbChambres = parseInt(document.getElementById('nbChambres')?.value) || 0;
+  const nbSalons   = parseInt(document.getElementById('nbSalons')?.value) || 0;
+  const nbDouches  = parseInt(document.getElementById('nbDouches')?.value) || 0;
+  const nbCuisines = parseInt(document.getElementById('nbCuisines')?.value) || 0;
+  const nbPieces   = nbChambres + nbSalons + nbDouches + nbCuisines;
+  const dimension  = parseFloat(document.getElementById('inputDimension')?.value) || 0;
+
+  switch (cat.titreFormat) {
+    case 'chambresSalon':
+      return pieceWord(nbChambres, 'chambre', 'chambres', true) + ' ' +
+             pieceWord(nbSalons, 'salon', 'salons', false) + standingSuffix + ' à ' + ville;
+    case 'pieces':
+      return typeBien + ' ' + pieceWord(nbPieces, 'pièce', 'pièces', true) + standingSuffix + ' à ' + ville;
+    case 'terrain':
+      return 'Terrain ' + dimension + 'm² à ' + ville;
+    case 'simple':
+    default:
+      return typeBien + ' à ' + ville;
   }
 }
+
+function updateTitrePreview() {
+  updateNbPiecesDisplay();
+  const titre = genererTitre();
+  const preview = document.getElementById('titrePreview');
+  if (preview) preview.textContent = titre || '—';
+  const hidden = document.getElementById('titreHidden');
+  if (hidden) hidden.value = titre;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const villeInput = document.querySelector('[name="ville"]');
+  if (villeInput) villeInput.addEventListener('input', updateTitrePreview);
+  updateTitrePreview();
+});
+
+document.getElementById('annonceForm')?.addEventListener('submit', (e) => {
+  updateTitrePreview();
+  const hidden = document.getElementById('titreHidden');
+  if (!hidden.value) {
+    e.preventDefault();
+    alert('Impossible de générer le titre : vérifiez le type de bien et la ville.');
+  }
+});
 
 // ─── Prévisualisation médias ──────────────────────────────────────
 let mediaFiles = [];

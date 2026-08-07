@@ -115,6 +115,12 @@
               <i class='bx <%= estVente ? "bx-transfer" : "bx-key" %>'></i>
               <%= estVente ? 'À vendre' : 'À louer' %>
             </span>
+            <% if (annonce.standing) { %>
+              <span class="badge badge-standing">
+                <i class='bx bx-star'></i>
+                <%= annonce.standing === 'sanitaire' ? 'Sanitaire' : annonce.standing === 'semi-sanitaire' ? 'Semi-sanitaire' : 'Ordinaire' %>
+              </span>
+            <% } %>
             <% if (annonce.enAvant) { %>
               <span class="badge badge-gold"><i class='bx bx-star'></i> En avant</span>
             <% } %>
@@ -153,12 +159,12 @@
               <div class="info-row"><span class="label">Caution électricité</span><span class="value"><%= annonce.cautionElec.toLocaleString('fr-FR') %> FCFA</span></div>
             <% } %>
           <% } %>
-          <% if (annonce.commissionDemarcheur) { %>
+          <% if (!estVente && annonce.commissionDemarcheur) { %>
             <div class="info-row"><span class="label">Commission démarcheur</span><span class="value"><%= annonce.commissionDemarcheur.toLocaleString('fr-FR') %> FCFA</span></div>
           <% } %>
           <% if (!estVente) { %>
             <%
-              const totalInitial = (prixAffiche || 0) * (annonce.moisAvance || 0)
+              const totalInitial = (annonce.loyer || 0) * (annonce.moisAvance || 0)
                 + (annonce.cautionEau || 0)
                 + (annonce.cautionElec || 0)
                 + (annonce.commissionDemarcheur || 0);
@@ -171,28 +177,37 @@
         </div>
 
         <!-- Caractéristiques -->
-        <% if (annonce.typeBien !== 'Terrain' && annonce.nbPieces > 0) { %>
+        <% if (annonce.typeBien === 'Terrain' ? annonce.dimension : annonce.nbPieces > 0) { %>
           <div class="info-block">
-            <h3><i class='bx bx-home-alt-2'></i> Caractéristiques du logement</h3>
-            <% if (annonce.nbPieces) { %><div class="info-row"><span class="label">Nombre de pièces</span><span class="value"><%= annonce.nbPieces %></span></div><% } %>
-            <% if (annonce.nbChambres) { %><div class="info-row"><span class="label">Chambres</span><span class="value"><%= annonce.nbChambres %></span></div><% } %>
-            <% if (annonce.nbSalons) { %><div class="info-row"><span class="label">Salons</span><span class="value"><%= annonce.nbSalons %></span></div><% } %>
-            <% if (annonce.nbDouches) { %><div class="info-row"><span class="label">Douches</span><span class="value"><%= annonce.nbDouches %></span></div><% } %>
-            <% if (annonce.nbCuisines) { %><div class="info-row"><span class="label">Cuisines</span><span class="value"><%= annonce.nbCuisines %></span></div><% } %>
-            <% if (annonce.electriciteType) { %>
-              <div class="info-row">
-                <span class="label">Électricité</span>
-                <span class="value">
-                  <%= annonce.electriciteType === 'personnel' ? 'Compteur personnel' : 'Compteur commun' %>
-                  <% if (annonce.electriciteCompteur) { %>(<%= annonce.electriciteCompteur === 'carte' ? 'à carte' : 'standard' %>)<% } %>
-                </span>
-              </div>
-            <% } %>
-            <% if (annonce.eauType) { %>
-              <div class="info-row">
-                <span class="label">Eau</span>
-                <span class="value"><%= annonce.eauType === 'personnel' ? 'Personnelle' : 'Commune' %></span>
-              </div>
+            <h3><i class='bx bx-home-alt-2'></i> Caractéristiques</h3>
+            <% if (annonce.typeBien === 'Terrain') { %>
+              <% if (annonce.dimension) { %>
+                <div class="info-row"><span class="label">Superficie</span><span class="value"><%= annonce.dimension %> m²</span></div>
+              <% } %>
+            <% } else { %>
+              <% if (annonce.nbPieces) { %><div class="info-row"><span class="label">Nombre de pièces</span><span class="value"><%= annonce.nbPieces %></span></div><% } %>
+              <% if (annonce.nbChambres) { %><div class="info-row"><span class="label">Chambres</span><span class="value"><%= annonce.nbChambres %></span></div><% } %>
+              <% if (annonce.nbSalons) { %><div class="info-row"><span class="label">Salons</span><span class="value"><%= annonce.nbSalons %></span></div><% } %>
+              <% if (annonce.nbDouches) { %><div class="info-row"><span class="label">Douches</span><span class="value"><%= annonce.nbDouches %></span></div><% } %>
+              <% if (annonce.nbCuisines) { %><div class="info-row"><span class="label">Cuisines</span><span class="value"><%= annonce.nbCuisines %></span></div><% } %>
+              <% if (annonce.standing) { %>
+                <div class="info-row">
+                  <span class="label">Standing</span>
+                  <span class="value"><%= annonce.standing === 'sanitaire' ? 'Sanitaire' : annonce.standing === 'semi-sanitaire' ? 'Semi-sanitaire' : 'Ordinaire' %></span>
+                </div>
+              <% } %>
+              <% if (annonce.electriciteType) { %>
+                <div class="info-row">
+                  <span class="label">Électricité</span>
+                  <span class="value">
+                    <%= annonce.electriciteType === 'personnel' ? 'Compteur perso.' : 'Compteur commun' %>
+                    <% if (annonce.electriciteCompteur) { %>(<%= annonce.electriciteCompteur === 'carte' ? 'à carte' : 'standard' %>)<% } %>
+                  </span>
+                </div>
+              <% } %>
+              <% if (annonce.eauType) { %>
+                <div class="info-row"><span class="label">Eau</span><span class="value"><%= annonce.eauType === 'personnel' ? 'Personnelle' : 'Commune' %></span></div>
+              <% } %>
             <% } %>
           </div>
         <% } %>

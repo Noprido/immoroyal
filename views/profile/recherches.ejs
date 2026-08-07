@@ -1,0 +1,83 @@
+<%- include('../partials/header', { title: 'Mes recherches' }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section" style="padding-top:2rem;">
+  <div class="container" style="max-width:900px;">
+    <% if (locals.success) { %><div class="alert alert-success"><i class='bx bx-check-circle'></i> <%= locals.success %></div><% } %>
+    <% if (locals.error) { %><div class="alert alert-error"><i class='bx bx-error-circle'></i> <%= locals.error %></div><% } %>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h2 style="font-size:1.4rem; font-weight:800;">Mes <span style="color:var(--gold);">recherches</span></h2>
+        <p style="color:var(--grey); font-size:0.85rem; margin-top:0.25rem;">
+          <a href="/profile/dashboard" style="color:var(--gold);">← Mon espace</a>
+        </p>
+      </div>
+      <a href="/recherches/creer" class="btn btn-gold btn-sm">
+        <i class='bx bx-plus'></i> Nouvelle recherche
+      </a>
+    </div>
+
+    <% if (recherches.length === 0) { %>
+      <div class="empty-state">
+        <i class='bx bx-search-alt' style="font-size:3rem; color:var(--grey); display:block; margin-bottom:1rem;"></i>
+        <h3>Aucune recherche publiée</h3>
+        <p>Publiez ce que vous cherchez pour être contacté par des propriétaires.</p>
+        <a href="/recherches/creer" class="btn btn-gold" style="margin-top:1rem;">
+          <i class='bx bx-plus'></i> Publier une recherche
+        </a>
+      </div>
+    <% } else { %>
+
+      <!-- Cards (visible sur tous les écrans) -->
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        <% recherches.forEach(r => { %>
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div style="flex:1; min-width:0;">
+                <div style="font-weight:700; font-size:0.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                  <%= r.titre %>
+                </div>
+                <div style="font-size:0.8rem; color:var(--grey); margin-top:0.25rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+                  <span><%= r.typeBien === 'Autre' ? r.autreTypeBien : r.typeBien %></span>
+                  <span>·</span>
+                  <span><%= r.localisation.importe ? 'Toute localisation' : r.localisation.ville %></span>
+                  <span>·</span>
+                  <span><%= r.budgetMax.toLocaleString('fr-FR') %> FCFA</span>
+                  <% if (r.fondsDisponibles) { %>
+                    <span class="badge-fonds"><i class='bx bx-check-circle'></i> Fonds disponibles</span>
+                  <% } %>
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.75rem; flex-shrink:0;">
+                <span class="badge <%= r.actif ? 'badge-green' : 'badge-grey' %>">
+                  <%= r.actif ? 'Active' : 'Inactive' %>
+                </span>
+                <span style="font-size:0.75rem; color:var(--grey);">
+                  <%= new Date(r.createdAt).toLocaleDateString('fr-FR') %>
+                </span>
+              </div>
+            </div>
+            <div class="admin-card-actions" style="margin-top:0.75rem;">
+              <a href="/recherches/<%= r.id %>" class="btn btn-outline btn-sm">
+                <i class='bx bx-show'></i> Voir
+              </a>
+              <a href="/recherches/<%= r.id %>/edit" class="btn btn-outline btn-sm">
+                <i class='bx bx-edit'></i> Modifier
+              </a>
+              <form action="/recherches/<%= r.id %>/toggle" method="POST" style="display:contents;">
+                <button type="submit" class="btn btn-sm <%= r.actif ? 'btn-danger' : 'btn-gold' %>">
+                  <i class='bx <%= r.actif ? "bx-pause" : "bx-play" %>'></i>
+                  <%= r.actif ? 'Désactiver' : 'Activer' %>
+                </button>
+              </form>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

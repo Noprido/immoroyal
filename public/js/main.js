@@ -167,10 +167,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!editForm) return;
 
   editForm.addEventListener('submit', (e) => {
-    const nbPieces = parseInt(document.getElementById('nbPieces')?.value) || 0;
+    const el = document.getElementById('nbPieces');
+    if (!el) return; /* pas un formulaire d'annonce */
+
+    const nbPieces = parseInt(el.value) || 0;
     if (nbPieces < 1) {
       e.preventDefault();
-      const el = document.getElementById('nbPieces');
       el.style.borderColor = '#dc3545';
       let msg = document.getElementById('nbPiecesError');
       if (!msg) {

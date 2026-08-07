@@ -7,8 +7,8 @@ const annoncesRoutes = require('./routes/annonces');
 const profileRoutes = require('./routes/profile');
 const adminRoutes = require('./routes/admin');
 const pagesRoutes = require('./routes/pages');
-
-const { TYPES_BIEN, getLabelDuree, getPrixAffiche } = require('./utils/validateAnnonce');
+const recherchesRouter = require('./routes/recherches');
+const apiRoutes        = require('./routes/api'); 
 
 
 const app = express();
@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 
 // Session
 app.use(session({
-  secret: 'immoroyal_secret_key_2024',
+  secret: 'immoroyal_secret_key_2026',
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24h
@@ -51,6 +51,10 @@ app.use((req, res, next) => {
   next();
 });
 
+
+// API mobile — JSON, pas de session
+app.use('/api/v1', apiRoutes);
+
 // Routes
 app.use('/', authRoutes);
 app.use('/annonces', annoncesRoutes);
@@ -58,24 +62,14 @@ app.use('/profile', profileRoutes);
 app.use('/admin', adminRoutes);
 app.use('/messages', require('./routes/messages'));
 app.use('/', pagesRoutes);
-// app.use('/profil', require('./routes/profile'));
+app.use('/recherches', recherchesRouter);
 
-// Page d'accueil
-app.get('/', (req, res) => {
-  const db = require('./utils/db');
-  const dernieres = db.read('annonces')
-    .filter(a => a.actif !== false)
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    .slice(0, 6);
-
-  res.render('home', { dernieres, TYPES_BIEN, getLabelDuree, getPrixAffiche });
-});
 
 // 404
 app.use((req, res) => {
   res.status(404).render('404');
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ ImmoRoyal démarré sur http://localhost:${PORT}`);
 });

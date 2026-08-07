@@ -1,0 +1,100 @@
+<%- include('../partials/header', { title: 'Je cherche' }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Filtres -->
+    <div style="background:#fff; border-radius:12px; box-shadow:var(--shadow); padding:1.5rem; margin-bottom:2rem;">
+      <h3 style="font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; color:var(--grey); margin-bottom:1rem;">Filtrer les recherches</h3>
+      <form action="/recherches" method="GET" class="search-grid">
+        <div class="form-group">
+          <label class="form-label">Ville / Commune</label>
+          <input type="text" name="ville" class="form-control" data-autocomplete="ville"
+                 value="<%= filtres.ville || '' %>" placeholder="Cotonou..." autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Type de bien</label>
+          <select name="typeBien" class="form-control">
+            <option value="">Tous</option>
+            <% typesBien.forEach(t => { %>
+              <option value="<%= t %>" <%= filtres.typeBien === t ? 'selected' : '' %>><%= t %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Transaction</label>
+          <select name="typeTransaction" class="form-control">
+            <option value="">Toutes</option>
+            <option value="location" <%= filtres.typeTransaction === 'location' ? 'selected' : '' %>>Location</option>
+            <option value="achat" <%= filtres.typeTransaction === 'achat' ? 'selected' : '' %>>Achat</option>
+          </select>
+        </div>
+        <div class="form-group" style="justify-content:flex-end; flex-direction:row; align-items:flex-end; gap:0.5rem;">
+          <a href="/recherches" class="btn btn-outline btn-sm"><i class='bx bx-reset'></i> Reset</a>
+          <button type="submit" class="btn btn-gold btn-sm"><i class='bx bx-search'></i> Filtrer</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Header résultats -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+      <h2 class="section-title"><%= recherches.length %> recherche<%= recherches.length !== 1 ? 's' : '' %></h2>
+      <% if (locals.user) { %>
+        <a href="/recherches/creer" class="btn btn-gold"><i class='bx bx-plus'></i> Publier une recherche</a>
+      <% } %>
+    </div>
+
+    <% if (recherches.length === 0) { %>
+      <div class="empty-state">
+        <i class='bx bx-search-alt' style="font-size:3rem; color:var(--grey); display:block; margin-bottom:1rem;"></i>
+        <h3>Aucune recherche pour l'instant</h3>
+        <p>Soyez le premier à publier ce que vous cherchez !</p>
+        <% if (locals.user) { %>
+          <a href="/recherches/creer" class="btn btn-gold" style="margin-top:1rem;">Publier une recherche</a>
+        <% } %>
+      </div>
+    <% } else { %>
+      <div class="annonces-grid">
+        <% recherches.forEach(r => { %>
+          <a href="/recherches/<%= r.id %>" class="card-recherche">
+            <div class="card-recherche-header">
+              <span class="badge-recherche"><i class='bx bx-search-alt'></i> Je cherche</span>
+              <% if (r.fondsDisponibles) { %>
+                <span class="badge-fonds"><i class='bx bx-check-circle'></i> Fonds disponibles</span>
+              <% } %>
+            </div>
+            <div class="card-body">
+              <div class="card-price">
+                Budget max : <%= r.budgetMax.toLocaleString('fr-FR') %> FCFA
+                <% if (r.typeTransaction === 'location' && r.dureeLocation) { %>
+                  <span>/ <%= r.dureeLocation %></span>
+                <% } %>
+              </div>
+              <div class="card-title"><%= r.titre %></div>
+              <div class="card-location">
+                <i class='bx bx-map'></i>
+                <% if (r.localisation.importe) { %>
+                  Toute localisation
+                <% } else { %>
+                  <%= r.localisation.ville %><% if (r.localisation.quartier) { %>, <%= r.localisation.quartier %><% } %>
+                <% } %>
+              </div>
+              <div class="card-infos">
+                <span>
+                  <i class='bx bx-home-alt-2'></i>
+                  <%= r.typeBien === 'Autre' ? r.autreTypeBien : r.typeBien %>
+                </span>
+                <span style="margin-left:auto; color:var(--grey); font-size:0.75rem;">
+                  <%= new Date(r.createdAt).toLocaleDateString('fr-FR') %>
+                </span>
+              </div>
+            </div>
+          </a>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

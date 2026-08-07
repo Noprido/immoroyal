@@ -43,13 +43,14 @@ router.get('/', isAuthenticated, (req, res) => res.redirect('/profile/dashboard'
 router.get('/dashboard', isAuthenticated, (req, res) => {
   const user = db.findById('users', req.session.user.id);
   const annonces = db.read('annonces').filter(a => a.auteurId === req.session.user.id);
+  const recherches = db.read('recherches').filter(r => r.auteurId === req.session.user.id);
   const unread = countUnread(req.session.user.id);
-  res.render('profile/dashboard', { user, annonces, unread });
+  res.render('profile/dashboard', { user, annonces, recherches, unread, currentPath: req.path });
 });
 
 router.get('/annonces', isAuthenticated, (req, res) => {
   const annonces = db.read('annonces').filter(a => a.auteurId === req.session.user.id);
-  res.render('profile/annonces', { annonces });
+  res.render('profile/annonces', { annonces, currentPath: req.path });
 });
 
 router.post('/modifier', isAuthenticated, async (req, res) => {
@@ -85,6 +86,14 @@ router.post('/modifier', isAuthenticated, async (req, res) => {
   req.session.user = { ...req.session.user, nom: updates.nom, email: updates.email };
   req.session.success = 'Profil mis à jour avec succès.';
   res.redirect('/profile/dashboard');
+});
+
+router.get('/recherches', isAuthenticated, (req, res) => {
+  const recherches = db.read('recherches')
+    .filter(r => r.auteurId === req.session.user.id)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  const unread = countUnread(req.session.user.id);
+  res.render('profile/recherches', { recherches, unread, currentPath: req.path });
 });
 
 module.exports = router;

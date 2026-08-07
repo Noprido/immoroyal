@@ -1,7 +1,7 @@
 [
   {
     "id": "59e2e16d-75a0-4764-83ca-1596cb63182b",
-    "nom": "Prince Steed Noumon Dossou",
+    "nom": "Steed Noumon",
     "email": "steednoumon@gmail.com",
     "telephone": "+2290152398046",
     "whatsapp": "+22952398046",
@@ -9,18 +9,18 @@
     "role": "admin",
     "banni": false,
     "createdAt": "2026-06-22T03:18:13.386Z",
-    "bio": "",
-    "typeVendeur": "particulier"
+    "bio": "✌🏾Charismatique 2.0✌🏾",
+    "typeVendeur": "proprietaire"
   },
   {
     "id": "59e2e16d-75a0-4764-83ca-1596cb63182c",
     "nom": "Lord Noprido",
     "email": "steednoumon7@gmail.com",
-    "telephone": "+22963098301",
+    "telephone": "+2290163098301",
     "whatsapp": "22963098301",
     "password": "$2b$10$u9yPF9/wJ4hWILaLDrphCOR88Vm86jZnMNeUimFL57GnTWrtANtP.",
     "role": "user",
-    "banni": true,
+    "banni": false,
     "createdAt": "2026-06-22T03:18:13.386Z"
   },
   {
@@ -36,5 +36,33 @@
     "typeVendeur": "particulier",
     "suspendu": false,
     "createdAt": "2026-07-07T22:58:09.820Z"
+  },
+  {
+    "id": "6fd3ae1d-9408-4d7a-abf4-6381583845cf",
+    "nom": "*8*1/8*15+9+/78",
+    "email": "",
+    "telephone": "<script>alert('faille xcss')</script>",
+    "whatsapp": "/**/*82*8925/*/+6892",
+    "password": "$2b$10$frUJJAwkDC4RyQRnM6yL6O3iHrKzFt9Pmq68dCDXzT8HZv.DFsJ3.",
+    "role": "user",
+    "banni": false,
+    "bio": "",
+    "typeVendeur": "particulier",
+    "suspendu": false,
+    "createdAt": "2026-07-13T16:09:00.697Z"
+  },
+  {
+    "id": "c8a31f30-c0b2-4927-a762-ef622eddde3c",
+    "nom": "Prince",
+    "email": "",
+    "telephone": "+22990000000",
+    "whatsapp": "+2292525455258",
+    "password": "$2b$10$jN2KLhfc//wGmnYzUIEAPe3fAjSG.QAsTDsS6i4AeNVroPjQkCSNa",
+    "role": "user",
+    "banni": false,
+    "bio": "",
+    "typeVendeur": "particulier",
+    "suspendu": false,
+    "createdAt": "2026-07-19T22:29:16.555Z"
   }
 ]

@@ -38,7 +38,7 @@
             <option value="vente" <%= filtres.typeTransaction === 'vente' ? 'selected' : '' %>>À vendre</option>
           </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
           <label class="form-label">Prix min</label>
           <input type="number" name="prixMin" class="form-control" value="<%= filtres.prixMin || '' %>" placeholder="0">
         </div>

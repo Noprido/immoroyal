@@ -1,0 +1,91 @@
+[
+  
+  {
+    "value": "Appartement vide",
+    "label": "Appart vide",
+    "web_bx_class": "bx-building",
+    "iconCodePoint": "0xe089",
+    "iconFont": "MaterialIcons",
+    "venteParDefaut": false,
+    "champsCaracteristiques": ["nbChambres", "nbSalons", "nbDouches", "nbCuisines", "standing"],
+    "afficheDimension": false,
+    "titreFormat": "chambresSalon"
+  },
+  {
+    "value": "Appartement meublé",
+    "label": "Appart meublé",
+    "web_bx_class": "bx-bed",
+    "iconCodePoint": "0xe3a8",
+    "iconFont": "MaterialIcons",
+    "venteParDefaut": false,
+    "champsCaracteristiques": ["nbChambres", "nbSalons", "nbDouches", "nbCuisines", "standing"],
+    "afficheDimension": false,
+    "titreFormat": "pieces"
+  },
+  {
+    "value": "Boutique",
+    "label": "Boutique",
+    "web_bx_class": "bx-store",
+    "iconCodePoint": "0xe60a",
+    "iconFont": "MaterialIcons",
+    "venteParDefaut": false,
+    "champsCaracteristiques": [],
+    "afficheDimension": false,
+    "titreFormat": "simple"
+  },
+  {
+    "value": "Maison",
+    "label": "Maison",
+    "web_bx_class": "bx-home-alt-2",
+    "iconCodePoint": "0xe319",
+    "iconFont": "MaterialIcons",
+    "venteParDefaut": false,
+    "champsCaracteristiques": ["nbChambres", "nbSalons", "nbDouches", "nbCuisines", "standing"],
+    "afficheDimension": false,
+    "titreFormat": "pieces"
+  },
+  {
+    "value": "Terrain",
+    "label": "Terrain",
+    "web_bx_class": "bx-landscape",
+    "iconCodePoint": "0xe365",
+    "iconFont": "MaterialIcons",
+    "venteParDefaut": true,
+    "champsCaracteristiques": [],
+    "afficheDimension": true,
+    "titreFormat": "terrain"
+  },
+  {
+    "value": "Entrée personnelle",
+    "label": "Entrée perso.",
+    "web_bx_class": "bx-door-open",
+    "iconCodePoint": "0xe1fb",
+    "iconFont": "MaterialIcons",
+    "venteParDefaut": false,
+    "champsCaracteristiques": ["nbChambres", "nbSalons", "nbDouches", "nbCuisines", "standing"],
+    "afficheDimension": false,
+    "titreFormat": "pieces"
+  },
+  {
+    "value": "Bureau",
+    "label": "Bureau",
+    "web_bx_class": "bx-briefcase",
+    "iconCodePoint": "0xe6f2",
+    "iconFont": "MaterialIcons",
+    "venteParDefaut": false,
+    "champsCaracteristiques": ["nbChambres", "nbSalons", "nbDouches", "nbCuisines"],
+    "afficheDimension": false,
+    "titreFormat": "pieces"
+  },
+  {
+    "value": "Magasin",
+    "label": "Magasin",
+    "web_bx_class": "bx-store-alt",
+    "iconCodePoint": "0xf05a0",
+    "iconFont": "MaterialIcons",
+    "venteParDefaut": false,
+    "champsCaracteristiques": [],
+    "afficheDimension": false,
+    "titreFormat": "simple"
+  }
+]

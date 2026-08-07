@@ -6,9 +6,14 @@ const path = require('path');
 const db = require('../utils/db');
 const { isAuthenticated } = require('../middleware/auth');
 
+const ffmpeg = require('fluent-ffmpeg');
+const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
+ffmpeg.setFfmpegPath(ffmpegInstaller.path);
+
 const {
   validateAnnonce, buildAnnonce,
   TYPES_BIEN, TYPES_VENTE_DEFAUT, DUREES_LOCATION,
+  STANDINGS, CATEGORIES,
   getLabelPrix, getLabelDuree, getPrixAffiche
 } = require('../utils/validateAnnonce');
 
@@ -39,15 +44,40 @@ const upload = multer({
 });
 
 // Helper : séparer photos et vidéos depuis req.files
-function separerMedias(files) {
+async function separerMedias(files) {
   const photos = [];
   const videos = [];
-  (files || []).forEach(f => {
+
+  for (const f of (files || [])) {
     const ext = path.extname(f.originalname).toLowerCase().replace('.', '');
     const url = `/uploads/annonces/${f.filename}`;
-    if (VIDEO_EXTS.test(ext)) videos.push(url);
-    else photos.push(url);
-  });
+
+    if (VIDEO_EXTS.test(ext)) {
+      videos.push(url);
+      // Générer miniature jpg de la première frame
+      const thumbFilename = `thumb_${f.filename.replace(/\.[^.]+$/, '.jpg')}`;
+      const thumbPath = path.join(__dirname, '../uploads/annonces', thumbFilename);
+      try {
+        await new Promise((resolve, reject) => {
+          ffmpeg(path.join(__dirname, '../uploads/annonces', f.filename))
+            .screenshots({
+              timestamps: ['00:00:01'],
+              filename: thumbFilename,
+              folder: path.join(__dirname, '../uploads/annonces'),
+              // size: '640x360'
+            })
+            .on('end', resolve)
+            .on('error', reject);
+        });
+        photos.unshift(`/uploads/annonces/${thumbFilename}`);
+      } catch (e) {
+        console.error('Erreur génération miniature:', e.message);
+      }
+    } else {
+      photos.push(url);
+    }
+  }
+
   return { photos, videos };
 }
 
@@ -90,35 +120,43 @@ router.get('/creer', isAuthenticated, (req, res) => {
     error: null,
     typesBien: TYPES_BIEN,
     typesVenteDefaut: TYPES_VENTE_DEFAUT,
-    dureesLocation: DUREES_LOCATION
+    dureesLocation: DUREES_LOCATION,
+    categories: CATEGORIES,
+    standings: STANDINGS
   });
 });
 
 // ─── POST /annonces/creer ─────────────────────────────────────────
 router.post('/creer', isAuthenticated, (req, res) => {
-  upload.array('medias', 10)(req, res, (err) => {
+  upload.array('medias', 10)(req, res, async (err) => {
 
     if (err) return res.render('annonces/create', {
       error: err.message, typesBien: TYPES_BIEN,
-      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION
+      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION,
+      categories: CATEGORIES,
+      standings: STANDINGS
     });
 
-    processCreate();
+    await processCreate();
 
   });
 
-  function processCreate() {
+  async function processCreate() {
     const erreur = validateAnnonce(req.body);
     if (erreur) return res.render('annonces/create', {
       error: erreur, typesBien: TYPES_BIEN,
-      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION
+      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION,
+      categories: CATEGORIES,
+      standings: STANDINGS
     });
 
-    const { photos, videos } = separerMedias(req.files);
+    const { photos, videos } = await separerMedias(req.files);
     const erreurMedias = validerMedias(photos.length, videos.length);
     if (erreurMedias) return res.render('annonces/create', {
       error: erreurMedias, typesBien: TYPES_BIEN,
-      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION
+      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION,
+      categories: CATEGORIES,
+      standings: STANDINGS
     });
 
     const annonce = buildAnnonce(req.body, { photos, videos }, {
@@ -167,7 +205,9 @@ router.get('/:id/edit', isAuthenticated, (req, res) => {
     annonce, error: null,
     typesBien: TYPES_BIEN,
     typesVenteDefaut: TYPES_VENTE_DEFAUT,
-    dureesLocation: DUREES_LOCATION
+    dureesLocation: DUREES_LOCATION,
+    categories: CATEGORIES,
+    standings: STANDINGS
   });
 });
 
@@ -176,18 +216,20 @@ router.get('/:id/edit', isAuthenticated, (req, res) => {
 // ─── POST /annonces/:id/edit ──────────────────────────────────────
 router.post('/:id/edit', isAuthenticated, (req, res) => {
 
-  upload.array('medias', 10)(req, res, (err) => {
+  upload.array('medias', 10)(req, res, async (err) => {
 
     if (err) return res.render('annonces/edit', {
       annonce: db.findById('annonces', req.params.id),
       error: err.message, typesBien: TYPES_BIEN,
-      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION
+      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION,
+      categories: CATEGORIES,
+      standings: STANDINGS
     });
     
-    processUpdate();
+    await processUpdate();
   });
 
-  function processUpdate() {
+  async function processUpdate() {
 
     const annonce = db.findById('annonces', req.params.id);
     if (!annonce) return res.status(404).render('404');
@@ -200,11 +242,13 @@ router.post('/:id/edit', isAuthenticated, (req, res) => {
     const erreur = validateAnnonce(req.body);
     if (erreur) return res.render('annonces/edit', {
       annonce, error: erreur, typesBien: TYPES_BIEN,
-      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION
+      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION,
+      categories: CATEGORIES,
+      standings: STANDINGS
     });
 
     // Médias nouveaux
-    const { photos: newPhotos, videos: newVideos } = separerMedias(req.files);
+    const { photos: newPhotos, videos: newVideos } = await separerMedias(req.files);
 
     // Médias existants conservés
     const photosExistantes = Array.isArray(req.body.photosExistantes)
@@ -220,7 +264,9 @@ router.post('/:id/edit', isAuthenticated, (req, res) => {
     const erreurMedias = validerMedias(photosFinales.length, videosFinales.length);
     if (erreurMedias) return res.render('annonces/edit', {
       annonce, error: erreurMedias, typesBien: TYPES_BIEN,
-      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION
+      typesVenteDefaut: TYPES_VENTE_DEFAUT, dureesLocation: DUREES_LOCATION,
+      categories: CATEGORIES,
+      standings: STANDINGS
     });
 
     const updates = buildAnnonce(req.body, {

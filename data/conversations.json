@@ -3,7 +3,7 @@
     "id": "3463f07e-1302-494a-87e8-94e56cc1976a",
     "annonceId": "7dfeefbb-ae65-4825-8413-e1caa66c64ca",
     "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182b",
-    "userId2": "da79404e-1836-448f-ac68-fca0df17ff72",
+    "userId2": "c8a31f30-c0b2-4927-a762-ef622eddde3c",
     "dateCreation": "2026-06-25T15:58:39.940Z",
     "dernierMessage": {
       "texte": "cc",
@@ -15,8 +15,24 @@
     "id": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
     "annonceId": "e1f0827c-0fad-4b37-8868-3694ea03c6a1",
     "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182b",
-    "userId2": "877d2ac2-b5d6-4212-ab01-3b042baacede",
+    "userId2": "60990f5a-41f0-4962-a872-e4e9707c3c02",
     "dateCreation": "2026-07-06T01:29:58.820Z",
-    "dernierMessage": null
+    "dernierMessage": {
+      "texte": "cc",
+      "date": "2026-08-06T20:56:02.944Z",
+      "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b"
+    }
+  },
+  {
+    "id": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "annonceId": "598b0320-3df9-4736-8c0f-f83485911176",
+    "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "userId2": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "dateCreation": "2026-07-30T21:09:22.227Z",
+    "dernierMessage": {
+      "texte": "🎤 Audio",
+      "date": "2026-08-01T10:01:55.769Z",
+      "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b"
+    }
   }
 ]
