@@ -114,6 +114,8 @@
               <i class='bx bx-edit'></i> Modifier
             </a>
             <form action="/recherches/<%= recherche.id %>/toggle" method="POST">
+              <!-- hidden crsfToken -->
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <button type="submit" class="btn <%= recherche.actif ? 'btn-danger' : 'btn-gold' %>">
                 <i class='bx <%= recherche.actif ? "bx-pause" : "bx-play" %>'></i>
                 <%= recherche.actif ? 'Désactiver' : 'Réactiver' %>

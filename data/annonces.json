@@ -1795,28 +1795,29 @@
   {
     "typeBien": "Bureau",
     "typeTransaction": "vente",
-    "ville": "Glazoue",
+    "ville": "Glazoue - Gome",
     "quartier": "Thuy",
     "description": "",
-    "prix": 58998,
+    "prix": 58992,
     "loyer": 0,
     "dureeLocation": null,
     "moisAvance": 0,
     "cautionEau": 0,
     "cautionElec": 0,
     "commissionDemarcheur": 0,
-    "nbPieces": 17,
+    "nbPieces": 18,
     "nbChambres": 5,
     "nbSalons": 2,
     "nbDouches": 5,
-    "nbCuisines": 5,
+    "nbCuisines": 6,
     "electriciteType": "commun",
     "electriciteCompteur": "carte",
     "eauType": "commun",
     "standing": null,
     "dimension": 0,
     "photos": [
-      "/uploads/annonces/ff201fe5-54b7-4d0e-b6c9-8271e0c600a5.jpg"
+      "/uploads/annonces/ff201fe5-54b7-4d0e-b6c9-8271e0c600a5.jpg",
+      "/uploads/annonces/304998b1-de5c-4dcc-af04-c0d6252e45ef.jpg"
     ],
     "videos": [],
     "id": "189bcb5d-55b8-4168-a7b9-d87a2a2b7e44",
@@ -1827,7 +1828,8 @@
     "actif": true,
     "suspendu": false,
     "createdAt": "2026-08-04T22:42:25.562Z",
-    "titre": "Bureau 17 pièces à Glazoue"
+    "titre": "Bureau 18 pièces à Glazoue - Gome",
+    "updatedAt": "2026-08-08T23:59:35.622Z"
   },
   {
     "typeBien": "Magasin",
@@ -1940,7 +1942,8 @@
     "suspendu": false,
     "createdAt": "2026-08-04T22:53:03.333Z",
     "titre": "Entrée personnelle 11 pièces semi-sanitaire à Houeyogbe",
-    "updatedAt": "2026-08-04T23:09:36.049Z"
+    "updatedAt": "2026-08-04T23:09:36.049Z",
+    "suspenduLe": null
   },
   {
     "typeBien": "Appartement meublé",
@@ -1981,5 +1984,42 @@
     "createdAt": "2026-08-07T17:02:54.415Z",
     "titre": "Appartement meublé 141 pièces sanitaire à Vitae commodi aut eu",
     "updatedAt": "2026-08-07T17:03:20.478Z"
+  },
+  {
+    "typeBien": "Entrée personnelle",
+    "typeTransaction": "location",
+    "ville": "Djougou",
+    "quartier": "Porga",
+    "description": "",
+    "prix": 25000,
+    "loyer": 25000,
+    "dureeLocation": "mois",
+    "moisAvance": 3,
+    "cautionEau": 10000,
+    "cautionElec": 10000,
+    "commissionDemarcheur": 25000,
+    "nbPieces": 7,
+    "nbChambres": 2,
+    "nbSalons": 1,
+    "nbDouches": 2,
+    "nbCuisines": 2,
+    "electriciteType": "personnel",
+    "electriciteCompteur": "standard",
+    "eauType": "commun",
+    "standing": "sanitaire",
+    "dimension": 0,
+    "photos": [
+      "/uploads/annonces/2d1b1ec5-f8c9-4797-944f-03efebcc61f1.jpg"
+    ],
+    "videos": [],
+    "id": "cbfa1224-8d84-4ac7-b4c7-43461a207665",
+    "auteurId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "auteurNom": "Steed Noumon",
+    "auteurTelephone": "+2290152398046",
+    "enAvant": false,
+    "actif": true,
+    "suspendu": false,
+    "createdAt": "2026-08-09T00:01:04.524Z",
+    "titre": "Entrée personnelle 7 pièces sanitaire à Djougou"
   }
 ]

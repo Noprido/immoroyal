@@ -42,6 +42,8 @@
           <label class="form-label">Prix min</label>
           <input type="number" name="prixMin" class="form-control" value="<%= filtres.prixMin || '' %>" placeholder="0">
         </div>
+        <!-- hidden crsfToken -->
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="form-group">
           <label class="form-label">Prix max</label>
           <input type="number" name="prixMax" class="form-control" value="<%= filtres.prixMax || '' %>" placeholder="500 000">

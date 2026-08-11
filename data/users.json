@@ -38,20 +38,6 @@
     "createdAt": "2026-07-07T22:58:09.820Z"
   },
   {
-    "id": "6fd3ae1d-9408-4d7a-abf4-6381583845cf",
-    "nom": "*8*1/8*15+9+/78",
-    "email": "",
-    "telephone": "<script>alert('faille xcss')</script>",
-    "whatsapp": "/**/*82*8925/*/+6892",
-    "password": "$2b$10$frUJJAwkDC4RyQRnM6yL6O3iHrKzFt9Pmq68dCDXzT8HZv.DFsJ3.",
-    "role": "user",
-    "banni": false,
-    "bio": "",
-    "typeVendeur": "particulier",
-    "suspendu": false,
-    "createdAt": "2026-07-13T16:09:00.697Z"
-  },
-  {
     "id": "c8a31f30-c0b2-4927-a762-ef622eddde3c",
     "nom": "Prince",
     "email": "",
@@ -64,5 +50,19 @@
     "typeVendeur": "particulier",
     "suspendu": false,
     "createdAt": "2026-07-19T22:29:16.555Z"
+  },
+  {
+    "id": "60aa9d97-cf9b-4825-a5fe-1612f4a609f0",
+    "nom": "Vianney hkp",
+    "email": "",
+    "telephone": "+2290152409204",
+    "whatsapp": "+2290152409204",
+    "password": "$2b$10$BXq6Zr83t4a/hYDIP9Vuw.8LC2trazgSBXvhHf5g6.hSa/mlpvSge",
+    "role": "user",
+    "banni": false,
+    "bio": "",
+    "typeVendeur": "particulier",
+    "suspendu": false,
+    "createdAt": "2026-08-08T21:14:23.807Z"
   }
 ]

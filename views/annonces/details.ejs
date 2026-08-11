@@ -233,6 +233,8 @@
             </a>
             <form action="/annonces/<%= annonce.id %>/delete" method="POST"
                   onsubmit="return confirm('Supprimer cette annonce ?')">
+                  <!-- hidden crsfToken -->
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <button type="submit" class="btn btn-danger">
                 <i class='bx bx-trash'></i> Supprimer
               </button>
@@ -365,7 +367,7 @@
 
 <script>
 /* ─── Données ────────────────────────────────────────────────── */
-const tousMedias = <%- JSON.stringify(tousMedias) %>;
+const tousMedias = <%- escapeForScript(tousMedias) %>;
 const totalMedias = tousMedias.length;
 
 /* ─── État de la modale ──────────────────────────────────────── */
@@ -564,7 +566,11 @@ function openGalleryOverlay() {
           </div>
         </div>`;
     } else {
-      item.innerHTML = `<img class="media-grid-thumb" src="${m.src}" alt="" loading="lazy">`;
+      const img = document.createElement('img');
+      img.className = 'media-grid-thumb';
+      img.src = m.src; // assignation de propriété, pas de parsing HTML
+      img.loading = 'lazy';
+      item.appendChild(img);
     }
 
     item.onclick = () => { closeGalleryOverlay(); openModal(i); };

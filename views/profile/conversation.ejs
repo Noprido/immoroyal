@@ -39,6 +39,8 @@
 
     <!-- Zone de saisie -->
     <form action="/messages/<%= conv.id %>/envoyer" method="POST" class="chat-input">
+      <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       <input type="text" name="texte" class="form-control" placeholder="Écrire un message..." autocomplete="off" style="flex:1;" required>
       <button type="submit" class="btn btn-gold">Envoyer</button>
     </form>

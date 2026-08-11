@@ -14,12 +14,18 @@
     <form action="/login" method="POST" style="display:flex; flex-direction:column; gap:1.2rem;">
       <div class="form-group">
         <label class="form-label">Numéro de téléphone</label>
-        <input type="tel" name="telephone" class="form-control" placeholder="+229 01 97 00 00 00" required>
+        <input type="tel" name="telephone" id="telephone" class="form-control"
+          placeholder="+229 01 97 00 00 00" required
+          pattern="^\+?[0-9\s\-\.]{8,17}$"
+          title="8 à 15 chiffres, espaces/tirets/points tolérés">
       </div>
       <div class="form-group">
         <label class="form-label">Mot de passe</label>
-        <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+        <input type="password" name="password" id="password" class="form-control"
+              placeholder="••••••••" required minlength="6" maxlength="72">
       </div>
+      <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       <button type="submit" class="btn btn-gold btn-full btn-lg">Se connecter</button>
     </form>
 
@@ -29,5 +35,38 @@
     </p>
   </div>
 </div>
+
+<script>
+document.querySelector('form[action="/login"]').addEventListener('submit', function(e) {
+  const telephone = document.getElementById('telephone');
+  const password = document.getElementById('password');
+  let messages = [];
+
+  const telClean = telephone.value.replace(/[\s\-\.]/g, '');
+  if (!/^\+?[0-9]{8,15}$/.test(telClean)) {
+    messages.push('Le numéro de téléphone semble invalide.');
+  }
+  if (password.value.length < 6) {
+    messages.push('Le mot de passe doit contenir au moins 6 caractères.');
+  }
+
+  if (messages.length > 0) {
+    e.preventDefault();
+    afficherErreursClient(messages);
+  }
+});
+
+function afficherErreursClient(messages) {
+  const existant = document.querySelector('.alert-error-client');
+  if (existant) existant.remove();
+
+  const div = document.createElement('div');
+  div.className = 'alert alert-error alert-error-client';
+  div.innerHTML = `<i class='bx bx-error-circle'></i> ${messages[0]}`; // valeurs fixes, pas d'input utilisateur ici → pas de risque XSS
+
+  const form = document.querySelector('form[action="/login"]');
+  form.parentNode.insertBefore(div, form);
+}
+</script>
 
 <%- include('partials/footer') %>

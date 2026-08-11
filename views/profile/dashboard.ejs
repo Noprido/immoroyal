@@ -55,7 +55,8 @@
                 <input type="tel" class="form-control" value="<%= user.telephone %>" readonly
                        style="background:#F5F5F5; color:#6B6B6B; cursor:not-allowed;">
               </div>
-
+<!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <!-- WhatsApp -->
               <div class="form-group">
                 <label class="form-label">Numéro WhatsApp</label>

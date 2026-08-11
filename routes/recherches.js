@@ -3,9 +3,8 @@ const router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 const db = require('../utils/db');
 const { isAuthenticated } = require('../middleware/auth');
-const { TYPES_BIEN, DUREES_LOCATION } = require('../utils/validateAnnonce');
-
-const TYPES_BIEN_RECHERCHE = [...TYPES_BIEN, 'Autre'];
+const { DUREES_LOCATION } = require('../utils/validateAnnonce');
+const { validateRecherche, TYPES_BIEN_RECHERCHE } = require('../utils/validateRecherche');
 
 //  GET - /recherches
 router.get('/', (req, res) => {
@@ -47,28 +46,15 @@ router.post('/creer', isAuthenticated, (req, res) => {
     fondsDisponibles, description
   } = req.body;
 
-  if (!titre || !typeBien || !typeTransaction || !budgetMax) {
+  const erreur = validateRecherche(req.body);
+  if (erreur) {
     return res.render('recherches/create', {
-      error: 'Veuillez remplir tous les champs obligatoires.',
-      typesBien: TYPES_BIEN_RECHERCHE,
-      dureesLocation: DUREES_LOCATION
-    });
-  }
-  if (typeBien === 'Autre' && !autreTypeBien?.trim()) {
-    return res.render('recherches/create', {
-      error: 'Précisez le type de bien recherché.',
+      error: erreur,
       typesBien: TYPES_BIEN_RECHERCHE,
       dureesLocation: DUREES_LOCATION
     });
   }
   const importe = localisationImporte === 'on';
-  if (!importe && !ville?.trim()) {
-    return res.render('recherches/create', {
-      error: 'Indiquez une ville ou cochez "La localisation m\'importe peu".',
-      typesBien: TYPES_BIEN_RECHERCHE,
-      dureesLocation: DUREES_LOCATION
-    });
-  }
 
   const auteur = db.findById('users', req.session.user.id);
   const recherche = {
@@ -128,6 +114,17 @@ router.post('/:id/edit', isAuthenticated, (req, res) => {
   const recherche = db.findById('recherches', req.params.id);
   if (!recherche) return res.status(404).render('404');
   if (recherche.auteurId !== req.session.user.id) return res.status(403).render('403');
+
+  // ─── AJOUT ──────────────────────────────────────────────────
+  const erreur = validateRecherche(req.body);
+  if (erreur) {
+    return res.render('recherches/edit', {
+      recherche, error: erreur,
+      typesBien: TYPES_BIEN_RECHERCHE,
+      dureesLocation: DUREES_LOCATION
+    });
+  }
+  // ────────────────────────────────────────────────────────────
 
   const {
     titre, typeBien, autreTypeBien, typeTransaction,

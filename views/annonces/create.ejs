@@ -155,77 +155,77 @@
     <!-- ══════════════════════════════════════════════════
          ÉTAPE 3 : Caractéristiques (masqué pour Terrain)
     ══════════════════════════════════════════════════ -->
-<div class="form-step" data-step="3">
-    <div class="form-card" id="cardCaracteristiques">
-      <h3><i class='bx bx-home-alt-2'></i> Caractéristiques du logement</h3>
-      <div class="form-grid-3" style="margin-bottom:1.5rem;">
-        <div class="form-group field-carac" id="groupChambres" data-field="nbChambres">
-          <label class="form-label">Chambres *</label>
-          <input type="number" name="nbChambres" id="nbChambres" class="form-control" min="0" placeholder="2" oninput="updateTitrePreview()">
-        </div>
-        <div class="form-group field-carac" id="groupSalons" data-field="nbSalons">
-          <label class="form-label">Salons *</label>
-          <input type="number" name="nbSalons" id="nbSalons" class="form-control" min="0" placeholder="1" oninput="updateTitrePreview()">
-        </div>
-        <div class="form-group field-carac" id="groupDouches" data-field="nbDouches">
-          <label class="form-label">Douches *</label>
-          <input type="number" name="nbDouches" id="nbDouches" class="form-control" min="0" placeholder="1" oninput="updateTitrePreview()">
-        </div>
-        <div class="form-group field-carac" id="groupCuisines" data-field="nbCuisines">
-          <label class="form-label">Cuisines *</label>
-          <input type="number" name="nbCuisines" id="nbCuisines" class="form-control" min="0" placeholder="1" oninput="updateTitrePreview()">
-        </div>
-        <div class="form-group">
-          <label class="form-label" style="color:#D4AF37;">Nb. pièces (auto)</label>
-          <input type="number" id="nbPieces" class="form-control" min="0" readonly
-                style="background:#F5F5F5; color:#6B6B6B; cursor:not-allowed;">
-        </div>
-      </div>
+    <div class="form-step" data-step="3">
+        <div class="form-card" id="cardCaracteristiques">
+          <h3><i class='bx bx-home-alt-2'></i> Caractéristiques du logement</h3>
+          <div class="form-grid-3" style="margin-bottom:1.5rem;">
+            <div class="form-group field-carac" id="groupChambres" data-field="nbChambres">
+              <label class="form-label">Chambres *</label>
+              <input type="number" name="nbChambres" id="nbChambres" class="form-control" min="0" placeholder="2" oninput="updateTitrePreview()">
+            </div>
+            <div class="form-group field-carac" id="groupSalons" data-field="nbSalons">
+              <label class="form-label">Salons *</label>
+              <input type="number" name="nbSalons" id="nbSalons" class="form-control" min="0" placeholder="1" oninput="updateTitrePreview()">
+            </div>
+            <div class="form-group field-carac" id="groupDouches" data-field="nbDouches">
+              <label class="form-label">Douches *</label>
+              <input type="number" name="nbDouches" id="nbDouches" class="form-control" min="0" placeholder="1" oninput="updateTitrePreview()">
+            </div>
+            <div class="form-group field-carac" id="groupCuisines" data-field="nbCuisines">
+              <label class="form-label">Cuisines *</label>
+              <input type="number" name="nbCuisines" id="nbCuisines" class="form-control" min="0" placeholder="1" oninput="updateTitrePreview()">
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:#D4AF37;">Nb. pièces (auto)</label>
+              <input type="number" id="nbPieces" class="form-control" min="0" readonly
+                    style="background:#F5F5F5; color:#6B6B6B; cursor:not-allowed;">
+            </div>
+          </div>
 
-      <div class="form-grid-3">
-        <div class="form-group">
-          <label class="form-label">Électricité *</label>
-          <select name="electriciteType" class="form-control" required>
-            <option value="">Choisir...</option>
-            <option value="personnel">Compteur personnel</option>
-            <option value="commun">Compteur commun</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Type de compteur *</label>
-          <select name="electriciteCompteur" class="form-control" required>
-            <option value="">Choisir...</option>
-            <option value="standard">Standard</option>
-            <option value="carte">À carte</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Eau *</label>
-          <select name="eauType" class="form-control" required>
-            <option value="">Choisir...</option>
-            <option value="personnel">Personnelle</option>
-            <option value="commun">Commune</option>
-          </select>
-        </div>
-      </div>
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label class="form-label">Électricité *</label>
+              <select name="electriciteType" class="form-control" required>
+                <option value="">Choisir...</option>
+                <option value="personnel">Compteur personnel</option>
+                <option value="commun">Compteur commun</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Type de compteur *</label>
+              <select name="electriciteCompteur" class="form-control" required>
+                <option value="">Choisir...</option>
+                <option value="standard">Standard</option>
+                <option value="carte">À carte</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Eau *</label>
+              <select name="eauType" class="form-control" required>
+                <option value="">Choisir...</option>
+                <option value="personnel">Personnelle</option>
+                <option value="commun">Commune</option>
+              </select>
+            </div>
+          </div>
 
-      <div class="form-group" id="groupStanding" style="display:none;">
-        <label class="form-label">Standing *</label>
-        <select name="standing" id="selectStanding" class="form-control" onchange="updateTitrePreview()">
-          <option value="">Choisir...</option>
-          <% standings.forEach(s => { %>
-            <option value="<%= s %>"><%= s.charAt(0).toUpperCase() + s.slice(1) %></option>
-          <% }) %>
-        </select>
-      </div>
+          <div class="form-group" id="groupStanding" style="display:none;">
+            <label class="form-label">Standing *</label>
+            <select name="standing" id="selectStanding" class="form-control" onchange="updateTitrePreview()">
+              <option value="">Choisir...</option>
+              <% standings.forEach(s => { %>
+                <option value="<%= s %>"><%= s.charAt(0).toUpperCase() + s.slice(1) %></option>
+              <% }) %>
+            </select>
+          </div>
 
-      <div class="form-group" style="margin-top:1rem;">
-        <label class="form-label">Titre généré (aperçu)</label>
-        <div id="titrePreview" style="padding:0.75rem 1rem; background:#F5F5F5; border-radius:8px; color:#2C2C2E; font-weight:600;">—</div>
-        <input type="hidden" name="titre" id="titreHidden" value="">
-      </div>
+          <div class="form-group" style="margin-top:1rem;">
+            <label class="form-label">Titre généré (aperçu)</label>
+            <div id="titrePreview" style="padding:0.75rem 1rem; background:#F5F5F5; border-radius:8px; color:#2C2C2E; font-weight:600;">—</div>
+            <input type="hidden" name="titre" id="titreHidden" value="">
+          </div>
+        </div>
     </div>
-</div>
 
     <div class="form-card" id="cardTerrain" style="display:none;">
       <h3><i class='bx bx-landscape'></i> Terrain</h3>
@@ -265,6 +265,9 @@
         <div class="medias-preview" id="mediasPreview"></div>
       </div>
     </div>
+    
+    <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
     <!-- Navigation wizard -->
     <div class="wizard-nav">

@@ -18,6 +18,9 @@
     <!-- Barre de recherche + filtres -->
     <div style="background:#fff; border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,0.08); padding:1.25rem; margin-bottom:2rem;">
       <form action="/admin/annonces" method="GET" style="display:grid; grid-template-columns:1fr auto auto; gap:0.75rem; align-items:end;">
+
+                    <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="form-group" style="margin:0;">
           <label class="form-label">Rechercher</label>
           <input type="text" name="q" class="form-control" value="<%= filtres.q || '' %>"
@@ -95,6 +98,8 @@
                 </td>
                 <td>
                   <form action="/admin/annonces/<%= a.id %>/featured" method="POST">
+                    <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button class="btn <%= a.enAvant ? 'btn-gold' : 'btn-outline' %> btn-sm">
                       <i class='bx bx-star'></i> <%= a.enAvant ? 'Oui' : 'Non' %>
                     </button>
@@ -105,12 +110,16 @@
                     <% if (!a.suspendu) { %>
                       <form action="/admin/annonces/<%= a.id %>/suspendre" method="POST"
                             onsubmit="return confirm('Suspendre cette annonce ? L\'utilisateur ne pourra pas la réactiver.')">
+                                                <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <button class="btn btn-danger btn-sm">
                           <i class='bx bx-block'></i> Suspendre
                         </button>
                       </form>
                     <% } else { %>
                       <form action="/admin/annonces/<%= a.id %>/reactiver" method="POST">
+                    <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <button class="btn btn-outline btn-sm">
                           <i class='bx bx-check'></i> Réactiver
                         </button>
@@ -158,6 +167,8 @@
             </div>
             <div class="admin-card-actions">
               <form action="/admin/annonces/<%= a.id %>/featured" method="POST">
+                    <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button class="btn <%= a.enAvant ? 'btn-gold' : 'btn-outline' %> btn-sm">
                   <i class='bx bx-star'></i> <%= a.enAvant ? 'En avant' : 'Mettre en avant' %>
                 </button>
@@ -165,12 +176,16 @@
               <% if (!a.suspendu) { %>
                 <form action="/admin/annonces/<%= a.id %>/suspendre" method="POST"
                       onsubmit="return confirm('Suspendre cette annonce ?')">
+                                          <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                   <button class="btn btn-danger btn-sm">
                     <i class='bx bx-block'></i> Suspendre
                   </button>
                 </form>
               <% } else { %>
                 <form action="/admin/annonces/<%= a.id %>/reactiver" method="POST">
+                    <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                   <button class="btn btn-outline btn-sm">
                     <i class='bx bx-check'></i> Réactiver
                   </button>

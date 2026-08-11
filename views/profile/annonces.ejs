@@ -75,6 +75,8 @@
                         <i class='bx bx-edit'></i> Modifier
                       </a>
                       <form action="/annonces/<%= a.id %>/toggle" method="POST">
+                        <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <button type="submit" class="btn <%= a.actif !== false ? 'btn-outline' : 'btn-gold' %> btn-sm">
                           <% if (a.actif !== false) { %>
                             <i class='bx bx-pause'></i> Désactiver
@@ -141,6 +143,8 @@
                   <i class='bx bx-edit'></i> Modifier
                 </a>
                 <form action="/annonces/<%= a.id %>/toggle" method="POST">
+                  <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                   <button type="submit" class="btn <%= a.actif !== false ? 'btn-outline' : 'btn-gold' %> btn-sm">
                     <% if (a.actif !== false) { %>
                       <i class='bx bx-pause'></i> Désactiver

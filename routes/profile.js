@@ -12,7 +12,10 @@ router.get('/public/:id', (req, res) => {
   const user = db.findById('users', req.params.id);
   if (!user || user.banni) return res.status(404).render('404');
 
-  const { password, ...userPublic } = user;
+  const userPublic = {
+    id: user.id, nom: user.nom, whatsapp: user.whatsapp,
+    bio: user.bio, typeVendeur: user.typeVendeur, createdAt: user.createdAt
+  };
 
   const annonces = db.read('annonces')
     .filter(a => a.auteurId === user.id && a.actif !== false && !a.suspendu)
@@ -54,7 +57,7 @@ router.get('/annonces', isAuthenticated, (req, res) => {
 });
 
 router.post('/modifier', isAuthenticated, async (req, res) => {
-  const { nom, telephone, whatsapp, bio, typeVendeur, ancienPassword, newPassword } = req.body;
+  const { nom, email, telephone, whatsapp, bio, typeVendeur, ancienPassword, newPassword } = req.body;
   const user = db.findById('users', req.session.user.id);
 
   const updates = {

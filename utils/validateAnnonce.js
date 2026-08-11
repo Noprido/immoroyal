@@ -159,6 +159,13 @@ function buildAnnonce(body, medias, extra = {}) {
   return data;
 }
 
+function escapeForScript(obj) {
+  return JSON.stringify(obj)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
+}
+
 function getLabelPrix(annonce) {
   if (annonce.typeTransaction === 'vente') return 'Prix de vente';
   return 'Loyer';
@@ -184,6 +191,7 @@ module.exports = {
   CATEGORIES: categories,
   champsAutorises,
   afficheDimension,
+  escapeForScript,
   getLabelPrix,
   getLabelDuree,
   getPrixAffiche

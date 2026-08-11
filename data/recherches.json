@@ -187,5 +187,32 @@
     "actif": true,
     "createdAt": "2026-08-07T19:21:39.964Z",
     "updatedAt": "2026-08-07T19:21:39.964Z"
+  },
+  {
+    "id": "398af0a6-25dd-4da6-b62c-83688c39b5ba",
+    "titre": "cherche appartement meublé à kandi",
+    "description": "appartement meublé à kandi",
+    "typeBien": "Appartement meublé",
+    "autreTypeBien": "",
+    "typeTransaction": "location",
+    "localisation": {
+      "importe": false,
+      "ville": "Kandi",
+      "quartier": "Koua"
+    },
+    "budgetMax": 25000,
+    "dureeLocation": "24h",
+    "nbChambres": 1,
+    "nbSalons": 1,
+    "nbDouches": 1,
+    "nbCuisines": 1,
+    "fondsDisponibles": true,
+    "auteurId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "auteurNom": "Steed Noumon",
+    "auteurTelephone": "+2290152398046",
+    "auteurWhatsapp": "+22952398046",
+    "actif": true,
+    "createdAt": "2026-08-09T00:02:40.399Z",
+    "updatedAt": "2026-08-09T00:02:40.399Z"
   }
 ]

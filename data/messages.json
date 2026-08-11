@@ -487,5 +487,87 @@
     "texte": "cc",
     "date": "2026-08-06T20:56:02.944Z",
     "lu": false
+  },
+  {
+    "id": "7cf1cef5-4ec8-4f4e-8eda-22c86c1cf4b2",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Cc",
+    "date": "2026-08-08T23:52:50.388Z",
+    "lu": false
+  },
+  {
+    "id": "081f6743-b2ab-4772-a3a2-e52b50715fd4",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/b4b6d9aa-4625-405b-b63a-63cbb699ab31.m4a",
+    "dureeAudio": 5,
+    "date": "2026-08-08T23:53:04.435Z",
+    "lu": false
+  },
+  {
+    "id": "8461869e-7f71-4b2c-8cc5-cf466ad75bee",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/3764916d-4e82-489c-a169-59e7c053462d.m4a",
+    "dureeAudio": 3,
+    "date": "2026-08-08T23:53:14.442Z",
+    "lu": false
+  },
+  {
+    "id": "3cf98100-ffec-4ad4-bb9f-5cf6a1f4dcc0",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/8e7a9651-2fae-47da-8e20-c7ec8203b44d.m4a",
+    "dureeAudio": 3,
+    "date": "2026-08-08T23:53:31.957Z",
+    "lu": false
+  },
+  {
+    "id": "8f325a79-3624-4a89-a3e2-5480a4ef211b",
+    "conversationId": "3463f07e-1302-494a-87e8-94e56cc1976a",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/67b9ef13-8476-48c0-9f99-279d94a77e57.m4a",
+    "dureeAudio": 2,
+    "date": "2026-08-08T23:54:07.652Z",
+    "lu": false
+  },
+  {
+    "id": "e585759a-ca9d-4d07-b7a6-7ce838f750c0",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/959dafe1-f691-49d6-acb3-4fe6d2df9d6e.m4a",
+    "dureeAudio": 2,
+    "date": "2026-08-08T23:57:36.625Z",
+    "lu": false
+  },
+  {
+    "id": "71c33e51-bba6-46ba-8e3c-2ea5750640e5",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Cc",
+    "date": "2026-08-08T23:57:50.605Z",
+    "lu": false
+  },
+  {
+    "id": "6f9946b7-de27-4e2b-a6e7-64b171dc4618",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/a2958438-9897-4e18-8cfa-03df9207dd16.m4a",
+    "dureeAudio": 4,
+    "date": "2026-08-08T23:57:58.234Z",
+    "lu": false
   }
 ]

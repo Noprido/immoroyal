@@ -30,6 +30,8 @@
             <option value="achat" <%= filtres.typeTransaction === 'achat' ? 'selected' : '' %>>Achat</option>
           </select>
         </div>
+        <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="form-group" style="justify-content:flex-end; flex-direction:row; align-items:flex-end; gap:0.5rem;">
           <a href="/recherches" class="btn btn-outline btn-sm"><i class='bx bx-reset'></i> Reset</a>
           <button type="submit" class="btn btn-gold btn-sm"><i class='bx bx-search'></i> Filtrer</button>

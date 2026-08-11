@@ -65,18 +65,24 @@
                     <% if (u.role !== 'admin') { %>
                       <% if (!u.banni) { %>
                         <form action="/admin/users/<%= u.id %>/ban" method="POST">
+                    <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                           <button class="btn btn-danger btn-sm">
                             <i class='bx bx-block'></i> Bannir
                           </button>
                         </form>
                       <% } else { %>
                         <form action="/admin/users/<%= u.id %>/unban" method="POST">
+                    <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                           <button class="btn btn-outline btn-sm">
                             <i class='bx bx-check'></i> Débannir
                           </button>
                         </form>
                       <% } %>
                       <form action="/admin/users/<%= u.id %>/delete" method="POST" onsubmit="return confirm('Supprimer ce compte définitivement ?')">
+                                            <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <button class="btn btn-danger btn-sm">
                           <i class='bx bx-trash'></i>
                         </button>
@@ -125,18 +131,24 @@
               <div class="admin-card-actions">
                 <% if (!u.banni) { %>
                   <form action="/admin/users/<%= u.id %>/ban" method="POST">
+                    <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button class="btn btn-danger btn-sm">
                       <i class='bx bx-block'></i> Bannir
                     </button>
                   </form>
                 <% } else { %>
                   <form action="/admin/users/<%= u.id %>/unban" method="POST">
+                    <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button class="btn btn-outline btn-sm">
                       <i class='bx bx-check'></i> Débannir
                     </button>
                   </form>
                 <% } %>
                 <form action="/admin/users/<%= u.id %>/delete" method="POST" onsubmit="return confirm('Supprimer ce compte définitivement ?')">
+                                      <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                   <button class="btn btn-danger btn-sm">
                     <i class='bx bx-trash'></i> Supprimer
                   </button>

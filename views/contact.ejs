@@ -49,6 +49,8 @@
                 <option value="autre">Autre</option>
               </select>
             </div>
+            <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <div class="form-group">
               <label class="form-label">Message *</label>
               <textarea name="message" class="form-control" placeholder="Décrivez votre demande..." style="min-height:150px;" required></textarea>

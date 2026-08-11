@@ -66,6 +66,8 @@
                 <i class='bx bx-edit'></i> Modifier
               </a>
               <form action="/recherches/<%= r.id %>/toggle" method="POST" style="display:contents;">
+                <!-- hidden crsfToken -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit" class="btn btn-sm <%= r.actif ? 'btn-danger' : 'btn-gold' %>">
                   <i class='bx <%= r.actif ? "bx-pause" : "bx-play" %>'></i>
                   <%= r.actif ? 'Désactiver' : 'Activer' %>
