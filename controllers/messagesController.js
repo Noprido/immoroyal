@@ -87,6 +87,19 @@ function getUserConversations(userId) {
     });
 }
 
+function markMessagesAsRead(convId, userId) {
+  const messages = readMessages();
+  let modified = false;
+  messages.forEach(m => {
+    if (m.conversationId === convId && m.senderId !== userId && !m.lu) {
+      m.lu = true;
+      modified = true;
+    }
+  });
+  if (modified) writeMessages(messages);
+}
+
+
 function countUnread(userId) {
   const convIds = getUserConversations(userId).map(c => c.id);
   return readMessages().filter(m =>
@@ -101,5 +114,6 @@ module.exports = {
   getMessagesOfConversation,
   sendMessage,
   getUserConversations,
-  countUnread
+  countUnread,
+  markMessagesAsRead
 };

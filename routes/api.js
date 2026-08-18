@@ -14,6 +14,8 @@ const { v4: uuidv4 } = require('uuid');
 const path     = require('path');
 const multer   = require('multer');
 
+const { getIO } = require('../utils/socket');
+
 const ffmpeg = require('fluent-ffmpeg');
 const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
@@ -28,6 +30,8 @@ const {
 
 const { normalize } = require('../utils/textNormalize');
 const { findCommunesForQuartier } = require('../utils/beninHierarchy');
+
+const { envoyerNotificationMessage } = require('../utils/notifications');
 
 const JWT_SECRET  = process.env.JWT_SECRET || 'immoroyal_jwt_secret';
 const JWT_EXPIRES = '7d';
@@ -217,6 +221,20 @@ router.get('/auth/me', authJWT, (req, res) => {
   res.json(sanitizeUser(user));
 });
 
+// POST /api/v1/users/fcm-token — enregistre/actualise le token FCM de l'utilisateur
+router.post('/users/fcm-token', authJWT, (req, res) => {
+  const { token } = req.body;
+  if (!token) return res.status(400).json({ error: 'Token requis.' });
+
+  const user = db.findById('users', req.user.id);
+  if (!user) return res.status(404).json({ error: 'Utilisateur introuvable.' });
+
+  const tokens = new Set(user.fcmTokens || []);
+  tokens.add(token); // Set évite les doublons si le même token est renvoyé
+
+  db.update('users', req.user.id, { fcmTokens: [...tokens] });
+  res.json({ success: true });
+});
 
 // ═══════════════════════════════════════════════════════════════════
 // ANNONCES
@@ -311,6 +329,9 @@ router.get('/annonces', (req, res) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
   }
+
+  // console.log('📋 Liste finale avant pagination :');
+  // console.log(JSON.stringify(annonces, null, 2));
 
   const pageNum  = Math.max(1, parseInt(page) || 1);
   const pageSize = Math.min(50, Math.max(1, parseInt(limit) || 20));
@@ -710,6 +731,8 @@ router.get('/messages/conversation/:id', authJWT, (req, res) => {
     const fs = require('fs');
     const p  = require('path').join(__dirname, '../data/messages.json');
     fs.writeFileSync(p, JSON.stringify(allMsgs, null, 2));
+
+    getIO().to(`user_${req.user.id}`).emit('messages_read', { conversationId: conv.id });
   }
 
   const autreUserId = conv.userId1 === req.user.id ? conv.userId2 : conv.userId1;
@@ -812,6 +835,11 @@ router.post('/messages/conversation/:id/send-audio', authJWT, (req, res) => {
 
     console.log("✅ Conversation mise à jour.");
 
+    getIO().to(`conv_${conv.id}`).emit('new_message', message);
+    // Notifie les deux participants pour maj de leur liste de convs
+    getIO().to(`user_${conv.userId1}`).emit('conversation_updated', { conversationId: conv.id });
+    getIO().to(`user_${conv.userId2}`).emit('conversation_updated', { conversationId: conv.id });
+
     console.log("📤 Réponse 201 envoyée au client.");
     console.log("══════════════════════════════════════════════\n");
 
@@ -857,8 +885,89 @@ router.post('/messages/conversation/:id/send-media', authJWT, (req, res) => {
       }
     });
 
+    getIO().to(`conv_${conv.id}`).emit('new_message', message);
+    // Notifie les deux participants pour maj de leur liste de convs
+    getIO().to(`user_${conv.userId1}`).emit('conversation_updated', { conversationId: conv.id });
+    getIO().to(`user_${conv.userId2}`).emit('conversation_updated', { conversationId: conv.id });
     res.status(201).json(message);
   });
+});
+
+// POST /api/v1/messages/annonce/:annonceId/quick-send
+// Crée (ou récupère) la conversation ET envoie le message en une seule requête
+router.post('/messages/annonce/:annonceId/quick-send', authJWT, (req, res) => {
+  const { texte } = req.body;
+  if (!texte?.trim()) return res.status(400).json({ error: 'Le message ne peut pas être vide.' });
+
+  const annonce = db.findById('annonces', req.params.annonceId);
+  if (!annonce) return res.status(404).json({ error: 'Annonce introuvable.' });
+  if (annonce.auteurId === req.user.id)
+    return res.status(400).json({ error: 'Vous ne pouvez pas vous envoyer un message.' });
+
+  const conversations = db.read('conversations');
+  let conv = conversations.find(c =>
+    c.annonceId === annonce.id &&
+    ((c.userId1 === req.user.id && c.userId2 === annonce.auteurId) ||
+     (c.userId2 === req.user.id && c.userId1 === annonce.auteurId))
+  );
+
+  if (!conv) {
+    conv = {
+      id:            uuidv4(),
+      annonceId:     annonce.id,
+      userId1:       req.user.id,
+      userId2:       annonce.auteurId,
+      dernierMessage: { texte: '', date: '', senderId: '' },
+      dateCreation:  new Date().toISOString()
+    };
+    db.insert('conversations', conv);
+  }
+
+  const message = {
+    id:             uuidv4(),
+    conversationId: conv.id,
+    senderId:       req.user.id,
+    texte:          texte.trim(),
+    date:           new Date().toISOString(),
+    lu:             false
+  };
+  db.insert('messages', message);
+
+  db.update('conversations', conv.id, {
+    dernierMessage: { texte: message.texte, date: message.date, senderId: message.senderId }
+  });
+
+  // ⬇️ AJOUT
+  envoyerNotificationMessage(annonce.auteurId, message.texte, req.user.nom, conv.id);
+
+  res.status(201).json({ conversation: conv, message });
+});
+
+// POST /api/v1/messages/conversation/:id/read
+router.post('/messages/conversation/:id/read', authJWT, (req, res) => {
+  const conv = db.read('conversations').find(c => c.id === req.params.id);
+  if (!conv) return res.status(404).json({ error: 'Conversation introuvable.' });
+
+  const estParticipant = conv.userId1 === req.user.id || conv.userId2 === req.user.id;
+  if (!estParticipant) return res.status(403).json({ error: 'Accès interdit.' });
+
+  const allMsgs = db.read('messages');
+  let modified = false;
+  allMsgs.forEach(m => {
+    if (m.conversationId === conv.id && m.senderId !== req.user.id && !m.lu) {
+      m.lu = true;
+      modified = true;
+    }
+  });
+
+  if (modified) {
+    const fs = require('fs');
+    const p = require('path').join(__dirname, '../data/messages.json');
+    fs.writeFileSync(p, JSON.stringify(allMsgs, null, 2));
+    getIO().to(`user_${req.user.id}`).emit('messages_read', { conversationId: conv.id });
+  }
+
+  res.json({ success: true });
 });
 
 // DELETE /api/v1/messages/:id
@@ -927,11 +1036,19 @@ router.post('/messages/conversation/:id/send', authJWT, (req, res) => {
 
   db.insert('messages', message);
 
-  // Mettre à jour le dernier message de la conversation
   db.update('conversations', conv.id, {
     dernierMessage: { texte: message.texte, date: message.date, senderId: message.senderId }
   });
 
+  // ⬇️ AJOUT : notifie le destinataire
+  const destinataireId = conv.userId1 === req.user.id ? conv.userId2 : conv.userId1;
+  envoyerNotificationMessage(destinataireId, message.texte, req.user.nom, conv.id);
+
+  // Émettre le message en temps réel à tous les membres de la conv
+  getIO().to(`conv_${conv.id}`).emit('new_message', message);
+  // Notifie les deux participants pour maj de leur liste de convs
+  getIO().to(`user_${conv.userId1}`).emit('conversation_updated', { conversationId: conv.id });
+  getIO().to(`user_${conv.userId2}`).emit('conversation_updated', { conversationId: conv.id });
   res.status(201).json(message);
 });
 

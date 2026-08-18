@@ -38,19 +38,77 @@
     </div>
 
     <!-- Zone de saisie -->
-    <form action="/messages/<%= conv.id %>/envoyer" method="POST" class="chat-input">
-      <!-- hidden crsfToken -->
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-      <input type="text" name="texte" class="form-control" placeholder="Écrire un message..." autocomplete="off" style="flex:1;" required>
-      <button type="submit" class="btn btn-gold">Envoyer</button>
-    </form>
+    <div class="chat-input">
+      <input type="text" id="msgInput" class="form-control" placeholder="Écrire un message..." autocomplete="off" style="flex:1;">
+      <button id="sendBtn" class="btn btn-gold">Envoyer</button>
+    </div>
   </div>
 </section>
 
+<!-- <script src="/socket.io/socket.io.js"></script> -->
 <script>
-  // Scroll auto vers le bas
   const chatBox = document.getElementById('chatBox');
+  const msgInput = document.getElementById('msgInput');
+  const sendBtn = document.getElementById('sendBtn');
+  const convId = '<%= conv.id %>';
+  const userId = '<%= user.id %>';
+  const csrfToken = '<%= csrfToken %>';
+
+  // Scroll initial
   if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+
+  // Réutiliser le socket global créé par header.ejs
+  window._socket.emit('join_conversation', convId);
+  window._socket.on('new_message', (msg) => {
+    if (msg.conversationId !== convId) return;
+    appendMessage(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    fetch(`/messages/${convId}/read`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `_csrf=${encodeURIComponent(csrfToken)}`
+    });
+  });
+
+  // Après le listener new_message, ajouter :
+  window.addEventListener('beforeunload', () => {
+    window._socket.emit('leave_conversation', convId);
+    window._socket.off('new_message');
+  });
+
+  // Envoi message sans reload
+  function envoyer() {
+    const texte = msgInput.value.trim();
+    if (!texte) return;
+    msgInput.value = '';
+
+    fetch(`/messages/${convId}/envoyer`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `texte=${encodeURIComponent(texte)}&_csrf=${encodeURIComponent(csrfToken)}`
+    });
+    // Pas besoin d'ajouter le message ici — il reviendra via socket
+  }
+
+  sendBtn.addEventListener('click', envoyer);
+  msgInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') envoyer();
+  });
+
+  // Ajouter une bulle dans le DOM
+  function appendMessage(msg) {
+    const isMe = msg.senderId === userId;
+    const time = new Date(msg.date).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    const date = new Date(msg.date).toLocaleDateString('fr-FR');
+
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = `display:flex; flex-direction:column; align-items:${isMe ? 'flex-end' : 'flex-start'}`;
+    wrapper.innerHTML = `
+      <div class="message-bubble ${isMe ? 'sent' : 'received'}">${msg.texte}</div>
+      <span class="message-time">${time} · ${date}</span>
+    `;
+    chatBox.appendChild(wrapper);
+  }
 </script>
 
 <%- include('../partials/footer') %>

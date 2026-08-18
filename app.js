@@ -15,6 +15,9 @@ const recherchesRouter = require('./routes/recherches');
 const apiRoutes        = require('./routes/api'); 
 const helmet = require('helmet');
 
+const http = require('http');
+const { initSocket } = require('./utils/socket');
+
 const { doubleCsrf } = require('csrf-csrf');
 
 
@@ -112,6 +115,15 @@ app.use((req, res, next) => {
   res.locals.csrfToken = req.csrfToken();
   delete req.session.success;
   delete req.session.error;
+
+  // AJOUTER
+  if (req.session.user) {
+    const { countUnread } = require('./controllers/messagesController');
+    res.locals.totalNonLus = countUnread(req.session.user.id);
+  } else {
+    res.locals.totalNonLus = 0;
+  }
+
   next();
 });
 
@@ -140,6 +152,12 @@ app.use((req, res) => {
   res.status(404).render('404');
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+
+
+
+const server = http.createServer(app);
+initSocket(server);
+
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ ImmoRoyal démarré sur http://localhost:${PORT}`);
 });

@@ -15,7 +15,14 @@
 
     <% if (user) { %>
       <a href="/annonces/creer" class="nav-link">Publier</a>
-      <a href="/messages" class="nav-link">Messages</a>
+      <a href="/messages" id="navMessagesLink" class="nav-link" style="position:relative;">
+        Messages
+        <% if (totalNonLus > 0) { %>
+          <span id="navBadge" style="position:absolute; top:-6px; right:-10px; background:#dc3545; color:#fff; border-radius:50%; font-size:9px; font-weight:800; min-width:16px; height:16px; display:flex; align-items:center; justify-content:center; padding:0 3px;">
+            <%= totalNonLus > 99 ? '99+' : totalNonLus %>
+          </span>
+        <% } %>
+      </a>
 
       <!-- Dropdown compte -->
       <div class="nav-dropdown" id="navDropdown">
@@ -68,3 +75,39 @@ document.addEventListener('click', (e) => {
   }
 });
 </script>
+
+<% if (user) { %>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+  window._socket = io({
+    auth: { session: { id: '<%= user.id %>' } }
+  });
+
+  window._socket.on('conversation_updated', () => majBadgeNav());
+  window._socket.on('messages_read', () => majBadgeNav());
+
+  // socket.on('conversation_updated', () => majBadgeNav());
+  // socket.on('messages_read', () => majBadgeNav());
+
+  async function majBadgeNav() {
+    try {
+      const res = await fetch('/messages/badge');
+      const { total } = await res.json();
+      let badge = document.getElementById('navBadge');
+
+      if (total > 0) {
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.id = 'navBadge';
+          badge.style.cssText = 'position:absolute; top:-6px; right:-10px; background:#dc3545; color:#fff; border-radius:50%; font-size:9px; font-weight:800; min-width:16px; height:16px; display:flex; align-items:center; justify-content:center; padding:0 3px;';
+          document.getElementById('navMessagesLink')?.appendChild(badge);
+        }
+        badge.textContent = total > 99 ? '99+' : total;
+      } else {
+        badge?.remove();
+      }
+    } catch (_) {}
+  }
+</script>
+<% } %>
