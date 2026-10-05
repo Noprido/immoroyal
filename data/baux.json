@@ -1,0 +1,11 @@
+[
+  {
+    "id": "562da960-9387-4415-8a7b-216bf14f104d",
+    "bienId": "bbea04cc-9a50-4ca6-bc49-62eb4f023805",
+    "montantLoyer": 50000,
+    "jourEcheance": 5,
+    "dateDebut": "2026-09-01T00:00:00.000Z",
+    "dateFin": null,
+    "createdAt": "2026-10-05T23:50:47.949Z"
+  }
+]

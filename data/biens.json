@@ -1,0 +1,16 @@
+[
+  {
+    "id": "bbea04cc-9a50-4ca6-bc49-62eb4f023805",
+    "groupeId": "6ec736f5-d9c0-4613-accf-be6e694e8e60",
+    "gerantId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "nom": "Studio A",
+    "adresse": "Rue 1",
+    "ville": "Cotonou",
+    "quartier": null,
+    "typeBien": "Studio",
+    "proprietaireNom": null,
+    "locataireId": null,
+    "locataireLieLe": null,
+    "createdAt": "2026-10-05T23:50:47.949Z"
+  }
+]
