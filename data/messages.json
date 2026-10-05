@@ -1,0 +1,1910 @@
+[
+  {
+    "id": "9eb2d0a7-ed27-41e7-83cd-538ef66ebaae",
+    "conversationId": "3463f07e-1302-494a-87e8-94e56cc1976a",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "cc",
+    "date": "2026-06-25T15:58:50.818Z",
+    "lu": false
+  },
+  {
+    "id": "7bc4ae29-5d00-4aab-8002-b1f33597102e",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "yo",
+    "date": "2026-07-30T21:09:33.884Z",
+    "lu": true
+  },
+  {
+    "id": "a14bca58-0e51-4624-9094-87bd5d212598",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Oui bro",
+    "date": "2026-07-30T21:09:46.835Z",
+    "lu": true
+  },
+  {
+    "id": "83685da1-578a-429c-ad65-e2ca9c4377fc",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "c'est comment ?",
+    "date": "2026-07-30T21:10:16.997Z",
+    "lu": true
+  },
+  {
+    "id": "51a5dcb4-db59-4160-acd7-2e06da408083",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Oklm, oklm sdk ?",
+    "date": "2026-07-30T21:10:49.349Z",
+    "lu": true
+  },
+  {
+    "id": "136f5b92-9558-4789-be87-12a32e253420",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Ffgg",
+    "date": "2026-07-31T03:27:29.676Z",
+    "lu": true
+  },
+  {
+    "id": "231dab8e-ac75-4981-bd74-190a73998804",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Yo bro",
+    "date": "2026-07-31T11:16:40.485Z",
+    "lu": true
+  },
+  {
+    "id": "40ec673d-b50f-4699-92ca-051523924ada",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/4a9ea2c1-7fd1-4704-a43b-7185ead9b522.m4a",
+    "dureeAudio": 0,
+    "date": "2026-07-31T11:34:06.060Z",
+    "lu": true
+  },
+  {
+    "id": "8457f17c-53ad-4a23-965b-36ff82737251",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/1f9a5792-d1ac-4d93-8e66-67535bbc626c.m4a",
+    "dureeAudio": 0,
+    "date": "2026-07-31T11:34:16.046Z",
+    "lu": true
+  },
+  {
+    "id": "29fad0a9-9742-4d76-a2ff-d33c14900075",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/3ba67524-719c-48c9-94b9-1413230f58a2.m4a",
+    "dureeAudio": 0,
+    "date": "2026-07-31T11:39:18.766Z",
+    "lu": true
+  },
+  {
+    "id": "8a47d85c-36ea-4887-a0ec-7f695dfdc358",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/751ee018-5a9d-49d4-bbec-ca25ad844e98.m4a",
+    "dureeAudio": 4,
+    "date": "2026-07-31T11:49:45.564Z",
+    "lu": true
+  },
+  {
+    "id": "fcb3facd-cb71-4a61-b268-50d9cb8b6bd0",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/f1f102dd-a6df-4fbc-807e-586955e441b5.m4a",
+    "dureeAudio": 4,
+    "date": "2026-07-31T11:50:20.680Z",
+    "lu": true
+  },
+  {
+    "id": "6efd50de-9db9-4e85-a466-5d7e928e5a42",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Ok bosd je fais ça chap chap",
+    "date": "2026-07-31T11:50:44.074Z",
+    "lu": true
+  },
+  {
+    "id": "76c18ed4-9725-462b-a6a1-d1fa1a5ee6a9",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/e7ae3598-08b0-45fc-a718-5a2b5a97241d.m4a",
+    "dureeAudio": 2,
+    "date": "2026-07-31T11:50:52.149Z",
+    "lu": true
+  },
+  {
+    "id": "de2acb86-0464-4da7-83d3-a15e2cea8293",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/3694a4b8-5c81-40dc-9d69-5a3b6e18c401.m4a",
+    "dureeAudio": 2,
+    "date": "2026-07-31T11:51:01.101Z",
+    "lu": true
+  },
+  {
+    "id": "4c7ed351-d8fe-4a01-a6b3-53753aa32850",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/3521f47f-cb0b-429f-951c-52b765f30222.jpg",
+    "fichierNom": "27.jpg",
+    "date": "2026-07-31T16:21:36.108Z",
+    "lu": true,
+    "isDeleted": true
+  },
+  {
+    "id": "3a8594c0-d2b0-400d-a649-c4e18e7f089d",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Man",
+    "date": "2026-07-31T16:22:02.600Z",
+    "lu": true,
+    "isDeleted": true
+  },
+  {
+    "id": "a7e7d071-c715-45e9-83c1-781904a0db34",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/197d4939-0799-4a7c-94af-555a1da3bd08.jpg",
+    "fichierNom": "34.jpg",
+    "date": "2026-07-31T16:22:19.439Z",
+    "lu": true
+  },
+  {
+    "id": "3a977d1f-b5df-4f85-aa2b-289079de0676",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "video",
+    "fichierUrl": "/uploads/messages/eb05968e-b16c-4819-8be2-db3cf84e61b0.mp4",
+    "fichierNom": "35.mp4",
+    "date": "2026-07-31T21:21:01.671Z",
+    "lu": true
+  },
+  {
+    "id": "323c0a0f-21dd-48dd-bdc5-4c52722d6cc2",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/59cee038-bb0b-4c5b-bd10-6e5aa29b1128.jpg",
+    "fichierNom": "1008714140.jpg",
+    "date": "2026-07-31T21:22:02.418Z",
+    "lu": true,
+    "isDeleted": true
+  },
+  {
+    "id": "324dd6ad-1dd2-443d-816a-f2745f734878",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/23536ebb-9b66-431f-b786-4790106f7ac1.jpg",
+    "fichierNom": "27.jpg",
+    "date": "2026-07-31T22:16:13.074Z",
+    "lu": true
+  },
+  {
+    "id": "532c37b3-7a9e-43b6-9047-f665c329d0b5",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/f9c56f72-7bcb-478d-b7c8-4d224827dc87.jpg",
+    "fichierNom": "34.jpg",
+    "date": "2026-07-31T22:16:13.180Z",
+    "lu": true,
+    "isDeleted": true
+  },
+  {
+    "id": "fccaf7f4-f5ec-427b-b94d-bcaf8fbe9581",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "video",
+    "fichierUrl": "/uploads/messages/096d8039-f5a4-4940-b669-62a164ac727b.mp4",
+    "fichierNom": "35.mp4",
+    "date": "2026-07-31T22:16:23.107Z",
+    "lu": true
+  },
+  {
+    "id": "f924aea3-b1ea-4124-9c30-424f343ada79",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/881cefb0-1fff-4ae2-a77d-e94db33e9cb6.jpg",
+    "fichierNom": "1008714140.jpg",
+    "date": "2026-07-31T22:19:38.651Z",
+    "lu": true
+  },
+  {
+    "id": "9c2cbc48-b942-4932-ac21-749d9077c266",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/3a8ffc9e-4ea8-4c02-8017-70b88b800b8f.jpg",
+    "fichierNom": "1008714137.jpg",
+    "date": "2026-07-31T22:19:38.742Z",
+    "lu": true
+  },
+  {
+    "id": "b22e9f1f-4172-4688-8ddc-26ad04c79b8a",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/71dc1edd-5d9e-45d8-8aed-789c12701c9f.m4a",
+    "dureeAudio": 5,
+    "date": "2026-07-31T22:32:00.141Z",
+    "lu": true,
+    "isDeleted": true
+  },
+  {
+    "id": "43ff1232-d8f7-44ea-bfea-6ef6be55cb72",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/89f3323f-0e03-4d56-a689-7994f5f7f680.m4a",
+    "dureeAudio": 2,
+    "date": "2026-07-31T22:50:07.939Z",
+    "lu": true
+  },
+  {
+    "id": "924b5600-5666-4eb3-b9cf-391be03944a1",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/53c57b1d-b18e-4011-aa6c-15b34dec1da8.m4a",
+    "dureeAudio": 1,
+    "date": "2026-07-31T23:18:39.100Z",
+    "lu": true
+  },
+  {
+    "id": "c0cf29e6-fdac-43f3-85c2-fd1571882b62",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/8ba22a8a-3a0b-472e-a47e-4557993b22ed.jpg",
+    "fichierNom": "1008714150.jpg",
+    "date": "2026-07-31T23:18:59.198Z",
+    "lu": true
+  },
+  {
+    "id": "3dbe6df1-6b5c-4194-8165-4dc4848aeaa1",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/6cbebb24-08c7-44b2-8f07-5f5709d182d5.jpg",
+    "fichierNom": "1008714147.jpg",
+    "date": "2026-07-31T23:18:59.309Z",
+    "lu": true
+  },
+  {
+    "id": "e731fefa-d8e5-48b0-a239-82c5d072f27e",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/238e3c03-68c7-471b-a6d2-92a3c34acb9f.m4a",
+    "dureeAudio": 2,
+    "date": "2026-07-31T23:19:02.787Z",
+    "lu": true
+  },
+  {
+    "id": "fb741241-d180-4b3d-9ce8-240829ffc0f7",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/d35023c8-70f5-42b1-ba31-5cc17820469b.m4a",
+    "dureeAudio": 1,
+    "date": "2026-07-31T23:19:13.014Z",
+    "lu": true
+  },
+  {
+    "id": "cc1c866b-3967-44c1-b1b1-52f83ff6ce13",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/fcedf568-1ad5-40ce-ab43-da88baaa8738.jpg",
+    "fichierNom": "1008714150.jpg",
+    "date": "2026-07-31T23:19:17.415Z",
+    "lu": true
+  },
+  {
+    "id": "37372412-7dfb-4678-a298-4912abbe5209",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/94bb01dd-9a55-4280-b362-34aff5da1a00.jpg",
+    "fichierNom": "1008714147.jpg",
+    "date": "2026-07-31T23:19:17.585Z",
+    "lu": true
+  },
+  {
+    "id": "6a147e49-41f5-4723-bae9-31bd0fb1f722",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/49b58423-d20f-45ae-b970-8a7b4cf44451.jpg",
+    "fichierNom": "1008714150.jpg",
+    "date": "2026-08-01T00:06:28.915Z",
+    "lu": true
+  },
+  {
+    "id": "f7c47a29-dd53-4e35-8dba-9a3b98f4bcef",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/b5ab2726-0277-44ed-9fc0-fa20550292fb.jpg",
+    "fichierNom": "1008714147.jpg",
+    "date": "2026-08-01T00:06:28.956Z",
+    "lu": true
+  },
+  {
+    "id": "40f235d6-ec01-4927-b9bd-00a168d8e888",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/4aed60bf-abeb-445b-a3bd-5ff419f4274a.jpg",
+    "fichierNom": "1008714150.jpg",
+    "date": "2026-08-01T00:06:56.844Z",
+    "lu": true
+  },
+  {
+    "id": "02f286fe-bd79-48b5-bc9e-4b5a2d94987a",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/9c884072-0ccf-44bd-ad3a-cbacb3ac6cca.jpg",
+    "fichierNom": "1008714140.jpg",
+    "date": "2026-08-01T00:07:05.302Z",
+    "lu": true
+  },
+  {
+    "id": "6daf2296-07cd-41ab-a6d8-343d53ccd275",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/683d2692-ca43-4796-8224-3dcdbad4f4c5.jpg",
+    "fichierNom": "1008714140.jpg",
+    "date": "2026-08-01T00:07:16.691Z",
+    "lu": true
+  },
+  {
+    "id": "46847a3c-a525-4ffa-8ecc-a6171719258d",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/7a7b7ef0-0b52-4078-b80f-dcad7d0bafd8.jpg",
+    "fichierNom": "1008714150.jpg",
+    "date": "2026-08-01T00:08:02.708Z",
+    "lu": true
+  },
+  {
+    "id": "7bbdb0d2-5af4-4b5c-ae60-8f47964493b6",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "image",
+    "fichierUrl": "/uploads/messages/efaf3659-4b74-472d-88d2-069fb67e9c4c.jpg",
+    "fichierNom": "1008714147.jpg",
+    "date": "2026-08-01T00:08:02.803Z",
+    "lu": true
+  },
+  {
+    "id": "523d108f-071a-411b-b8bd-00a2af855702",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/743da80d-8105-4dcf-93e3-2ae5a1d28ca3.m4a",
+    "dureeAudio": 4,
+    "date": "2026-08-01T09:59:26.820Z",
+    "lu": true
+  },
+  {
+    "id": "868e956e-01b1-430b-ac16-1ec6370abd31",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/56b47f73-a98c-4323-b178-952bc2751028.m4a",
+    "dureeAudio": 5,
+    "date": "2026-08-01T09:59:37.633Z",
+    "lu": true
+  },
+  {
+    "id": "25e0fc7a-cfcc-4593-be9f-f2a2291b3e84",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/357b889f-a19f-4de5-acd1-bbd6beae97af.m4a",
+    "dureeAudio": 5,
+    "date": "2026-08-01T10:01:55.769Z",
+    "lu": true
+  },
+  {
+    "id": "343bbff6-338b-4323-bc91-ec4b796b8d69",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Man",
+    "date": "2026-08-03T04:22:43.589Z",
+    "lu": false
+  },
+  {
+    "id": "2ce0c6b3-bf13-4e36-984f-f700d17d232a",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/895a6e2d-155f-42e7-936e-247d14b49605.m4a",
+    "dureeAudio": 5,
+    "date": "2026-08-04T09:02:45.490Z",
+    "lu": false
+  },
+  {
+    "id": "bb0c7ff4-54d9-4638-a8de-7c0c0a4c203a",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "cc",
+    "date": "2026-08-06T20:56:02.944Z",
+    "lu": false
+  },
+  {
+    "id": "7cf1cef5-4ec8-4f4e-8eda-22c86c1cf4b2",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Cc",
+    "date": "2026-08-08T23:52:50.388Z",
+    "lu": false
+  },
+  {
+    "id": "081f6743-b2ab-4772-a3a2-e52b50715fd4",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/b4b6d9aa-4625-405b-b63a-63cbb699ab31.m4a",
+    "dureeAudio": 5,
+    "date": "2026-08-08T23:53:04.435Z",
+    "lu": false
+  },
+  {
+    "id": "8461869e-7f71-4b2c-8cc5-cf466ad75bee",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/3764916d-4e82-489c-a169-59e7c053462d.m4a",
+    "dureeAudio": 3,
+    "date": "2026-08-08T23:53:14.442Z",
+    "lu": false
+  },
+  {
+    "id": "3cf98100-ffec-4ad4-bb9f-5cf6a1f4dcc0",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/8e7a9651-2fae-47da-8e20-c7ec8203b44d.m4a",
+    "dureeAudio": 3,
+    "date": "2026-08-08T23:53:31.957Z",
+    "lu": false
+  },
+  {
+    "id": "8f325a79-3624-4a89-a3e2-5480a4ef211b",
+    "conversationId": "3463f07e-1302-494a-87e8-94e56cc1976a",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/67b9ef13-8476-48c0-9f99-279d94a77e57.m4a",
+    "dureeAudio": 2,
+    "date": "2026-08-08T23:54:07.652Z",
+    "lu": false
+  },
+  {
+    "id": "e585759a-ca9d-4d07-b7a6-7ce838f750c0",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/959dafe1-f691-49d6-acb3-4fe6d2df9d6e.m4a",
+    "dureeAudio": 2,
+    "date": "2026-08-08T23:57:36.625Z",
+    "lu": true
+  },
+  {
+    "id": "71c33e51-bba6-46ba-8e3c-2ea5750640e5",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Cc",
+    "date": "2026-08-08T23:57:50.605Z",
+    "lu": false
+  },
+  {
+    "id": "6f9946b7-de27-4e2b-a6e7-64b171dc4618",
+    "conversationId": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/a2958438-9897-4e18-8cfa-03df9207dd16.m4a",
+    "dureeAudio": 4,
+    "date": "2026-08-08T23:57:58.234Z",
+    "lu": false
+  },
+  {
+    "id": "fec6792f-12b2-4e27-b08c-59fb687bea56",
+    "conversationId": "504fc492-5738-4c25-9e06-6291ff5f6680",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-15T21:57:30.343Z",
+    "lu": false
+  },
+  {
+    "id": "986f6a40-b251-4f11-8d69-e414dda6639c",
+    "conversationId": "504fc492-5738-4c25-9e06-6291ff5f6680",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-15T21:57:35.448Z",
+    "lu": false
+  },
+  {
+    "id": "5615c6ea-69b1-43ed-9a91-9550f18f7614",
+    "conversationId": "4f870e64-4c88-405c-9d39-e6b1c6532813",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-15T21:58:11.822Z",
+    "lu": false
+  },
+  {
+    "id": "b7004402-c114-4968-b677-c5e4794002cd",
+    "conversationId": "4f870e64-4c88-405c-9d39-e6b1c6532813",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-15T21:58:24.237Z",
+    "lu": false
+  },
+  {
+    "id": "0b6aa106-11f4-4488-834d-e177fd5d9a9c",
+    "conversationId": "c78124f3-fa24-40a4-b89e-444df6655b05",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-15T22:01:07.630Z",
+    "lu": false
+  },
+  {
+    "id": "b87e8680-9eab-4833-ad66-969dad84fd10",
+    "conversationId": "c78124f3-fa24-40a4-b89e-444df6655b05",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-15T22:01:14.707Z",
+    "lu": false
+  },
+  {
+    "id": "0056e7a3-20e0-400b-a4a8-60e55b18dd28",
+    "conversationId": "c78124f3-fa24-40a4-b89e-444df6655b05",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "yo man",
+    "date": "2026-08-15T22:05:36.147Z",
+    "lu": false
+  },
+  {
+    "id": "d249371b-3ee6-4253-873a-42fa87bf939a",
+    "conversationId": "f651b9d5-e8d5-4f60-8e09-2235075da60f",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-15T22:07:48.909Z",
+    "lu": false
+  },
+  {
+    "id": "bfaa426d-a6ec-4bf6-a956-15cd999e8100",
+    "conversationId": "f651b9d5-e8d5-4f60-8e09-2235075da60f",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-15T22:07:51.536Z",
+    "lu": false
+  },
+  {
+    "id": "37a2732f-6ba7-4067-abb9-f94c1899b55f",
+    "conversationId": "f651b9d5-e8d5-4f60-8e09-2235075da60f",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-15T22:08:33.813Z",
+    "lu": false
+  },
+  {
+    "id": "ab737e35-478b-4d68-b6d8-ef26a28e974c",
+    "conversationId": "4f870e64-4c88-405c-9d39-e6b1c6532813",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-15T22:20:57.360Z",
+    "lu": false
+  },
+  {
+    "id": "21a8ba71-21ec-49d8-afe5-9c758bbdb4d8",
+    "conversationId": "4f870e64-4c88-405c-9d39-e6b1c6532813",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "yo c'est comment ?",
+    "date": "2026-08-15T22:21:10.758Z",
+    "lu": false
+  },
+  {
+    "id": "e5dcbdb9-d80c-41e7-a2fe-337dd18fd49b",
+    "conversationId": "4f870e64-4c88-405c-9d39-e6b1c6532813",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-15T22:21:47.125Z",
+    "lu": false
+  },
+  {
+    "id": "e0e8feaa-4a90-492b-8845-f86cdb57ebdc",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Bonjour, cet article est-il toujours disponible ?",
+    "date": "2026-08-16T05:21:44.172Z",
+    "lu": true
+  },
+  {
+    "id": "eb06ad07-8253-4ec6-b294-8895a25242b4",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Wow",
+    "date": "2026-08-16T05:22:18.491Z",
+    "lu": true
+  },
+  {
+    "id": "4254a124-995d-43da-894a-b7708f87a924",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Ça fonctionne du toner",
+    "date": "2026-08-16T05:22:34.001Z",
+    "lu": true
+  },
+  {
+    "id": "71bac69a-d1e9-46ac-b1f3-994c0c9403c9",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/8a910276-6d82-4d86-b642-145c557672bd.m4a",
+    "dureeAudio": 3,
+    "date": "2026-08-16T05:22:49.692Z",
+    "lu": true
+  },
+  {
+    "id": "e792c07b-b20d-453d-9c63-a95293a201db",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Yo man",
+    "date": "2026-08-17T20:53:59.158Z",
+    "lu": true
+  },
+  {
+    "id": "d8534b98-634f-49c4-9edb-7136ce64050f",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Oui bro",
+    "date": "2026-08-17T20:54:38.287Z",
+    "lu": true
+  },
+  {
+    "id": "e0d04a4a-4a94-4691-a2c0-d58ce233ddb1",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Quoi de neuf ?",
+    "date": "2026-08-17T20:59:10.140Z",
+    "lu": true
+  },
+  {
+    "id": "b2c9e7fc-8179-44ae-8ffb-be94fbf95026",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Oklm boss",
+    "date": "2026-08-17T20:59:43.212Z",
+    "lu": true
+  },
+  {
+    "id": "9216d3d0-0a6a-4f55-a3d9-6db9b6df0336",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/8eb19a65-e3b8-4089-a952-844c9480c74e.m4a",
+    "dureeAudio": 4,
+    "date": "2026-08-17T22:13:52.495Z",
+    "lu": true
+  },
+  {
+    "id": "63420e1e-b1cf-4ddc-ad18-b6f97256f51a",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "",
+    "type": "audio",
+    "fichierUrl": "/uploads/messages/e4c0989f-7f3b-4a45-aa9d-2675c2906d46.m4a",
+    "dureeAudio": 2,
+    "date": "2026-08-17T22:14:23.178Z",
+    "lu": true
+  },
+  {
+    "id": "13d38285-ecce-4547-8fa4-4e038770c079",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Yo",
+    "date": "2026-08-17T22:14:34.344Z",
+    "lu": true
+  },
+  {
+    "id": "0b26d2c6-cad8-4b12-af4e-8b348e2b0c33",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Oui man",
+    "date": "2026-08-17T22:15:08.169Z",
+    "lu": true
+  },
+  {
+    "id": "60adf2c6-bd18-4e4c-9730-a115688c7d8e",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Yo",
+    "date": "2026-08-17T22:49:16.976Z",
+    "lu": true
+  },
+  {
+    "id": "bf112e4f-a570-4c1d-933f-8eac0b014a20",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Bro",
+    "date": "2026-08-17T22:49:30.627Z",
+    "lu": true
+  },
+  {
+    "id": "9b2afcf5-f223-4428-9454-c700fde7fb72",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Yo",
+    "date": "2026-08-17T23:32:11.424Z",
+    "lu": true
+  },
+  {
+    "id": "4e93a975-aaf0-4b8a-8d41-383782f26cf9",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Oui bro",
+    "date": "2026-08-17T23:33:09.843Z",
+    "lu": true
+  },
+  {
+    "id": "f30de944-7953-4217-93b5-8f1e976b2c8a",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Cc",
+    "date": "2026-08-17T23:34:07.034Z",
+    "lu": true
+  },
+  {
+    "id": "bb6f59b0-ddef-4340-95b6-25c4368bab1f",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Yo",
+    "date": "2026-08-17T23:37:57.939Z",
+    "lu": true
+  },
+  {
+    "id": "76f93716-fd42-44fd-bb97-3d3ae5e43340",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oui bro",
+    "date": "2026-08-17T23:39:32.190Z",
+    "lu": true
+  },
+  {
+    "id": "df888472-e1a1-4eac-afee-6417c4819bf3",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "comment ?",
+    "date": "2026-08-17T23:39:51.105Z",
+    "lu": true
+  },
+  {
+    "id": "39e260ca-1628-4da7-bd42-11e9d63e1719",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Yo",
+    "date": "2026-08-17T23:40:03.106Z",
+    "lu": true
+  },
+  {
+    "id": "d33ffbd5-5094-4e69-973f-e26a8a21e1ff",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oui bro",
+    "date": "2026-08-17T23:40:17.806Z",
+    "lu": true
+  },
+  {
+    "id": "927b9ea8-f0a3-42d9-a73a-a747a67a6da6",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "ttt",
+    "date": "2026-08-17T23:40:35.147Z",
+    "lu": true
+  },
+  {
+    "id": "120e4f03-88b9-4916-82ae-2551648dfb28",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Ok",
+    "date": "2026-08-17T23:47:59.483Z",
+    "lu": true
+  },
+  {
+    "id": "e8da6f37-662d-4321-9c87-b852ad1f4f4e",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oui ?",
+    "date": "2026-08-17T23:48:23.788Z",
+    "lu": true
+  },
+  {
+    "id": "8b3f1a80-2e72-4982-a0eb-ca461e72abf2",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Ok ça marche",
+    "date": "2026-08-17T23:48:31.818Z",
+    "lu": true
+  },
+  {
+    "id": "7627a584-38dd-490a-a99c-1e11901a8d7c",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "du tonner !",
+    "date": "2026-08-17T23:48:45.622Z",
+    "lu": true
+  },
+  {
+    "id": "5b8d0b04-e424-43fe-81c7-19194d6efffb",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Oui",
+    "date": "2026-08-17T23:48:53.750Z",
+    "lu": true
+  },
+  {
+    "id": "670c9ba4-3c26-40c5-bbc7-93fb61f84f32",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "trop cool !",
+    "date": "2026-08-17T23:49:03.622Z",
+    "lu": true
+  },
+  {
+    "id": "7682fd98-02c1-4cf8-95c6-527de0ef4315",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "ok, ok, calme toi",
+    "date": "2026-08-18T00:23:15.479Z",
+    "lu": true
+  },
+  {
+    "id": "bc390506-e245-43c9-8d72-b86e179eb97f",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "???",
+    "date": "2026-08-18T00:23:55.189Z",
+    "lu": true
+  },
+  {
+    "id": "99d163f7-0994-4feb-91cb-ff16ff4f97a7",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oui ?",
+    "date": "2026-08-18T00:28:55.695Z",
+    "lu": true
+  },
+  {
+    "id": "32bd2de4-e605-4e94-ba6f-ce7076d13a89",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Ça marche pas hein",
+    "date": "2026-08-18T00:29:32.638Z",
+    "lu": true
+  },
+  {
+    "id": "ff345f81-c44e-4714-9cc4-92778a3ad8df",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "non",
+    "date": "2026-08-18T00:29:38.044Z",
+    "lu": true
+  },
+  {
+    "id": "14b78c6c-1f69-4da0-b310-c06f160e3799",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "mnce alors",
+    "date": "2026-08-18T00:29:56.125Z",
+    "lu": true
+  },
+  {
+    "id": "2b3c42aa-4873-4848-9947-f122ea302c59",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "ok ok",
+    "date": "2026-08-18T00:35:31.262Z",
+    "lu": true
+  },
+  {
+    "id": "feff71df-1f3a-4154-944c-1befa034a011",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "quoii ??",
+    "date": "2026-08-18T00:44:48.468Z",
+    "lu": true
+  },
+  {
+    "id": "a607b020-4f11-4a35-b802-66a91934e8bd",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Rien",
+    "date": "2026-08-18T00:55:57.589Z",
+    "lu": true
+  },
+  {
+    "id": "c260c045-a768-4067-b04f-71060ad53dcf",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "bon on retest",
+    "date": "2026-08-18T00:56:19.273Z",
+    "lu": true
+  },
+  {
+    "id": "e51197e2-f822-495d-b0ee-c4f0c01c9613",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Ok",
+    "date": "2026-08-18T00:57:35.711Z",
+    "lu": true
+  },
+  {
+    "id": "1a3d5dc7-47ad-4d76-8579-5609f13186a5",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "what ?",
+    "date": "2026-08-18T00:57:47.758Z",
+    "lu": true
+  },
+  {
+    "id": "24cf8b89-bbd6-4f6a-bd71-6cc09e2cea54",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "rien",
+    "date": "2026-08-18T01:10:24.976Z",
+    "lu": true
+  },
+  {
+    "id": "bea46974-c0a4-4043-a8df-1b7dee942f88",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "oo ok",
+    "date": "2026-08-18T01:10:36.131Z",
+    "lu": true
+  },
+  {
+    "id": "1d131db9-632c-4037-8b8c-d43636484f40",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Super",
+    "date": "2026-08-18T01:10:42.935Z",
+    "lu": true
+  },
+  {
+    "id": "ab2c15e4-e7cf-4816-96f1-fb76dffbd425",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "ah bon ?",
+    "date": "2026-08-18T01:11:06.243Z",
+    "lu": true
+  },
+  {
+    "id": "6038d704-8f98-4376-9d88-971b4dd9dc93",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "non",
+    "date": "2026-08-18T01:11:18.908Z",
+    "lu": true
+  },
+  {
+    "id": "87f5d89a-8f63-425d-9681-6b73ae8fbcf2",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "eeerv",
+    "date": "2026-08-18T01:11:38.651Z",
+    "lu": true
+  },
+  {
+    "id": "95e645dd-3581-41ec-93ba-e0ec99a92bf0",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "bon ?",
+    "date": "2026-08-18T01:14:05.835Z",
+    "lu": true
+  },
+  {
+    "id": "afad8a0e-c390-4c11-a755-eafe04c99c0b",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "???",
+    "date": "2026-08-18T01:16:37.870Z",
+    "lu": true
+  },
+  {
+    "id": "552dece0-b172-4046-9e00-0ddddc5ba1ab",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "on fait un autre test",
+    "date": "2026-08-18T01:16:49.715Z",
+    "lu": true
+  },
+  {
+    "id": "8de5dfa5-d882-4eec-894b-87165e7dab02",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Fbhr",
+    "date": "2026-08-18T01:16:57.905Z",
+    "lu": true
+  },
+  {
+    "id": "b9cf8ff5-092e-42a5-9575-7068a7112f1f",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Dhehe",
+    "date": "2026-08-18T01:16:59.448Z",
+    "lu": true
+  },
+  {
+    "id": "56e7defe-af93-4c66-9475-d32efd0cc23f",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Whdhe",
+    "date": "2026-08-18T01:17:00.999Z",
+    "lu": true
+  },
+  {
+    "id": "43d6e1db-c1d7-41ac-a892-44dad83a0734",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "gib",
+    "date": "2026-08-18T01:17:11.694Z",
+    "lu": true
+  },
+  {
+    "id": "58e2d711-9fe7-4f63-928f-c96deae81cdf",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "fyjcg",
+    "date": "2026-08-18T01:17:18.045Z",
+    "lu": true
+  },
+  {
+    "id": "ec030589-0882-497d-af40-a71061d98860",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "grtghtr",
+    "date": "2026-08-18T01:34:18.110Z",
+    "lu": true
+  },
+  {
+    "id": "12cd07a1-4486-4b26-a25e-dc0f1b8660a9",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "rthrth",
+    "date": "2026-08-18T01:34:25.031Z",
+    "lu": true
+  },
+  {
+    "id": "9c2dfe95-c68e-4ed9-a7ec-0c47eb434a0c",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "rtgrt",
+    "date": "2026-08-18T01:34:33.967Z",
+    "lu": true
+  },
+  {
+    "id": "e26dba71-7a87-46c5-b2e0-d5ae343037e0",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Sheheh",
+    "date": "2026-08-18T01:34:41.826Z",
+    "lu": true
+  },
+  {
+    "id": "7787ad41-63d4-4a88-81db-9f96c0e5b36d",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "rt'(t",
+    "date": "2026-08-18T01:34:47.288Z",
+    "lu": true
+  },
+  {
+    "id": "2208bfc6-db6d-4802-bf11-e3dfd55745cd",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "eferf",
+    "date": "2026-08-18T01:35:00.098Z",
+    "lu": true
+  },
+  {
+    "id": "039f8603-166a-48f2-845c-f95d7322b22c",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "e\"frf",
+    "date": "2026-08-18T01:35:05.126Z",
+    "lu": true
+  },
+  {
+    "id": "7b332fe2-8a7a-4f24-a1b5-63cb8335b6b6",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Ok",
+    "date": "2026-08-18T01:35:11.666Z",
+    "lu": true
+  },
+  {
+    "id": "ca2a952e-2bd6-4376-8b84-e620f22fcbd3",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "???",
+    "date": "2026-08-18T01:35:20.839Z",
+    "lu": true
+  },
+  {
+    "id": "d2ca2afa-a7a3-489d-9956-f213ca35d4dc",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "oui ?",
+    "date": "2026-08-18T01:35:27.120Z",
+    "lu": true
+  },
+  {
+    "id": "a3175c66-432b-408f-905f-10e482cbbe93",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "egrge",
+    "date": "2026-08-18T01:35:48.957Z",
+    "lu": true
+  },
+  {
+    "id": "3d89b76c-dcd8-46df-a87e-658e9bb426e0",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Hhj",
+    "date": "2026-08-18T01:35:58.872Z",
+    "lu": true
+  },
+  {
+    "id": "c9eee0a4-5d0c-45f6-ab16-93dbb3ce0c38",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "egreger",
+    "date": "2026-08-18T01:36:03.543Z",
+    "lu": true
+  },
+  {
+    "id": "adc163fa-1f56-470e-b70d-51c9ac3ad00b",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "what ?",
+    "date": "2026-08-18T01:51:33.265Z",
+    "lu": true
+  },
+  {
+    "id": "f8131650-6e92-483a-8afb-1a490d6cf3e8",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "jzcjz",
+    "date": "2026-08-18T01:51:41.953Z",
+    "lu": true
+  },
+  {
+    "id": "06a6beff-a5a9-4331-96c8-116392dae74e",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "oklm !",
+    "date": "2026-08-18T01:51:49.948Z",
+    "lu": true
+  },
+  {
+    "id": "2083ffa6-620f-45c1-890f-11e8e27b31e2",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "yo",
+    "date": "2026-08-18T02:08:28.334Z",
+    "lu": true
+  },
+  {
+    "id": "92c6deb8-88b4-42e9-bc1a-1693b3b2253b",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oui bro",
+    "date": "2026-08-18T02:08:34.195Z",
+    "lu": true
+  },
+  {
+    "id": "b0e7944e-b7ef-4b1d-a400-52678f3b168e",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "quel coup ?",
+    "date": "2026-08-18T02:08:43.881Z",
+    "lu": true
+  },
+  {
+    "id": "8860be2c-5dc4-48c9-88ce-567d01b8987f",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Ah bro, je suis l'a hein",
+    "date": "2026-08-18T02:08:55.816Z",
+    "lu": true
+  },
+  {
+    "id": "6a6bb899-9548-40d6-aa5f-26cca0b7d786",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Oklm",
+    "date": "2026-08-18T02:08:59.187Z",
+    "lu": true
+  },
+  {
+    "id": "5a54f36e-a3d4-4025-9201-f66ec70ccabd",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oui oui, tranquille",
+    "date": "2026-08-18T02:09:18.320Z",
+    "lu": true
+  },
+  {
+    "id": "9807286e-6851-4789-a716-4163b2aa65ef",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Man",
+    "date": "2026-08-18T02:09:35.787Z",
+    "lu": true
+  },
+  {
+    "id": "e69ab23f-ff4e-430f-81fa-4f1a1b3e4396",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Sur ?",
+    "date": "2026-08-18T02:11:28.189Z",
+    "lu": true
+  },
+  {
+    "id": "910e62ec-2fac-4496-ac1a-92b40e3effae",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Oui bro",
+    "date": "2026-08-18T02:11:45.883Z",
+    "lu": true
+  },
+  {
+    "id": "8b9eee2b-7f48-4fc4-bb04-2a0e0fcdb137",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Mani",
+    "date": "2026-08-18T02:18:09.088Z",
+    "lu": true
+  },
+  {
+    "id": "43d68bb4-4f06-46c1-98a3-a9fc7ddf82ab",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oklm, oklm",
+    "date": "2026-08-18T02:18:21.931Z",
+    "lu": true
+  },
+  {
+    "id": "c21e0521-c93d-497a-9cd4-b76e386a31f3",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oui ?",
+    "date": "2026-08-18T02:18:31.052Z",
+    "lu": true
+  },
+  {
+    "id": "f0e64060-abd9-4643-afbf-0331c86e64b8",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "quoi ?",
+    "date": "2026-08-18T02:18:42.470Z",
+    "lu": true
+  },
+  {
+    "id": "7c2278cf-6bf6-482b-a1ac-1b3395c076fd",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Ok ok",
+    "date": "2026-08-18T02:18:47.854Z",
+    "lu": true
+  },
+  {
+    "id": "e48e3bd4-df30-44d0-9963-dd678a7f076f",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "super bien",
+    "date": "2026-08-18T02:18:57.748Z",
+    "lu": true
+  },
+  {
+    "id": "5774337c-aa6f-44d3-b73d-17e637f7ec2e",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "mani",
+    "date": "2026-08-18T02:23:30.917Z",
+    "lu": true
+  },
+  {
+    "id": "f2813e1f-7d7d-474e-8625-5f2c7caced6f",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oui bro",
+    "date": "2026-08-18T02:23:48.896Z",
+    "lu": true
+  },
+  {
+    "id": "35768b5c-b202-4c90-90c9-7ce10c8ab260",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "??",
+    "date": "2026-08-18T02:24:02.644Z",
+    "lu": true
+  },
+  {
+    "id": "60f868c3-70cf-41ae-bff5-51b1351e5fee",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Oui bro",
+    "date": "2026-08-18T02:26:38.172Z",
+    "lu": true
+  },
+  {
+    "id": "7617161d-5677-4f42-a2ac-70da3e91ee70",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oui ?",
+    "date": "2026-08-18T02:35:24.359Z",
+    "lu": true
+  },
+  {
+    "id": "9ed59e40-07e0-4d7b-bba5-793bb8612618",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Cc",
+    "date": "2026-08-18T02:35:34.832Z",
+    "lu": true
+  },
+  {
+    "id": "e1141fbd-c922-489e-bd4f-907db4aa9033",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oui ?",
+    "date": "2026-08-18T02:35:41.163Z",
+    "lu": true
+  },
+  {
+    "id": "eb6ed4e3-3e5d-445a-8919-38b252cecd40",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Cc",
+    "date": "2026-08-18T02:37:23.541Z",
+    "lu": true
+  },
+  {
+    "id": "c1e5316c-412c-4dea-bfb7-9c800cf2ea20",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "oui?",
+    "date": "2026-08-18T02:37:30.035Z",
+    "lu": true
+  },
+  {
+    "id": "8ef28a36-ae9a-4f3d-b37e-e474bf8fef31",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Ed",
+    "date": "2026-08-18T02:37:35.617Z",
+    "lu": true
+  },
+  {
+    "id": "85a2e04d-df87-4857-98b7-e53b2aa44357",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "orjt",
+    "date": "2026-08-18T02:37:39.033Z",
+    "lu": true
+  },
+  {
+    "id": "0f0e97ff-ff55-446a-a08e-420738e6bb7a",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "gteg",
+    "date": "2026-08-18T02:37:42.394Z",
+    "lu": true
+  },
+  {
+    "id": "a06b1211-5779-415f-9c89-002deade9646",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "fgege",
+    "date": "2026-08-18T02:37:58.926Z",
+    "lu": true
+  },
+  {
+    "id": "19d427f0-e047-472e-9fc0-51eb1723985c",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "erge",
+    "date": "2026-08-18T02:38:03.477Z",
+    "lu": true
+  },
+  {
+    "id": "891d764d-248b-4ed0-909d-2790410447f8",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Eheh",
+    "date": "2026-08-18T02:38:05.834Z",
+    "lu": true
+  },
+  {
+    "id": "d5c36c45-a344-46e6-9ed1-a3f7a90f413c",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Ejrj",
+    "date": "2026-08-18T02:38:08.392Z",
+    "lu": true
+  },
+  {
+    "id": "95269d01-b370-43b5-b996-8ea56407378a",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "egerg",
+    "date": "2026-08-18T02:38:12.075Z",
+    "lu": true
+  },
+  {
+    "id": "d638c59a-cfd3-4a82-862a-78d474b3333f",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Ehry",
+    "date": "2026-08-18T02:38:27.151Z",
+    "lu": true
+  },
+  {
+    "id": "3e3b13d8-3f0c-4d46-a4d0-aa5cf474295b",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Tehheh",
+    "date": "2026-08-18T02:38:31.140Z",
+    "lu": true
+  },
+  {
+    "id": "b00be62f-ae86-4826-a6f3-21f2c3db4def",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Gff",
+    "date": "2026-08-18T02:40:09.781Z",
+    "lu": true
+  },
+  {
+    "id": "3e31da59-c46a-44de-ae2a-cbf2e4e55bc8",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "ghghg",
+    "date": "2026-08-18T02:40:13.739Z",
+    "lu": true
+  },
+  {
+    "id": "5d47949a-80cd-4110-ac9e-6557d828b04f",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "gfregfr",
+    "date": "2026-08-18T02:40:18.002Z",
+    "lu": true
+  },
+  {
+    "id": "dcf80e56-338b-446a-9dac-d8b4390b327c",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Je pratique la sodomie, massage, fellations nature, avale, suce, anal , pénétration, éjaculations buccale gorge profonde cunnilingus, doigté 69 et levrette et tout ça sans tabous",
+    "date": "2026-08-18T02:40:26.989Z",
+    "lu": true
+  },
+  {
+    "id": "cfa409c2-121d-4ef1-b9a5-f2827de16ef1",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "ghgh",
+    "date": "2026-08-18T02:40:32.140Z",
+    "lu": true
+  },
+  {
+    "id": "7f8de1bb-3a6c-4bba-9afe-c9df5fbf236d",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "ccc",
+    "date": "2026-08-18T02:43:15.915Z",
+    "lu": true
+  },
+  {
+    "id": "cfa8fb78-ddd7-4a7e-9959-c2943f3ceb61",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "rer",
+    "date": "2026-08-18T02:43:19.453Z",
+    "lu": true
+  },
+  {
+    "id": "2ca1f8b7-b023-4178-b691-e2d3925e33f4",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Cg",
+    "date": "2026-08-18T02:43:20.792Z",
+    "lu": true
+  },
+  {
+    "id": "78d18182-322c-4991-a18a-189f57316b74",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Rvrb",
+    "date": "2026-08-18T02:43:23.184Z",
+    "lu": true
+  },
+  {
+    "id": "127da5c6-8def-4a76-b4b5-9b2b4ed6402a",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Cc",
+    "date": "2026-08-18T02:44:11.353Z",
+    "lu": true
+  },
+  {
+    "id": "22a6a128-9ebb-485a-b22f-a709f2cd285e",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Ojjh",
+    "date": "2026-08-18T02:44:18.424Z",
+    "lu": true
+  },
+  {
+    "id": "534122cf-3ec2-477b-8ba7-a6267e9fbfcd",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Tyy",
+    "date": "2026-08-18T02:44:20.725Z",
+    "lu": true
+  },
+  {
+    "id": "3acb87e9-19ea-4f41-b6d2-baa928f940be",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "dfgdfg",
+    "date": "2026-08-18T02:44:23.481Z",
+    "lu": true
+  },
+  {
+    "id": "21b3e3ea-6f44-41c7-bb2c-004694810d46",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "Rjt ki",
+    "date": "2026-08-18T02:44:27.411Z",
+    "lu": true
+  },
+  {
+    "id": "7596f7ad-ec89-423d-acbd-a5e3a5334d42",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Gggy",
+    "date": "2026-08-18T02:48:01.778Z",
+    "lu": true
+  },
+  {
+    "id": "a2f66222-5ee2-4799-8db3-ed784eb2f0f3",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Sgdh",
+    "date": "2026-08-18T02:48:03.695Z",
+    "lu": true
+  },
+  {
+    "id": "88bbde70-07a1-421b-a658-c5599110a178",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "fgergr",
+    "date": "2026-08-18T02:48:06.070Z",
+    "lu": true
+  },
+  {
+    "id": "a5ab241d-ebfd-4e9e-a546-a173379f67a4",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "egfergfr",
+    "date": "2026-08-18T02:48:08.942Z",
+    "lu": true
+  },
+  {
+    "id": "2b25aad1-591a-40d1-a32a-45eed980b218",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "gfregfre",
+    "date": "2026-08-18T02:48:12.244Z",
+    "lu": true
+  },
+  {
+    "id": "6b37b649-08c0-487e-95f8-de86460d0232",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "fff",
+    "date": "2026-08-18T02:48:17.972Z",
+    "lu": true
+  },
+  {
+    "id": "f564e241-e205-4b3f-aa9c-e93918048f00",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Hrhru",
+    "date": "2026-08-18T02:48:21.156Z",
+    "lu": true
+  },
+  {
+    "id": "2aa6317a-7800-4ec9-ba1d-b3e19b1b0aac",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Rjtjjt",
+    "date": "2026-08-18T02:48:22.759Z",
+    "lu": true
+  },
+  {
+    "id": "5df894d5-00b8-4c6d-9170-ac71ac62fb0e",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Fjfjf",
+    "date": "2026-08-18T02:48:30.493Z",
+    "lu": true
+  },
+  {
+    "id": "43d30fce-9cb2-4955-932f-27ecde511cd4",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Ehry",
+    "date": "2026-08-18T02:48:32.178Z",
+    "lu": true
+  },
+  {
+    "id": "e4de7e0c-0f56-478b-9e6c-97cd5f93e3d4",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Dhrh",
+    "date": "2026-08-18T02:48:34.076Z",
+    "lu": true
+  },
+  {
+    "id": "e06b6e40-4f6e-4610-ac0c-3d5dd8e6722f",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Dvrhr",
+    "date": "2026-08-18T02:48:36.874Z",
+    "lu": true
+  },
+  {
+    "id": "f161b950-2f25-4ada-8052-9fda3e29ec60",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Egeyry",
+    "date": "2026-08-18T02:48:45.148Z",
+    "lu": true
+  },
+  {
+    "id": "26aeac49-91a7-4cb0-abf1-3476a39de5ff",
+    "conversationId": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Heh",
+    "date": "2026-08-18T02:48:46.737Z",
+    "lu": true
+  },
+  {
+    "id": "5e7215f0-b0b8-4906-9940-4b475c0dab97",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "qdd",
+    "date": "2026-08-18T02:48:48.901Z",
+    "lu": true
+  },
+  {
+    "id": "7c90b434-ebc2-4a7a-91fb-72bf55597fd4",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Dvrhrh",
+    "date": "2026-08-18T02:49:00.056Z",
+    "lu": true
+  },
+  {
+    "id": "e559f261-36b3-4990-a987-9ad5eafc9bfd",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Sheh",
+    "date": "2026-08-18T02:49:03.180Z",
+    "lu": true
+  },
+  {
+    "id": "de69e9e1-0f29-444d-839f-084ea3f4c7fa",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "getg",
+    "date": "2026-08-18T02:49:05.697Z",
+    "lu": true
+  },
+  {
+    "id": "7fe319e8-499c-488b-a619-095073f17ecf",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "egeg",
+    "date": "2026-08-18T02:49:08.185Z",
+    "lu": true
+  },
+  {
+    "id": "6b60072e-4a69-47f8-bc44-abf7dd520d28",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Yo",
+    "date": "2026-08-18T02:49:40.450Z",
+    "lu": true
+  },
+  {
+    "id": "5d4ebb84-9952-4cb2-9ac9-ad1c3c62ddd9",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Dvfh",
+    "date": "2026-08-18T02:50:38.340Z",
+    "lu": true
+  },
+  {
+    "id": "c0a0d99d-8e49-44e3-993d-2978dfef7730",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "svvfv",
+    "date": "2026-08-18T02:50:53.998Z",
+    "lu": true
+  },
+  {
+    "id": "5b936874-2eb0-4900-a13a-ec7427747b05",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Rhhrh",
+    "date": "2026-08-18T02:54:24.159Z",
+    "lu": true
+  },
+  {
+    "id": "f31f62fa-bdf2-4472-8745-93620caa28f8",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Rhrh",
+    "date": "2026-08-18T02:54:26.736Z",
+    "lu": true
+  },
+  {
+    "id": "371a1f7b-a88e-41df-b1d7-c89ff7da77d7",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Rhry",
+    "date": "2026-08-18T02:54:36.462Z",
+    "lu": true
+  },
+  {
+    "id": "2ffac7d4-346a-4c86-8cc2-8e867846c25b",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Stey",
+    "date": "2026-08-18T02:54:50.586Z",
+    "lu": true
+  },
+  {
+    "id": "3be9840c-d2f6-41f7-a350-ff2b52e52717",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Fhjr",
+    "date": "2026-08-18T02:55:13.332Z",
+    "lu": true
+  },
+  {
+    "id": "bb0db4e7-2cc0-41f1-89ec-a10b15db3807",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "CnGk",
+    "date": "2026-08-18T02:55:47.087Z",
+    "lu": true
+  },
+  {
+    "id": "d3be945b-95d4-442d-ab2c-84b7a5b41937",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "svvdf",
+    "date": "2026-08-18T02:55:52.180Z",
+    "lu": true
+  },
+  {
+    "id": "4ed04b86-f31b-450d-995a-53383514275d",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Whdhs",
+    "date": "2026-08-18T02:58:04.223Z",
+    "lu": true
+  },
+  {
+    "id": "6a091d66-96a7-4be9-8c90-06002bbd01c8",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "fezfez",
+    "date": "2026-08-18T02:58:54.668Z",
+    "lu": true
+  },
+  {
+    "id": "c7f28874-052a-4fa9-afbc-ef736739ce6a",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "texte": "Vssgvd",
+    "date": "2026-08-18T02:59:09.529Z",
+    "lu": true
+  },
+  {
+    "id": "7cb3eccc-fe77-4a6f-aea4-67f81cdd0178",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "to",
+    "date": "2026-08-18T03:01:51.115Z",
+    "lu": false
+  },
+  {
+    "id": "b79024f8-ff82-482a-9232-a4b49b469e74",
+    "conversationId": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "texte": "ok oklm",
+    "date": "2026-08-18T03:02:03.437Z",
+    "lu": false
+  }
+]

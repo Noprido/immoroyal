@@ -1,0 +1,74 @@
+[
+  {
+    "id": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "nom": "Steed Noumon",
+    "email": "steednoumon@gmail.com",
+    "telephone": "+2290152398046",
+    "whatsapp": "+2290152398046",
+    "password": "$2b$10$u9yPF9/wJ4hWILaLDrphCOR88Vm86jZnMNeUimFL57GnTWrtANtP.",
+    "role": "admin",
+    "banni": false,
+    "createdAt": "2026-06-22T03:18:13.386Z",
+    "bio": "✌🏾Charismatique 2.0✌🏾",
+    "typeVendeur": "proprietaire",
+    "fcmTokens": [
+      "dIUPmt3OS-WZpN84FemQNQ:APA91bF6YYSDWw7hMu3hZhix4fN5KAclYRg1A2PEmWdiDY6tEQ8bNCxXSbwa_K3n3mZpmJcU_M7I8V_IVbLADdE9aGLExYnb7QHeAu2TppHp4l0UCBoBdhM"
+    ]
+  },
+  {
+    "id": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "nom": "Lord Noprido",
+    "email": "steednoumon7@gmail.com",
+    "telephone": "+2290163098301",
+    "whatsapp": "22963098301",
+    "password": "$2b$10$u9yPF9/wJ4hWILaLDrphCOR88Vm86jZnMNeUimFL57GnTWrtANtP.",
+    "role": "user",
+    "banni": false,
+    "createdAt": "2026-06-22T03:18:13.386Z",
+    "fcmTokens": [
+      "f_4ySrThSNCh_QGM-wKCT0:APA91bGzFBOaaxPIU4oQimupjxDw3tlYtq8E8XLY7RRU3eIa_kzz3yGG1ZRV0er8W4310bEB2Db_2PdmJToI73rPb6YhKLkjWmJ1miWndds09lsfR069mWs"
+    ]
+  },
+  {
+    "id": "60990f5a-41f0-4962-a872-e4e9707c3c02",
+    "nom": "Jean Eude",
+    "email": "",
+    "telephone": "+22997020697",
+    "whatsapp": "+22997020697",
+    "password": "$2b$10$y3b5AprT6QgOCNznuQ9C2Osxa/jcDifaYtOSkmgTRVqAfebIkO4Oe",
+    "role": "user",
+    "banni": false,
+    "bio": "",
+    "typeVendeur": "particulier",
+    "suspendu": false,
+    "createdAt": "2026-07-07T22:58:09.820Z"
+  },
+  {
+    "id": "c8a31f30-c0b2-4927-a762-ef622eddde3c",
+    "nom": "Prince",
+    "email": "",
+    "telephone": "+22990000000",
+    "whatsapp": "+2292525455258",
+    "password": "$2b$10$jN2KLhfc//wGmnYzUIEAPe3fAjSG.QAsTDsS6i4AeNVroPjQkCSNa",
+    "role": "user",
+    "banni": false,
+    "bio": "",
+    "typeVendeur": "particulier",
+    "suspendu": false,
+    "createdAt": "2026-07-19T22:29:16.555Z"
+  },
+  {
+    "id": "60aa9d97-cf9b-4825-a5fe-1612f4a609f0",
+    "nom": "Vianney hkp",
+    "email": "",
+    "telephone": "+2290152409204",
+    "whatsapp": "+2290152409204",
+    "password": "$2b$10$BXq6Zr83t4a/hYDIP9Vuw.8LC2trazgSBXvhHf5g6.hSa/mlpvSge",
+    "role": "user",
+    "banni": false,
+    "bio": "",
+    "typeVendeur": "particulier",
+    "suspendu": false,
+    "createdAt": "2026-08-08T21:14:23.807Z"
+  }
+]

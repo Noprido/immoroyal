@@ -1,0 +1,98 @@
+[
+  {
+    "id": "3463f07e-1302-494a-87e8-94e56cc1976a",
+    "annonceId": "7dfeefbb-ae65-4825-8413-e1caa66c64ca",
+    "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "userId2": "c8a31f30-c0b2-4927-a762-ef622eddde3c",
+    "dateCreation": "2026-06-25T15:58:39.940Z",
+    "dernierMessage": {
+      "texte": "🎤 Audio",
+      "date": "2026-08-08T23:54:07.652Z",
+      "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b"
+    }
+  },
+  {
+    "id": "a6035fb6-f3ac-4b08-819b-56ddbb4f508d",
+    "annonceId": "e1f0827c-0fad-4b37-8868-3694ea03c6a1",
+    "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "userId2": "60990f5a-41f0-4962-a872-e4e9707c3c02",
+    "dateCreation": "2026-07-06T01:29:58.820Z",
+    "dernierMessage": {
+      "texte": "🎤 Audio",
+      "date": "2026-08-08T23:57:58.234Z",
+      "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b"
+    }
+  },
+  {
+    "id": "e935bbc8-d969-4588-9b14-0f2ef07ab88d",
+    "annonceId": "598b0320-3df9-4736-8c0f-f83485911176",
+    "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "userId2": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "dateCreation": "2026-07-30T21:09:22.227Z",
+    "dernierMessage": {
+      "texte": "ok oklm",
+      "date": "2026-08-18T03:02:03.437Z",
+      "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182c"
+    }
+  },
+  {
+    "id": "504fc492-5738-4c25-9e06-6291ff5f6680",
+    "annonceId": "e50f7a8b-254c-4e28-814b-54573e47a8df",
+    "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "userId2": "334296a8-5e00-4fc5-92a2-c746f2c1edf5",
+    "dernierMessage": {
+      "texte": "Bonjour, cet article est-il toujours disponible ?",
+      "date": "2026-08-15T21:57:35.448Z",
+      "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b"
+    },
+    "dateCreation": "2026-08-15T21:57:30.341Z"
+  },
+  {
+    "id": "4f870e64-4c88-405c-9d39-e6b1c6532813",
+    "annonceId": "e2531ff6-f77d-4f29-aaf9-08339a55e331",
+    "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "userId2": "877d2ac2-b5d6-4212-ab01-3b042baacede",
+    "dernierMessage": {
+      "texte": "Bonjour, cet article est-il toujours disponible ?",
+      "date": "2026-08-15T22:21:47.125Z",
+      "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b"
+    },
+    "dateCreation": "2026-08-15T21:58:11.819Z"
+  },
+  {
+    "id": "c78124f3-fa24-40a4-b89e-444df6655b05",
+    "annonceId": "7dfeefbb-ae65-4825-8413-e1caa66c64ca",
+    "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "userId2": "da79404e-1836-448f-ac68-fca0df17ff72",
+    "dernierMessage": {
+      "texte": "yo man",
+      "date": "2026-08-15T22:05:36.147Z",
+      "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b"
+    },
+    "dateCreation": "2026-08-15T22:01:07.627Z"
+  },
+  {
+    "id": "f651b9d5-e8d5-4f60-8e09-2235075da60f",
+    "annonceId": "e1f0827c-0fad-4b37-8868-3694ea03c6a1",
+    "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "userId2": "877d2ac2-b5d6-4212-ab01-3b042baacede",
+    "dernierMessage": {
+      "texte": "Bonjour, cet article est-il toujours disponible ?",
+      "date": "2026-08-15T22:08:33.813Z",
+      "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b"
+    },
+    "dateCreation": "2026-08-15T22:07:48.906Z"
+  },
+  {
+    "id": "1bc27622-2b94-4d71-8aed-d3f58e3d753d",
+    "annonceId": "cbfa1224-8d84-4ac7-b4c7-43461a207665",
+    "userId1": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "userId2": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "dernierMessage": {
+      "texte": "Heh",
+      "date": "2026-08-18T02:48:46.737Z",
+      "senderId": "59e2e16d-75a0-4764-83ca-1596cb63182b"
+    },
+    "dateCreation": "2026-08-16T05:21:44.169Z"
+  }
+]

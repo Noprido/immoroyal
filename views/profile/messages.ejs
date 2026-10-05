@@ -1,0 +1,95 @@
+<%- include('../partials/header', { title: 'Messages' }) %>
+<%- include('../partials/navbar') %>
+
+<section class="section">
+  <div class="container" style="max-width:800px;">
+    <h1 style="font-size:1.8rem; font-weight:800; margin-bottom:2rem;">
+      <i class='bx bx-message-rounded' style="color:var(--gold);"></i> Mes <span style="color:#D4AF37;">messages</span>
+    </h1>
+
+    <% if (conversations.length === 0) { %>
+      <div class="empty-state">
+        <i class='bx bx-message-rounded' style="font-size:3rem; color:var(--grey); display:block; margin-bottom:1rem;"></i>
+        <h3>Aucune conversation</h3>
+        <p>Vos échanges avec les propriétaires apparaîtront ici.</p>
+        <a href="/annonces" class="btn btn-gold" style="margin-top:1rem;">
+          <i class='bx bx-search'></i> Parcourir les annonces
+        </a>
+      </div>
+    <% } else { %>
+      <div class="conversations-list">
+        <% conversations.forEach(conv => { %>
+          <a href="/messages/<%= conv.id %>" class="conv-item" data-conv-id="<%= conv.id %>" style="text-decoration:none; color:inherit;">
+            <div class="conv-avatar">
+              <%= conv.autreUser ? conv.autreUser.nom.charAt(0).toUpperCase() : '?' %>
+            </div>
+            <div style="flex:1; min-width:0;">
+              <div class="conv-name-row" style="display:flex; justify-content:space-between; align-items:center;">
+                <strong style="font-size:0.95rem;"><%= conv.autreUser ? conv.autreUser.nom : 'Utilisateur' %></strong>
+                <% if (conv.nonLus > 0) { %><span class="badge badge-gold badge-nonlus"><%= conv.nonLus %></span><% } %>
+              </div>
+              <p style="font-size:0.8rem; color:#6B6B6B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                <i class='bx bx-home-alt-2 bx-trfm' style="color:var(--gold);"></i>
+                <%= conv.annonce ? conv.annonce.titre : 'Annonce supprimée' %>
+              </p>
+              <% if (conv.dernierMessage) { %>
+                <p class="conv-dernier-msg" style="font-size:0.82rem; color:#2C2C2E; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                  <%= conv.dernierMessage.texte %>
+                </p>
+              <% } %>
+            </div>
+            <span class="conv-date" style="font-size:0.75rem; color:#6B6B6B; flex-shrink:0;">
+              <%= conv.dernierMessage ? new Date(conv.dernierMessage.date).toLocaleDateString('fr-FR') : '' %>
+            </span>
+          </a>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- <script src="/socket.io/socket.io.js"></script> -->
+<script>
+  window._socket.on('conversation_updated', () => rafraichir());
+  window._socket.on('messages_read', () => rafraichir());
+
+  async function rafraichir() {
+    try {
+      const res = await fetch('/messages/json');
+      const conversations = await res.json();
+      mettreAJourListe(conversations);
+    } catch (_) {}
+  }
+
+  function mettreAJourListe(conversations) {
+    const liste = document.querySelector('.conversations-list');
+    if (!liste) return;
+
+    conversations.forEach(conv => {
+      const el = document.querySelector(`[data-conv-id="${conv.id}"]`);
+      if (!el) return;
+
+      const dernierMsg = el.querySelector('.conv-dernier-msg');
+      if (dernierMsg) dernierMsg.textContent = conv.dernierMessage?.texte || '';
+
+      const date = el.querySelector('.conv-date');
+      if (date) date.textContent = conv.dernierMessage
+        ? new Date(conv.dernierMessage.date).toLocaleDateString('fr-FR') : '';
+
+      const nameRow = el.querySelector('.conv-name-row');
+      let badge = el.querySelector('.badge-nonlus');
+      if (conv.nonLus > 0) {
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'badge badge-gold badge-nonlus';
+          nameRow.appendChild(badge);
+        }
+        badge.textContent = conv.nonLus;
+      } else {
+        badge?.remove();
+      }
+    });
+  }
+</script>
+
+<%- include('../partials/footer') %>
