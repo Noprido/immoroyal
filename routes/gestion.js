@@ -210,6 +210,15 @@ function validerBail(b) {
   return { valeurs: { montantLoyer, jourEcheance, dateDebut: dateDebut.toISOString(), dateFin: dateFin ? dateFin.toISOString() : null } };
 }
 
+/** Supprime des biens et tout ce qui en dépend (baux, paiements). */
+function supprimerBiensEtDependances(ids) {
+  if (!ids.length) return;
+  const set = new Set(ids);
+  db.write('biens',     db.read('biens').filter(b => !set.has(b.id)));
+  db.write('baux',      db.read('baux').filter(b => !set.has(b.bienId)));
+  db.write('paiements', db.read('paiements').filter(p => !set.has(p.bienId)));
+}
+
 // ═══════════════════════════════════════════════════════════════════
 // GROUPES
 // ═══════════════════════════════════════════════════════════════════
@@ -243,6 +252,39 @@ router.post('/groupes', safe((req, res) => {
   };
   db.insert('groupes', groupe);
   res.status(201).json(toGroupeDto(groupe, []));
+}));
+
+// PUT /gestion/groupes/:id
+router.put('/groupes/:id', safe((req, res) => {
+  const groupe = db.findById('groupes', req.params.id);
+  if (!groupe || groupe.gerantId !== req.user.id)
+    return res.status(404).json({ error: 'Groupe introuvable.' });
+
+  const nom = req.body.nom !== undefined ? String(req.body.nom).trim() : groupe.nom;
+  const description = req.body.description !== undefined
+    ? String(req.body.description || '').trim()
+    : (groupe.description || '');
+
+  if (!nom)            return res.status(400).json({ error: 'Le nom du groupe est requis.' });
+  if (nom.length > 80) return res.status(400).json({ error: 'Le nom du groupe est trop long (80 caractères max).' });
+  if (description.length > 300)
+    return res.status(400).json({ error: 'La description est trop longue (300 caractères max).' });
+
+  const maj = db.update('groupes', groupe.id, { nom, description });
+  const biens = db.read('biens').filter(b => b.gerantId === req.user.id);
+  res.json(toGroupeDto(maj, biens));
+}));
+
+// DELETE /gestion/groupes/:id  (supprime aussi ses biens, baux et paiements)
+router.delete('/groupes/:id', safe((req, res) => {
+  const groupe = db.findById('groupes', req.params.id);
+  if (!groupe || groupe.gerantId !== req.user.id)
+    return res.status(404).json({ error: 'Groupe introuvable.' });
+
+  const ids = db.read('biens').filter(b => b.groupeId === groupe.id).map(b => b.id);
+  supprimerBiensEtDependances(ids);
+  db.delete('groupes', groupe.id);
+  res.json({ success: true, biensSupprimes: ids.length });
 }));
 
 // ═══════════════════════════════════════════════════════════════════
@@ -317,6 +359,58 @@ router.post('/biens', safe((req, res) => {
   }
 
   res.status(201).json(toBienDto(bien, chargerContexte()));
+}));
+
+// PUT /gestion/biens/:id  (champs optionnels ; 'bail' crée ou met à jour le bail)
+router.put('/biens/:id', safe((req, res) => {
+  const bien = db.findById('biens', req.params.id);
+  if (!bien || bien.gerantId !== req.user.id)
+    return res.status(404).json({ error: 'Bien introuvable.' });
+
+  const maj = {};
+  for (const champ of ['nom', 'adresse', 'ville', 'typeBien']) {
+    if (req.body[champ] !== undefined) {
+      const v = String(req.body[champ]).trim();
+      if (!v) return res.status(400).json({ error: `Le champ « ${champ} » ne peut pas être vide.` });
+      maj[champ] = v;
+    }
+  }
+  for (const champ of ['quartier', 'proprietaireNom']) {
+    if (req.body[champ] !== undefined) maj[champ] = String(req.body[champ] || '').trim() || null;
+  }
+  if (req.body.groupeId !== undefined && req.body.groupeId !== bien.groupeId) {
+    const groupe = db.findById('groupes', req.body.groupeId);
+    if (!groupe || groupe.gerantId !== req.user.id)
+      return res.status(404).json({ error: 'Groupe introuvable.' });
+    maj.groupeId = groupe.id;
+  }
+
+  let bailValeurs = null;
+  if (req.body.bail) {
+    const r = validerBail(req.body.bail);
+    if (r.erreur) return res.status(400).json({ error: r.erreur });
+    bailValeurs = r.valeurs;
+  }
+
+  // Écritures seulement après toutes les validations
+  const bienMaj = Object.keys(maj).length ? db.update('biens', bien.id, maj) : bien;
+  if (bailValeurs) {
+    const existant = db.read('baux').filter(b => b.bienId === bien.id).sort(parDateDesc)[0];
+    if (existant) db.update('baux', existant.id, bailValeurs);
+    else db.insert('baux', { id: uuidv4(), bienId: bien.id, ...bailValeurs, createdAt: new Date().toISOString() });
+  }
+
+  res.json(toBienDto(bienMaj, chargerContexte()));
+}));
+
+// DELETE /gestion/biens/:id
+router.delete('/biens/:id', safe((req, res) => {
+  const bien = db.findById('biens', req.params.id);
+  if (!bien || bien.gerantId !== req.user.id)
+    return res.status(404).json({ error: 'Bien introuvable.' });
+
+  supprimerBiensEtDependances([bien.id]);
+  res.json({ success: true });
 }));
 
 // ═══════════════════════════════════════════════════════════════════
