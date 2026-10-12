@@ -186,6 +186,98 @@ function toGroupeDto(groupe, biens) {
   };
 }
 
+// ─── Notifications ────────────────────────────────────────────────
+
+function notifier(userId, type, titre, message, bienId = null) {
+  if (!userId) return;
+  db.insert('notifications', {
+    id: uuidv4(), userId, type, titre, message, bienId,
+    lue: false, createdAt: new Date().toISOString()
+  });
+}
+
+// ─── Accès à un bien (gérant ou locataire) ────────────────────────
+
+function bienAccessible(req, id) {
+  const bien = db.findById('biens', id);
+  if (!bien) return null;
+  if (bien.gerantId !== req.user.id && bien.locataireId !== req.user.id) return null;
+  return bien;
+}
+
+// ─── Limiteur de débit (recherche d'utilisateur) ──────────────────
+
+const tentativesRecherche = new Map();
+function limiterRecherche(req, res, next) {
+  const cle = req.user.id;
+  const maintenant = Date.now();
+  const recentes = (tentativesRecherche.get(cle) || []).filter(t => maintenant - t < 60000);
+  if (recentes.length >= 15)
+    return res.status(429).json({ error: 'Trop de recherches. Réessayez dans une minute.' });
+  recentes.push(maintenant);
+  tentativesRecherche.set(cle, recentes);
+  next();
+}
+
+// ─── Historique des loyers (échéances calculées + paiements) ──────
+
+function construireHistorique(bien, bail, paiements) {
+  if (!bien.locataireId || !bail) return [];
+
+  const payes = new Map(
+    paiements
+      .filter(p => p.bienId === bien.id && p.statut === 'paye')
+      .map(p => [p.moisConcerne, p])
+  );
+
+  const now = new Date();
+  const aujourdhui = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  const finMoisCourant = Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 0);
+
+  const debutBail = new Date(bail.dateDebut);
+  const lie = bien.locataireLieLe ? new Date(bien.locataireLieLe) : debutBail;
+  const debut = lie > debutBail ? lie : debutBail;
+  const fin = bail.dateFin ? new Date(bail.dateFin) : null;
+
+  let annee = debut.getUTCFullYear();
+  let mois = debut.getUTCMonth();
+  if (debut.getUTCDate() > jourDansMois(annee, mois, bail.jourEcheance)) {
+    mois++;
+    if (mois > 11) { mois = 0; annee++; }
+  }
+
+  const liste = [];
+  for (let garde = 0; garde < 120; garde++) {
+    const echeance = Date.UTC(annee, mois, jourDansMois(annee, mois, bail.jourEcheance));
+    if (echeance > finMoisCourant) break;
+    if (fin && echeance > fin.getTime()) break;
+
+    const cle = cleMois(annee, mois);
+    const p = payes.get(cle);
+    const base = { bienId: bien.id, moisConcerne: cle, operateur: null, transactionId: null, datePaiement: null, joursRetard: null };
+
+    if (p) {
+      liste.push({
+        ...base, id: p.id, montant: p.montant, statut: 'paye',
+        operateur: p.operateur || null,
+        transactionId: p.transactionId || p.reference || null,
+        datePaiement: p.datePaiement || null
+      });
+    } else if (echeance < aujourdhui) {
+      liste.push({
+        ...base, id: `echeance-${bien.id}-${cle}`, montant: bail.montantLoyer, statut: 'en_retard',
+        joursRetard: Math.floor((aujourdhui - echeance) / 86400000)
+      });
+    } else {
+      liste.push({ ...base, id: `echeance-${bien.id}-${cle}`, montant: bail.montantLoyer, statut: 'en_attente' });
+    }
+
+    mois++;
+    if (mois > 11) { mois = 0; annee++; }
+  }
+  return liste.reverse(); // le plus récent d'abord
+}
+
 // ─── Validation du bail ───────────────────────────────────────────
 
 function validerBail(b) {
@@ -217,6 +309,8 @@ function supprimerBiensEtDependances(ids) {
   db.write('biens',     db.read('biens').filter(b => !set.has(b.id)));
   db.write('baux',      db.read('baux').filter(b => !set.has(b.bienId)));
   db.write('paiements', db.read('paiements').filter(p => !set.has(p.bienId)));
+  db.write('etat_lieux',      db.read('etat_lieux').filter(e => !set.has(e.bienId)));
+  db.write('documents_biens', db.read('documents_biens').filter(d => !set.has(d.bienId)));
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -418,7 +512,7 @@ router.delete('/biens/:id', safe((req, res) => {
 // ═══════════════════════════════════════════════════════════════════
 
 // GET /gestion/recherche-utilisateur?q=  — correspondance EXACTE (ID ou téléphone)
-router.get('/recherche-utilisateur', safe((req, res) => {
+router.get('/recherche-utilisateur',limiterRecherche , safe((req, res) => {
   const r = resoudreUtilisateur(req.query.q);
   if (r.erreur) return res.status(r.status).json({ error: r.erreur });
 
@@ -430,7 +524,7 @@ router.get('/recherche-utilisateur', safe((req, res) => {
 }));
 
 // POST /gestion/biens/:id/lier-locataire   body: { idOuTel }
-router.post('/biens/:id/lier-locataire', safe((req, res) => {
+router.post('/biens/:id/lier-locataire',limiterRecherche , safe((req, res) => {
   const bien = db.findById('biens', req.params.id);
   if (!bien || bien.gerantId !== req.user.id)
     return res.status(404).json({ error: 'Bien introuvable.' });
@@ -446,6 +540,9 @@ router.post('/biens/:id/lier-locataire', safe((req, res) => {
     locataireId:    r.user.id,
     locataireLieLe: new Date().toISOString()
   });
+
+  notifier(r.user.id, 'bail_lie', 'Logement lié', `Votre gérant vous a lié à « ${bien.nom} ».`, bien.id);
+
   res.json(toBienDto(maj, chargerContexte()));
 }));
 
@@ -457,7 +554,12 @@ router.delete('/biens/:id/lier-locataire', safe((req, res) => {
   if (!bien.locataireId)
     return res.status(400).json({ error: 'Ce bien n\'a pas de locataire.' });
 
+  const ancienLocataireId = bien.locataireId;
+
   const maj = db.update('biens', bien.id, { locataireId: null, locataireLieLe: null });
+
+  notifier(ancienLocataireId, 'bail_delie', 'Logement délié', `Vous n'êtes plus associé à « ${bien.nom} ».`, null);
+
   res.json(toBienDto(maj, chargerContexte()));
 }));
 
@@ -478,6 +580,195 @@ router.get('/locataire/mes-logements', safe((req, res) => {
 // GET /gestion/mon-id
 router.get('/mon-id', safe((req, res) => {
   res.json({ monId: monIdDe(req.user.id) });
+}));
+
+
+// ═══════════════════════════════════════════════════════════════════
+// HISTORIQUE, RAPPEL
+// ═══════════════════════════════════════════════════════════════════
+
+// GET /gestion/biens/:id/paiements  (gérant ou locataire)
+router.get('/biens/:id/paiements', safe((req, res) => {
+  const bien = bienAccessible(req, req.params.id);
+  if (!bien) return res.status(404).json({ error: 'Bien introuvable.' });
+  const ctx = chargerContexte();
+  const bail = ctx.baux.filter(b => b.bienId === bien.id).sort(parDateDesc)[0] || null;
+  res.json(construireHistorique(bien, bail, ctx.paiements));
+}));
+
+// POST /gestion/biens/:id/rappel  (gérant) → notification au locataire
+router.post('/biens/:id/rappel', safe((req, res) => {
+  const bien = db.findById('biens', req.params.id);
+  if (!bien || bien.gerantId !== req.user.id)
+    return res.status(404).json({ error: 'Bien introuvable.' });
+  if (!bien.locataireId)
+    return res.status(400).json({ error: 'Aucun locataire lié à ce bien.' });
+
+  const ctx = chargerContexte();
+  const bail = ctx.baux.filter(b => b.bienId === bien.id).sort(parDateDesc)[0] || null;
+  const { statutLoyer, joursRetard } = calculerStatut(bien, bail, ctx);
+
+  const message = statutLoyer === 'en_retard'
+    ? `Votre loyer pour « ${bien.nom} » est en retard de ${joursRetard} jour${joursRetard > 1 ? 's' : ''}. Merci de régulariser.`
+    : `Rappel : votre loyer pour « ${bien.nom} » arrive à échéance${bail ? ` le ${bail.jourEcheance} du mois` : ''}.`;
+
+  notifier(bien.locataireId, 'rappel', 'Rappel de loyer', message, bien.id);
+  res.json({ success: true });
+}));
+
+// ═══════════════════════════════════════════════════════════════════
+// ÉTAT DES LIEUX
+// ═══════════════════════════════════════════════════════════════════
+
+const CATEGORIES_ELEMENT = ['equipement', 'structure', 'autre'];
+const STATUTS_ELEMENT    = ['bon_etat', 'defectueux', 'absent'];
+
+// GET /gestion/biens/:id/etat-des-lieux
+router.get('/biens/:id/etat-des-lieux', safe((req, res) => {
+  const bien = bienAccessible(req, req.params.id);
+  if (!bien) return res.status(404).json({ error: 'Bien introuvable.' });
+  res.json(
+    db.read('etat_lieux')
+      .filter(e => e.bienId === bien.id)
+      .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+  );
+}));
+
+// POST /gestion/biens/:id/etat-des-lieux
+router.post('/biens/:id/etat-des-lieux', safe((req, res) => {
+  const bien = db.findById('biens', req.params.id);
+  if (!bien || bien.gerantId !== req.user.id)
+    return res.status(404).json({ error: 'Bien introuvable.' });
+
+  const nom = (req.body.nom || '').trim();
+  if (!nom)            return res.status(400).json({ error: "Le nom de l'élément est requis." });
+  if (nom.length > 80) return res.status(400).json({ error: "Le nom de l'élément est trop long (80 caractères max)." });
+
+  const categorie = req.body.categorie || 'equipement';
+  const statut    = req.body.statut || 'bon_etat';
+  if (!CATEGORIES_ELEMENT.includes(categorie)) return res.status(400).json({ error: 'Catégorie invalide.' });
+  if (!STATUTS_ELEMENT.includes(statut))       return res.status(400).json({ error: 'Statut invalide.' });
+
+  const note = (req.body.note || '').trim();
+  if (note.length > 300) return res.status(400).json({ error: 'La note est trop longue (300 caractères max).' });
+
+  const element = {
+    id: uuidv4(), bienId: bien.id, nom, categorie, statut,
+    note: note || null, photos: [], createdAt: new Date().toISOString()
+  };
+  db.insert('etat_lieux', element);
+  res.status(201).json(element);
+}));
+
+// PUT /gestion/etat-des-lieux/:elemId
+router.put('/etat-des-lieux/:elemId', safe((req, res) => {
+  const element = db.findById('etat_lieux', req.params.elemId);
+  const bien = element ? db.findById('biens', element.bienId) : null;
+  if (!element || !bien || bien.gerantId !== req.user.id)
+    return res.status(404).json({ error: 'Élément introuvable.' });
+
+  const maj = {};
+  if (req.body.nom !== undefined) {
+    const nom = String(req.body.nom).trim();
+    if (!nom || nom.length > 80) return res.status(400).json({ error: "Nom d'élément invalide." });
+    maj.nom = nom;
+  }
+  if (req.body.statut !== undefined) {
+    if (!STATUTS_ELEMENT.includes(req.body.statut)) return res.status(400).json({ error: 'Statut invalide.' });
+    maj.statut = req.body.statut;
+  }
+  if (req.body.categorie !== undefined) {
+    if (!CATEGORIES_ELEMENT.includes(req.body.categorie)) return res.status(400).json({ error: 'Catégorie invalide.' });
+    maj.categorie = req.body.categorie;
+  }
+  if (req.body.note !== undefined) {
+    const note = String(req.body.note || '').trim();
+    if (note.length > 300) return res.status(400).json({ error: 'La note est trop longue (300 caractères max).' });
+    maj.note = note || null;
+  }
+
+  res.json(db.update('etat_lieux', element.id, maj));
+}));
+
+// DELETE /gestion/etat-des-lieux/:elemId
+router.delete('/etat-des-lieux/:elemId', safe((req, res) => {
+  const element = db.findById('etat_lieux', req.params.elemId);
+  const bien = element ? db.findById('biens', element.bienId) : null;
+  if (!element || !bien || bien.gerantId !== req.user.id)
+    return res.status(404).json({ error: 'Élément introuvable.' });
+  db.delete('etat_lieux', element.id);
+  res.json({ success: true });
+}));
+
+// ═══════════════════════════════════════════════════════════════════
+// DOCUMENTS
+// ═══════════════════════════════════════════════════════════════════
+
+const TYPES_DOCUMENT = ['contrat', 'etat_lieux', 'autre'];
+
+// GET /gestion/biens/:id/documents
+router.get('/biens/:id/documents', safe((req, res) => {
+  const bien = bienAccessible(req, req.params.id);
+  if (!bien) return res.status(404).json({ error: 'Bien introuvable.' });
+  res.json(
+    db.read('documents_biens')
+      .filter(d => d.bienId === bien.id)
+      .sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt))
+  );
+}));
+
+// POST /gestion/biens/:id/documents   body: { nom, type, url }
+router.post('/biens/:id/documents', safe((req, res) => {
+  const bien = db.findById('biens', req.params.id);
+  if (!bien || bien.gerantId !== req.user.id)
+    return res.status(404).json({ error: 'Bien introuvable.' });
+
+  const nom = (req.body.nom || '').trim();
+  const url = (req.body.url || '').trim();
+  const type = req.body.type || 'autre';
+
+  if (!nom)             return res.status(400).json({ error: 'Le nom du document est requis.' });
+  if (nom.length > 100) return res.status(400).json({ error: 'Le nom du document est trop long (100 caractères max).' });
+  if (!TYPES_DOCUMENT.includes(type)) return res.status(400).json({ error: 'Type de document invalide.' });
+  if (!/^https?:\/\/\S+$/i.test(url) || url.length > 500)
+    return res.status(400).json({ error: 'Le lien du document est invalide (http:// ou https://).' });
+
+  const doc = { id: uuidv4(), bienId: bien.id, nom, type, url, uploadedAt: new Date().toISOString() };
+  db.insert('documents_biens', doc);
+  res.status(201).json(doc);
+}));
+
+// DELETE /gestion/documents/:docId
+router.delete('/documents/:docId', safe((req, res) => {
+  const doc = db.findById('documents_biens', req.params.docId);
+  const bien = doc ? db.findById('biens', doc.bienId) : null;
+  if (!doc || !bien || bien.gerantId !== req.user.id)
+    return res.status(404).json({ error: 'Document introuvable.' });
+  db.delete('documents_biens', doc.id);
+  res.json({ success: true });
+}));
+
+// ═══════════════════════════════════════════════════════════════════
+// NOTIFICATIONS
+// ═══════════════════════════════════════════════════════════════════
+
+// GET /gestion/notifications
+router.get('/notifications', safe((req, res) => {
+  res.json(
+    db.read('notifications')
+      .filter(n => n.userId === req.user.id)
+      .sort(parDateDesc)
+      .slice(0, 100)
+  );
+}));
+
+// POST /gestion/notifications/lues  → marque tout comme lu
+router.post('/notifications/lues', safe((req, res) => {
+  const maj = db.read('notifications').map(n =>
+    n.userId === req.user.id && !n.lue ? { ...n, lue: true } : n
+  );
+  db.write('notifications', maj);
+  res.json({ success: true });
 }));
 
 module.exports = router;
