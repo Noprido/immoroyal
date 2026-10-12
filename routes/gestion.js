@@ -19,6 +19,8 @@ router.use(authJWT);
 
 const ID_LEN = 6; // longueur du code dans #IR-XXXXXX
 
+const crypto = require('crypto');
+
 // ─── Helpers génériques ───────────────────────────────────────────
 
 const safe = (fn) => (req, res) => {
@@ -46,8 +48,9 @@ function cleMois(annee, mois) {
 // ─── ID ImmoRoyal & recherche utilisateur ─────────────────────────
 
 // #IR-XXXXXX dérivé de l'id utilisateur (pas de migration nécessaire).
+// Code dérivé d'un hash de l'id : bien réparti quel que soit le format des ids.
 const monIdDe = (userId) =>
-  `#IR-${String(userId).replace(/-/g, '').slice(0, ID_LEN).toUpperCase()}`;
+  `#IR-${crypto.createHash('sha256').update(String(userId)).digest('hex').slice(0, ID_LEN).toUpperCase()}`;
 
 const chiffres = (s) => String(s || '').replace(/\D/g, '');
 
