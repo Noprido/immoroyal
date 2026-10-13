@@ -7,5 +7,77 @@
     "dateDebut": "2026-09-01T00:00:00.000Z",
     "dateFin": null,
     "createdAt": "2026-10-05T23:50:47.949Z"
+  },
+  {
+    "id": "demo-bail-0",
+    "bienId": "demo-b-0",
+    "montantLoyer": 45000,
+    "jourEcheance": 5,
+    "dateDebut": "2026-03-01T00:00:00.000Z",
+    "dateFin": null,
+    "createdAt": "2026-03-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-bail-1",
+    "bienId": "demo-b-1",
+    "montantLoyer": 30000,
+    "jourEcheance": 1,
+    "dateDebut": "2026-05-01T00:00:00.000Z",
+    "dateFin": null,
+    "createdAt": "2026-05-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-bail-2",
+    "bienId": "demo-b-2",
+    "montantLoyer": 120000,
+    "jourEcheance": 10,
+    "dateDebut": "2026-01-01T00:00:00.000Z",
+    "dateFin": "2027-01-28T00:00:00.000Z",
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-bail-3",
+    "bienId": "demo-b-3",
+    "montantLoyer": 80000,
+    "jourEcheance": 15,
+    "dateDebut": "2026-06-01T00:00:00.000Z",
+    "dateFin": null,
+    "createdAt": "2026-06-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-bail-4",
+    "bienId": "demo-b-4",
+    "montantLoyer": 150000,
+    "jourEcheance": 1,
+    "dateDebut": "2026-09-01T00:00:00.000Z",
+    "dateFin": null,
+    "createdAt": "2026-10-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-bail-5",
+    "bienId": "demo-b-5",
+    "montantLoyer": 35000,
+    "jourEcheance": 20,
+    "dateDebut": "2026-07-01T00:00:00.000Z",
+    "dateFin": null,
+    "createdAt": "2026-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-bail-6",
+    "bienId": "demo-b-6",
+    "montantLoyer": 250000,
+    "jourEcheance": 5,
+    "dateDebut": "2025-11-01T00:00:00.000Z",
+    "dateFin": null,
+    "createdAt": "2025-11-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-bail-7",
+    "bienId": "demo-b-7",
+    "montantLoyer": 180000,
+    "jourEcheance": 5,
+    "dateDebut": "2026-09-01T00:00:00.000Z",
+    "dateFin": null,
+    "createdAt": "2026-10-01T00:00:00.000Z"
   }
 ]

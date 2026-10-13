@@ -5,5 +5,26 @@
     "description": "",
     "gerantId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
     "createdAt": "2026-10-05T23:50:47.901Z"
+  },
+  {
+    "id": "demo-g-0",
+    "nom": "Résidences Fidjrossè",
+    "description": "Studios meublés près de la plage",
+    "gerantId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "createdAt": "2026-10-09T23:58:59.249Z"
+  },
+  {
+    "id": "demo-g-1",
+    "nom": "Immeuble Les Palmiers",
+    "description": "R+3, 4 logements et une boutique",
+    "gerantId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "createdAt": "2026-10-10T23:58:59.257Z"
+  },
+  {
+    "id": "demo-g-2",
+    "nom": "Villas Calavi",
+    "description": "Villas familiales avec cour",
+    "gerantId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "createdAt": "2026-10-11T23:58:59.259Z"
   }
 ]

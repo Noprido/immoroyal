@@ -1,0 +1,102 @@
+[
+  {
+    "id": "demo-notif-0",
+    "userId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "type": "bail_lie",
+    "titre": "Logement lié",
+    "message": "Votre gérant vous a lié à « Studio Meublé A ».",
+    "bienId": "demo-b-0",
+    "lue": false,
+    "createdAt": "2026-03-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-notif-1",
+    "userId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "type": "rappel",
+    "titre": "Rappel de loyer",
+    "message": "Votre loyer pour « Studio Meublé A » est en retard de 37 jours. Merci de régulariser.",
+    "bienId": "demo-b-0",
+    "lue": false,
+    "createdAt": "2026-10-12T23:58:59.276Z"
+  },
+  {
+    "id": "demo-notif-2",
+    "userId": "59e2e16d-75a0-4764-83ca-1596cb63182b",
+    "type": "paiement",
+    "titre": "Paiement reçu",
+    "message": "Loyer de 2026-08 reçu pour « Studio Meublé A ».",
+    "bienId": "demo-b-0",
+    "lue": false,
+    "createdAt": "2026-08-05T00:00:00.000Z"
+  },
+  {
+    "id": "demo-notif-3",
+    "userId": "60990f5a-41f0-4962-a872-e4e9707c3c02",
+    "type": "bail_lie",
+    "titre": "Logement lié",
+    "message": "Votre gérant vous a lié à « Studio Meublé B ».",
+    "bienId": "demo-b-1",
+    "lue": false,
+    "createdAt": "2026-05-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-notif-4",
+    "userId": "c8a31f30-c0b2-4927-a762-ef622eddde3c",
+    "type": "bail_lie",
+    "titre": "Logement lié",
+    "message": "Votre gérant vous a lié à « Appartement 3 pièces A1 ».",
+    "bienId": "demo-b-2",
+    "lue": false,
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-notif-5",
+    "userId": "c8a31f30-c0b2-4927-a762-ef622eddde3c",
+    "type": "rappel",
+    "titre": "Rappel de loyer",
+    "message": "Votre loyer pour « Appartement 3 pièces A1 » est en retard de 2 jours. Merci de régulariser.",
+    "bienId": "demo-b-2",
+    "lue": false,
+    "createdAt": "2026-10-12T21:58:59.367Z"
+  },
+  {
+    "id": "demo-notif-6",
+    "userId": "60aa9d97-cf9b-4825-a5fe-1612f4a609f0",
+    "type": "bail_lie",
+    "titre": "Logement lié",
+    "message": "Votre gérant vous a lié à « Appartement 2 pièces A2 ».",
+    "bienId": "demo-b-3",
+    "lue": false,
+    "createdAt": "2026-06-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-notif-7",
+    "userId": "59e2e16d-75a0-4764-83ca-1596cb63182c",
+    "type": "bail_lie",
+    "titre": "Logement lié",
+    "message": "Votre gérant vous a lié à « Studio terrasse ».",
+    "bienId": "demo-b-5",
+    "lue": false,
+    "createdAt": "2026-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-notif-8",
+    "userId": "60990f5a-41f0-4962-a872-e4e9707c3c02",
+    "type": "bail_lie",
+    "titre": "Logement lié",
+    "message": "Votre gérant vous a lié à « Villa 4 chambres ».",
+    "bienId": "demo-b-6",
+    "lue": false,
+    "createdAt": "2025-11-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-notif-9",
+    "userId": "60990f5a-41f0-4962-a872-e4e9707c3c02",
+    "type": "rappel",
+    "titre": "Rappel de loyer",
+    "message": "Votre loyer pour « Villa 4 chambres » est en retard de 68 jours. Merci de régulariser.",
+    "bienId": "demo-b-6",
+    "lue": false,
+    "createdAt": "2026-10-12T17:58:59.458Z"
+  }
+]

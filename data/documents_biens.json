@@ -1,0 +1,106 @@
+[
+  {
+    "id": "demo-doc-0-0",
+    "bienId": "demo-b-0",
+    "nom": "Contrat de bail",
+    "type": "contrat",
+    "url": "https://example.com/contrat-bail.pdf",
+    "uploadedAt": "2026-03-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-0-1",
+    "bienId": "demo-b-0",
+    "nom": "État des lieux d'entrée signé",
+    "type": "etat_lieux",
+    "url": "https://example.com/etat-des-lieux.pdf",
+    "uploadedAt": "2026-03-02T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-1-0",
+    "bienId": "demo-b-1",
+    "nom": "Contrat de bail",
+    "type": "contrat",
+    "url": "https://example.com/contrat-bail.pdf",
+    "uploadedAt": "2026-05-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-1-1",
+    "bienId": "demo-b-1",
+    "nom": "État des lieux d'entrée signé",
+    "type": "etat_lieux",
+    "url": "https://example.com/etat-des-lieux.pdf",
+    "uploadedAt": "2026-05-02T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-2-0",
+    "bienId": "demo-b-2",
+    "nom": "Contrat de bail",
+    "type": "contrat",
+    "url": "https://example.com/contrat-bail.pdf",
+    "uploadedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-2-1",
+    "bienId": "demo-b-2",
+    "nom": "État des lieux d'entrée signé",
+    "type": "etat_lieux",
+    "url": "https://example.com/etat-des-lieux.pdf",
+    "uploadedAt": "2026-01-02T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-2-2",
+    "bienId": "demo-b-2",
+    "nom": "Quittance du dernier mois",
+    "type": "autre",
+    "url": "https://example.com/quittance.pdf",
+    "uploadedAt": "2026-01-03T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-3-0",
+    "bienId": "demo-b-3",
+    "nom": "Contrat de bail",
+    "type": "contrat",
+    "url": "https://example.com/contrat-bail.pdf",
+    "uploadedAt": "2026-06-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-3-1",
+    "bienId": "demo-b-3",
+    "nom": "État des lieux d'entrée signé",
+    "type": "etat_lieux",
+    "url": "https://example.com/etat-des-lieux.pdf",
+    "uploadedAt": "2026-06-02T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-5-0",
+    "bienId": "demo-b-5",
+    "nom": "Contrat de bail",
+    "type": "contrat",
+    "url": "https://example.com/contrat-bail.pdf",
+    "uploadedAt": "2026-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-6-0",
+    "bienId": "demo-b-6",
+    "nom": "Contrat de bail",
+    "type": "contrat",
+    "url": "https://example.com/contrat-bail.pdf",
+    "uploadedAt": "2025-11-01T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-6-1",
+    "bienId": "demo-b-6",
+    "nom": "État des lieux d'entrée signé",
+    "type": "etat_lieux",
+    "url": "https://example.com/etat-des-lieux.pdf",
+    "uploadedAt": "2025-11-02T00:00:00.000Z"
+  },
+  {
+    "id": "demo-doc-6-2",
+    "bienId": "demo-b-6",
+    "nom": "Quittance du dernier mois",
+    "type": "autre",
+    "url": "https://example.com/quittance.pdf",
+    "uploadedAt": "2025-11-03T00:00:00.000Z"
+  }
+]
